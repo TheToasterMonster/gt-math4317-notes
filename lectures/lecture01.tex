@@ -1,0 +1,160 @@
+\chapter{Aug.~22 -- The Real Numbers}
+
+\section{Number Systems}
+We start with the natural numbers
+\footnote{$0 \notin \N$ for this class.}
+\[\N = \{1, 2, 3, \dots\}.\]
+These are perhaps
+the most natural in a way, since they are what we use to
+count things. They are closed under addition, but
+fail when it comes to subtraction. For example,
+$1 - 2 = -1 \notin \N$.
+So we must expand our number system to the
+integers
+\[\Z = \{\dots, -3, -2, -1, 0, 1, 2, 3, \dots\}.\]
+We can add, subtract, and
+multiply. But we run into problems when we start to
+consider quotients. For example,
+$1 \div 2 = \frac{1}{2} \notin \Z$.
+So we continue to the rational numbers
+\[\Q = \left\{\frac{p}{q} : p, q \in \Z,\, q \ne 0\right\}.\]
+We now have summation, subtraction,
+multiplication, and quotients. But there is still a
+problem.
+
+Consider the diagonal of a square with side length $1$.
+
+\begin{theorem}
+  $\sqrt{2}$ is not a rational number. 
+  \footnote{
+    In some sense, this shows that the notion of
+    ``rationals'' is strictly weaker than the notion of
+    ``length.''
+  }
+\end{theorem}
+
+\begin{proof}
+  Argue by contradiction. Suppose $\sqrt{2}$ is rational.
+  Then we can write
+   \[
+     \sqrt{2} = \frac{p}{q}
+  \]
+  for some integers $p, q$. Further assume $p$ and
+  $q$ have no common factors. Then
+  \[2 = \frac{p^2}{q^2} \implies p^2 = 2q^2.\]
+  So $p$ is even and we can write $p = 2r$ for some
+  $r \in \Z$. Then
+  \[4r^2 = 2q^2 \implies 2r^2 = q^2.\]
+  So $q$ is also even, and $p, q$ share a common factor
+  of $2$. Contradiction.
+\end{proof}
+
+Another weakness of $\Q$ is that we cannot take limits
+($\Q$ is not complete). For example, note that
+\[(\sqrt{2} - 1)(\sqrt{2} + 1) = 2 - 1 = 1,\]
+\[
+  \sqrt{2} = 1 + \frac{1}{\sqrt{2} + 1}
+  = 1 + \frac{1}{1 + 1 + \frac{1}{\sqrt{2} + 1}}
+  = \dots
+.\]
+So if we define the rational sequence
+\[
+  a_1 = 1, \quad
+  a_2 = 1 + \frac{1}{2}, \quad
+  a_3 = 1 + \frac{1}{2 + \frac{1}{2}}, \quad
+  a_4 = 1 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2}}},
+  \quad \dots
+,\]
+then as $n \to \infty$, $a_n \to \sqrt{2} \notin \Q$.
+
+\section{Sets}
+Sets are any collections of objects. Given a set $A$,
+we write $x \in A$ if $x$ is an element of $A$. We write
+$x \notin A$ otherwise. The \textbf{union} of two sets is
+\[
+  A \cup B = \{x : x \in A \text{ or } x \in B\}
+,\]
+and the \textbf{intersection} of two sets is
+\[
+  A \cap B = \{x : x \in A \text{ and } x \in B\}
+.\]
+We use the notation
+\[\bigcup_{k = 1}^{\infty} A_k\]
+to denote the countable union of a family of sets
+indexed by $k$.
+
+\section{Functions}
+\begin{definition}
+  Given two sets $A$ and $B$, a \textbf{function}
+  from $A$ to $B$ is a rule, relation, or mapping that
+  takes each element $x \in A$ and associates with
+  it a single element in $B$. In this case,
+  we write $f : A \to B$.
+\end{definition}
+
+We call $A$ the \textbf{domain} of $f$ and $B$ the
+\textbf{codomain} of $f$. The element in $B$ associated
+with $x \in A$ is $f(x)$, called the \textbf{image}
+of $x$. The \textbf{range} of $f$ is
+\[\text{range}(f) = \{y \in B : y = f(x) \text{ for some }x \in A\}.\]
+
+We say $f$ is:
+\begin{enumerate}
+  \item \textbf{onto} or \textbf{surjective} if
+    $\text{range}(f) = B$.
+  \item \textbf{one-to-one} or \textbf{injective} if
+    $x, x' \in A$ and $x \ne x'$, then $f(x) \ne f(x')$.
+  \item \textbf{bijective} if it is injective and
+    surjective.
+\end{enumerate}
+
+\begin{tcolorbox}
+  First Dirichlet function:
+  \[
+  g(x) =
+  \begin{cases}
+    1 & \text{if $x \in \Q$} \\
+    0 & \text{if $x \notin \Q$}
+  \end{cases}
+  =
+  \lim_{k \to \infty} \left(\lim_{j \to \infty} \left[\cos(k! \pi x)\right]^{2j}\right)
+  .\]
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  Second Dirichlet function:
+  \[
+  f(x) =
+  \begin{cases}
+    \frac{1}{q} & \text{if $x = \frac{p}{q} \in \Q$ in lowest terms} \\
+    0 & \text{if $x \notin \Q$}.
+  \end{cases}
+  \]
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  Absolute value:
+  \[
+    |x| =
+    \begin{cases}
+      x & \text{if $x \ge 0$} \\
+      -x & \text{if $x < 0$}.
+    \end{cases}
+  \]
+  Note that we have the following two properties:
+  \begin{itemize}
+    \item $|xy| = |x||y|$.
+    \item $|x + y| \le |x| + |y|$. This is called the
+      \textit{triangle inequality}.
+  \end{itemize}
+\end{tcolorbox}
+
+\section{Induction}
+If we have a set $S \subseteq \N$ and
+\begin{enumerate}
+  \item $1 \in S$
+  \item if $n \in S$, then $n + 1 \in S$
+\end{enumerate}
+then $S = \N$.
+\footnote{We always use induction in conjunction with
+$\N$.}

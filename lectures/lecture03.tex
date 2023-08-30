@@ -1,0 +1,200 @@
+\chapter{Aug.~29 -- Completeness and Countability}
+
+\section{Consequences of Completeness}
+
+\subsection{2nd Consequence: Density of $\Q$ in $\R$}
+\begin{theorem}[Density of $\Q$ in $\R$]
+For all $a, b \in \R$, $a < b$, there exists
+$r \in \Q$ such that $a < r < b$.
+\end{theorem}
+
+\begin{proof}
+  We want to find $m \in \Z$, $n \in \N$ such that
+  \[
+  a < \frac{m}{n} < b
+  .\]
+  By (ii) of the Archimedean property, we can find
+  $n \in \N$ such that
+  \[
+  \frac{1}{n} < b - a
+  .\]
+  Fix such an $n$. Then let $m$ be the smallest integer
+  such that $m - 1 \le na < m$. By construction,
+  \[
+  \frac{m}{n} - \frac{1}{n} \le a < \frac{m}{n},
+  \]
+  \[\frac{m}{n} \le a + \frac{1}{n} < b.\]
+  Therefore, $a < \frac{m}{n} < b$.
+\end{proof}
+
+\begin{corollary}
+  For all $a, b \in \Q$, $a < b$, there exists
+   $t \in \R \setminus \Q$ such that  $a < t < b$.
+\end{corollary}
+
+\subsection{3rd Consequence: Existence of $\sqrt{2}$}
+\begin{theorem}[Existence of $\sqrt{2}$]
+  There exists $s \in \R$, $s > 0$ such that $s^2 = 2$.
+\end{theorem}
+
+\begin{proof}
+  Define
+  \[S = \{x > 0 : x^2 < 2\} \subseteq \R.\]
+  $x = 1 \in S$, so $S \ne \emptyset$. $2$ is an upper
+  bound for $S$, so $S$ is bounded above. Then by the
+  axiom of completeness, $s = \sup S$ exists.
+  We claim that $s^2 = 2$. 
+
+  Suppose otherwise that $s^2 < 2$. Then we can find
+  $\epsilon > 0$ such that $s + \epsilon \in S$.
+  Define $\delta = 2 - s^2 > 0$. Note that
+  \[(s + \epsilon)^2 - 2 = s^2 + 2s\epsilon + \epsilon^2 - 2 = -\delta + 2s\epsilon + \epsilon^2.\]
+  We know $s \le 2$ since $2$ is an upper bound. 
+  Pick
+  \[\epsilon = \frac{\delta}{100000000000},\]
+  \[
+  2s\epsilon + \epsilon \le 4\epsilon + \epsilon^2 < \frac{\delta}{2}
+  .\]
+  Then
+  \[
+  (s + \epsilon)^2 - 2 < -\delta + \frac{\delta}{2}
+  = -\frac{\delta}{2} < 0
+  .\]
+  So $s + \epsilon \in S$, which contradicts with
+  $s = \sup S$.
+
+  $s^2 > 2$ also leads to a contradiction
+  (left as an exercise). Thus we must have $s^2 = 2$.
+\end{proof}
+
+\section{Countability}
+\begin{definition}
+  We say two sets $A$ and $B$ have the same
+  \textbf{cardinality}
+  if there is a bijection $f : A \to B$.
+  We write $A \sim B$.
+\end{definition}
+
+\begin{definition}
+  We say that a set $A$  is \textbf{finite} if
+  $A \sim \{1, 2, \dots, n\}$ for some integer $n$.
+  We say that a set $A$ is \textbf{countable}
+  (or countably infinite) if
+  $A \sim \N$.
+  If a set $A$ is not countable, then we say it is
+  \textbf{uncountable}.
+\end{definition}
+
+\begin{tcolorbox}
+  $E = \{2, 4, 6, 8, \dots\}$.
+
+  $E$ is not finite but it is countable: $E \sim \N$.
+  We can define $f : \N \to E$ by $f(n) = 2n$.
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  $\N \sim \Z$. 
+
+  The bijection $f : \N \to \Z$ is given by
+  \[
+  f(n) =
+  \begin{cases}
+    \frac{n-1}{2} & \text{$n$ is odd} \\
+    -\frac{n}{2} & \text{$n$ is even}.
+  \end{cases}
+  \]
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  $(-1, 1) \sim \R$.
+
+  The bijection  $f : (-1, 1) \to \R$ is given by
+  \[x \mapsto \frac{x}{x^2 - 1}.\]
+\end{tcolorbox}
+
+\begin{theorem}\leavevmode
+  \begin{enumerate}
+    \item $\Q$ is countable.
+    \item  $\R$ is uncountable.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of (1)]
+  Set $A_1 = \{0\}$ and for $n \ge 2$,
+  \[A_n = \left\{\pm \frac{p}{q} : p, q \in \N,\, \text{$p, q$ in lowest terms},\, p + q = n\right\}.\]
+  So the first few $A_n$ are:
+  \[A_2 = \left\{\frac{1}{1}, \frac{-1}{1}\right\},\]
+  \[A_3 = \left\{\frac{1}{2}, \frac{2}{1}, \frac{-1}{2}, \frac{-2}{1}\right\},\]
+  etc. Note that $A_n$ is finite and
+  for all
+  $x \in \Q$, there is an $n \in \N$ such that
+  $x \in A_n$.
+  We can list elements in $A_1, \dots, A_n$ and label
+  them with
+  integers in $\N$. Any element of $A_n$ will be
+  listed eventually. Then this pairing gives
+  a bijection since the $A_n$ are disjoint.
+  So $\Q \sim \N$.
+\end{proof}
+
+\begin{proof}[Proof of (2)]
+  Argue by contradiction. Suppose $f$ is one-to-one from
+  $\N \to \R$.
+  Set $x_1 = f(1)$, $x_2 = f(2)$, etc. We can write
+  \[\R = \{x_1, x_2, \dots\}.\]
+  Let $I_1$ be a closed interval such that
+  $x_1 \notin I_1$. Pick $I_2 \subseteq I_1$ such that
+  $x_2 \notin I_2$. Continue this process such that
+  $I_{n+1} \subseteq I_n$ is a closed interval where
+  $x_{n+1} \notin I_{n+1}$.
+  By construction,
+  \[I_1 \supseteq I_2 \supseteq \dots \supseteq I_n \supseteq \dots.\]
+  We know that
+  \[\bigcap_{n = 1}^\infty I_n \ne \emptyset.\]
+  So we can find $n_0$ such that
+  \[x_{n_0} \in \bigcap_{n = 1}^\infty I_n.\]
+  This is a contradiction with $x_{n_0} \notin I_{n_0}$.
+  Thus such an $f$ cannot exist and $\R$ is
+  uncountable.
+\end{proof}
+
+\begin{theorem}\leavevmode
+  \begin{enumerate}
+    \item Let $A \subseteq B$. If $B$ is countable, then
+      $A$ is either finite or countable.
+    \item If $A_n$ is a countable set, then
+      \[\bigcup_{n=1}^\infty A_n\]
+      is also countable.
+  \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Cantor's theorem]
+  The open interval
+  \[(0, 1) = \{x \in \R : 0 < x < 1\}\]
+  is uncountable.
+\end{theorem}
+
+\begin{proof}
+  Argue by contradiction. Assume $f : \N \to (0, 1)$
+  is one-to-one and onto. Then for $m \in \N$,
+  we can write (decimal expansion)
+  \[f(m) = 0.a_{m1}a_{m2}a_{m3}\ldots \in (0, 1)\]
+  For every $m, n \in \N$, $a_{mn} \in \{0, \dots, 9\}$
+  is the $n$th digit in the decimal expansion of
+  $f(m)$. We can write in a table
+  \[1 \quad f(1) \quad a_{11} \quad a_{12} \quad a_{13} \quad \dots\]
+  \[2 \quad f(2) \quad a_{21} \quad a_{22} \quad a_{23} \quad \dots\]
+  \[3 \quad f(3) \quad a_{31} \quad a_{32} \quad a_{33} \quad \dots\]
+  \[\vdots\]
+  Take $x = 0.b_1b_2b_3\ldots$ where
+  \[
+    b_n =
+    \begin{cases}
+      2 & \text{if $a_{nn} \ne 2$} \\
+      3 & \text{if $a_{nn} = 2$}.
+    \end{cases}
+  \]
+  Then $x \ne f(m)$ for any $m \in \N$
+  (since $b_m \ne a_{mm}$). This is a
+  contradiction.
+\end{proof}

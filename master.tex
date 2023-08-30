@@ -1,0 +1,69 @@
+\documentclass[12pt, letterpaper]{book}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{kpfonts}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage[many]{tcolorbox}
+\usepackage{footnote}
+\usepackage{cancel}
+\usepackage{titlesec}
+\usepackage{pgffor}
+\usepackage[shortlabels]{enumitem}
+
+\renewcommand{\chaptername}{Lecture}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\definecolor{nordblue}{RGB}{135, 160, 190}
+\definecolor{nordyellow}{RGB}{230, 204, 147}
+\definecolor{darkyellow}{RGB}{207, 184, 132}
+\definecolor{nordred}{RGB}{179, 102, 108}
+\definecolor{nordgreen}{RGB}{168, 189, 145}
+\definecolor{nordpurple}{RGB}{174, 143, 171}
+\definecolor{nordteal}{RGB}{148, 190, 206}
+
+\tcbset{sharp corners, breakable, enhanced, parbox=false}
+\newtcolorbox{mybox}[3][]
+{
+  colframe = #2!150,
+  colback  = #2!5,
+  coltitle = #2!0!white,  
+  title    = {#3},
+  #1,
+}
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\title{MATH 4317: Analysis I}
+\author{Frank Qiang}
+\date{Georgia Institute of Technology, Fall 2023}
+
+\begin{document}
+  \maketitle
+
+  \begingroup
+  \let\cleardoublepage\clearpage
+  \tableofcontents
+  \endgroup
+
+  \foreach \i in {00, 01, 02, 03, 04, ..., 50} {%
+    \edef\FileName{lectures/lecture\i.tex}%     The % here are necessary to eliminate any
+    \IfFileExists{\FileName}{%  spurious spaces that may get inserted
+       \input{\FileName}%       at these points
+    }
+}
+\end{document}
