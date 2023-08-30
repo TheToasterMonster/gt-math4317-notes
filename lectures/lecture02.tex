@@ -1,1 +1,183 @@
 \chapter{Aug.~24 -- The Axiom of Completeness}
+
+The number system $\Q$ is pretty good (it is a field),
+but recall that we are unable to take limits. For
+instance, take the sequence $x_0 = 2$ and
+\[x_{n+1} = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right)\]
+for $n \ge 1$. All the $x_i$ are rational, but
+$x_n \to \sqrt{2} \notin \Q$. This shows that there are
+gaps in $\Q$. The real numbers $\R$ will fill
+these gaps (completeness).
+
+\begin{axiom}[Axiom of completeness]
+Every nonempty set of real numbers that are bounded
+above has a least upper bound.
+\end{axiom}
+
+Note that this least upper bound is \textit{unique}.
+
+\section{Suprema and Infima}
+
+\begin{definition}
+  Let $S \subseteq \R$. The set $S$ is
+  \textbf{bounded above} if there exists $u \in R$
+  such that  $s \le u$ for all $s \in S$.
+  We say that $u$ is an \textbf{upper bound} of $S$.
+\end{definition}
+
+We define \textbf{bounded below} and \textbf{lower bound}
+similarly.
+
+\begin{definition}
+  $S$ is said to be \textbf{bounded} if it is
+  both bounded above and below. Otherwise we say that
+  $S$ is \textbf{unbounded}.
+\end{definition}
+
+\begin{tcolorbox}
+  $\N = \{1, 2, 3, \dots\}$ is bounded below but not
+  above.
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  \[\left\{\frac{1}{k} : k \in \N\right\} = \left\{1, \frac{1}{2}, \frac{1}{3}, \dots\right\}\]
+  is bounded.
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  $\emptyset$ is bounded.
+\end{tcolorbox}
+
+\begin{definition}
+  We say $u \in \R$ is the \textbf{least upper bound}
+  or \textbf{supremum} of a nonempty set $S \subseteq \R$
+  if
+  \begin{enumerate}
+    \item $u$ is an upper bound of $S$.
+    \item $u \le v$ for any upper bound $v$ of $S$.
+  \end{enumerate}
+  We write $u = \sup S$.
+\end{definition}
+
+The \textbf{greatest lower bound} or \textbf{infimum}
+of $S$ is defined similarly, denoted $\inf S$.
+
+\begin{tcolorbox}
+  \[S = \left\{\frac{1}{k} : k \in \N\right\}.\]
+  $\sup S = 1$,  $\inf S = 0$.
+\end{tcolorbox}
+
+\begin{definition}
+  Let $S \subseteq \R$. We say a real number
+  $M \in S$ is a \textbf{maximal element} or
+  \textbf{maximum} of $S$ if $s \le M$ for all
+  $s \in S$.
+\end{definition}
+
+The \textbf{minimal element} or \textbf{minimum}
+is defined similarly.
+
+\begin{tcolorbox}
+  $[0, 1)$ is bounded, but has no maximum. The minimum is
+  $0$.
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  \[\{2^{-n} : n \in \N\} = \{\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \dots\}\]
+  is bounded, but has no minimum. The maximum is
+  $\frac{1}{2}$.
+\end{tcolorbox}
+
+\begin{tcolorbox}
+  $\emptyset$ is bounded but has no minimum or maximum.
+\end{tcolorbox}
+
+\begin{exercise}
+  Let $A \subseteq \R$ be bounded above. Let  $c \in \R$
+  and define
+  \[c + a := \{a + c : a \in A\}.\]
+  Then  $\sup (A + c) = c + \sup A$.
+\end{exercise}
+
+\begin{proof}
+  Let $s = \sup A$. By definition, we know  $a \le s$
+  for all  $a \in A$, which implies
+  $a + c \le s + c$. So $s + c$ is an upper bound
+  for $c + A$.
+  Now let  $b$ be an arbitrary upper bound
+  for $c + A$.  For all $a \in A$, we have
+  $a + c \le b$, which implies $a \le b - c$. So
+  $b - c$ is an upper bound for  $A$. By construction,
+  $s \le b - c$, so $s + c \le b$. Therefore
+  $s + c = \sup (A + c)$.
+\end{proof}
+
+\begin{lemma}
+  Assume $s \in \R$ is an upper bound for a set
+  $A \subseteq \R$. Then $s = \sup A$ if and only
+  if for every $\epsilon > 0$, there exists
+  $a \in A$ such that  $s - \epsilon < a$.
+\end{lemma}
+
+\begin{proof}\leavevmode\\
+$(\Longrightarrow)$: Suppose $\sup A = s$. Then given any
+$\epsilon > 0$,  $s - \epsilon$ cannot be an upper
+bound for $A$. So there exists $a \in A$ such that
+$a > s - \epsilon$.
+
+$(\Longleftarrow)$: Let $b$ be an arbitrary upper bound
+for $A$. Suppose for contradiction that $b < s$. Set
+$\epsilon = s - b > 0$. Then by assumption we can
+find $a \in A$ such that $a > s - \epsilon = b$.
+Contradiction. Therefore $b \ge s$, whence $\sup A = s$.
+\end{proof}
+
+\section{Consequences of Completeness}
+\subsection{1st Consequence: Nested Interval Properties}
+\begin{theorem}[Nested interval properties]
+  For any $n \in \N$, assume that we are given a closed
+  interval
+  \[
+    I_n = [a_n, b_n] = \{x \in \R : a_n \le x \le b_n\}
+  .\]
+  Assume $I_n \supseteq I_{n+1}$. Then the resulting
+  nested sequence of closed intervals
+  \[I_1 \supseteq I_2 \supseteq I_3 \supseteq \dots\]
+  has a nonempty intersection:
+  \[\bigcap_{n=1}^\infty I_n \ne \emptyset.\]
+\end{theorem}
+
+\begin{proof}
+  Define $A = \{a_n\}$. Note that  $A \ne \emptyset$.
+  For any $n$, $a_n \le b_n \le b_1$. So $x = \sup A$
+  exists. Furthermore, for any $n$, $b_n$ is an upper
+  bound for $A$. So  $x \le b_n$. Since  $x = \sup A$,
+  $a_n \le x$. So $x \in [a_n, b_n]$ for any $n$,
+  whence
+  \[x \in \bigcap_{n = 1}^\infty I_n.\]
+\end{proof}
+
+\subsection{2nd Consequence: Archimedean Properties}
+\begin{theorem}[Archimedean properties]\leavevmode
+  \begin{enumerate}
+    \item Given any $x \in \R$, there is an $n \in \N$
+      such that $n > x$.
+    \footnote{This is saying that $\N$ is not bounded
+      above.}
+    \item Given any real number $y > 0$, there is an
+      $\N$ such that  $\frac{1}{n} < y$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of (1)]
+  Argue by contradiction. Suppose $\N$ is bounded above.
+  Then by the axiom of completeness, $\alpha = \sup N$
+  exists. By construction, $\alpha - 1$ is not an
+  upper bound for  $\N$. So we can find  $n \in N$
+  such that  $\alpha - 1 < n$, which implies
+  $\alpha < n + 1 \in \N$. Contradiction.
+\end{proof}
+
+\begin{proof}[Proof of (2)]
+  Follows from (1) by setting $x = \frac{1}{y}$.
+\end{proof}
