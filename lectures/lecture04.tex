@@ -1,0 +1,150 @@
+\chapter{Aug.~31 -- Cantor's Theorem, Sequences}
+
+
+\section{Cantor's Theorem}
+
+\begin{definition}
+  The \textbf{power set} of $A$, denoted $\mathcal{P}(A)$,
+  is the collection of all
+  subsets of $A$.
+\end{definition}
+
+\begin{theorem}[Cantor's theorem]
+  Given any set $A$, there does not exist a function
+  $f : A \to \mathcal{P}(A)$ which is surjective.
+  \footnote{Note that if $\#(A) = n < \infty$, this is
+    true as $\#(\mathcal{P}(A)) = 2^n \ne \#(A)$.}
+\end{theorem}
+
+\begin{proof}
+  Argue by contradiction. Suppose
+  $f : A \to \mathcal{P}(A)$ is onto.
+  Then for any $a \in A$, $f(a)$ is a subset of $A$.
+  Since $f$ is onto, for any subset $B$ of $A$, we
+  can find $a \in A$ such that $f(a) = B$. Define
+  \[B = \{a \in A : a \notin f(a)\} \subseteq A.\]
+  We can find $a' \in A$ such that $f(a') = B$.
+  If  $a' \in B$, then $a' \notin f(a') = B$,
+  which is a contradition.. If $a' \notin B$,
+  this is a contradiction with the definition of
+  $B$. Thus such $f$ cannot exist.
+\end{proof}
+
+\begin{remark}
+  This means that the cardinality of $\mathcal{P}(A)$
+  is strictly larger than that of $A$.
+\end{remark}
+
+\section{Sequences}
+\begin{definition}
+  A \textbf{sequence} is a function whose domain
+  is $\N$.
+\end{definition}
+
+We usually write $\{a_n\}$, $\{x_n\}$
+or $(a_n)$, $(x_n)$ to denote sequences.
+
+\begin{example}
+  The following
+  \[\left\{\frac{1+n}{n}\right\}_{n=1}^\infty = \left\{2, \frac{3}{2}, \frac{4}{3}, \frac{5}{4}, \dots\right\}\]
+  is a sequence.
+\end{example}
+
+\begin{example}
+  $\{a_n\}$, where $a_n = 2^n$ for $n \in \N$ is a sequence.
+\end{example}
+
+\begin{example}
+  We can also define $\{x_n\}$ recursively by $x_1 = 2$
+  and
+  \[
+    x_{n+1} = \frac{x_n + 1}{2}
+  .\]
+\end{example}
+
+\begin{remark}
+  Sometimes a sequence is also labeled starting from
+  $n = 0$.
+\end{remark}
+
+\begin{definition}
+  A sequence $\{a_n\}$ \textbf{converges} to a real number
+  $a$ if for every $\epsilon > 0$, we can find $N \in \N$
+  such that for all $n \ge N$, one has
+  $|a_n - a| < \epsilon$.
+  We write $\lim_{n \to \infty} a_n = a$.
+\end{definition}
+
+\begin{remark}
+  In analysis, $\epsilon$ is always taken to be a
+  positive number.
+\end{remark}
+
+\begin{example}
+  The sequence $\{1/n\}_{n = 1}^\infty$ converges with
+  \[\lim_{n \to \infty} \frac{1}{n} = 0.\]
+\end{example}
+
+\begin{definition}
+  For $\epsilon > 0$, the
+  \textbf{$\epsilon$-neighborhood} of $a$
+  is defined to be
+  \[V_\epsilon(a) = \{x \in \R : |x - a| < \epsilon\}.\]
+\end{definition}
+
+\begin{definition}
+  We say that $a$ is the \textbf{limit} of a sequence
+  $\{a_n\}$ if for every $\epsilon > 0$,
+  $V_\epsilon(a)$ contains all but finitely
+  many elements of $\{a_n\}$.
+  \footnote{This is the \textit{topological} definition
+    of the limit.}
+\end{definition}
+
+\begin{remark}
+  This definition of the limit is equivalent to the
+  definition of convergence.
+\end{remark}
+
+\begin{definition}
+  A sequence $\{a_n\}$ that does not converge is said
+  to be \textbf{divergent}.
+\end{definition}
+
+\begin{theorem}
+  The limit of a sequence, when it exists, must be
+  unique.
+\end{theorem}
+
+\begin{exercise}
+  Show
+  \[\lim_{n \to \infty} \frac{n+1}{n}\]
+  exists and
+  \[\lim_{n \to \infty} \frac{n+1}{n} = 1.\]
+\end{exercise}
+
+\begin{proof}
+  We show
+  \[\lim_{n \to \infty} \frac{n+1}{n} = 1.\]
+  For every $\epsilon > 0$, take $N \in \N$ such that
+  $N > \frac{1}{\epsilon}$. We have for all $n \ge N$,
+  \[
+  \left|\frac{n+1}{n} - 1\right| = \left|\frac{1}{n}\right| \le \frac{1}{N} < \epsilon
+  .\]
+  Therefore,
+  \[
+    \lim_{n \to \infty} \frac{n+1}{n} = 1
+  .\]
+\end{proof}
+
+\subsection{Tips for Showing Limits}
+To show the limit of a sequence, take the following steps:
+\begin{enumerate}
+  \item Identify the limit $a$. This is always given
+    by the problem or observation.
+  \item $\forall \epsilon > 0$.
+  \item Find $N = N(\epsilon)$. Do this in sketch paper
+    (need computations and manipulations).
+  \item Set $N$ as what is found in (3).
+  \item Check that $N$ works.
+\end{enumerate}

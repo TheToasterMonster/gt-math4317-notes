@@ -1,4 +1,4 @@
-\chapter{Aug.~29 -- Completeness and Countability}
+\chapter{Aug.~29 -- Completeness, Countability}
 
 \section{Consequences of Completeness}
 
@@ -13,7 +13,7 @@ $r \in \Q$ such that $a < r < b$.
   \[
   a < \frac{m}{n} < b
   .\]
-  By (ii) of the Archimedean properties, we can find
+  By (2) of the Archimedean properties, we can find
   $n \in \N$ such that
   \[
   \frac{1}{n} < b - a
@@ -85,16 +85,14 @@ $r \in \Q$ such that $a < r < b$.
   \textbf{uncountable}.
 \end{definition}
 
-\begin{tcolorbox}
-  $E = \{2, 4, 6, 8, \dots\}$.
-
+\begin{example}
+  Let $E = \{2, 4, 6, 8, \dots\}$.
   $E$ is not finite but it is countable: $E \sim \N$.
   We can define $f : \N \to E$ by $f(n) = 2n$.
-\end{tcolorbox}
+\end{example}
 
-\begin{tcolorbox}
+\begin{example}
   $\N \sim \Z$. 
-
   The bijection $f : \N \to \Z$ is given by
   \[
   f(n) =
@@ -103,14 +101,13 @@ $r \in \Q$ such that $a < r < b$.
     -\frac{n}{2} & \text{$n$ is even}.
   \end{cases}
   \]
-\end{tcolorbox}
+\end{example}
 
-\begin{tcolorbox}
+\begin{example}
   $(-1, 1) \sim \R$.
-
   The bijection  $f : (-1, 1) \to \R$ is given by
   \[x \mapsto \frac{x}{x^2 - 1}.\]
-\end{tcolorbox}
+\end{example}
 
 \begin{theorem}\leavevmode
   \begin{enumerate}
@@ -168,7 +165,7 @@ $r \in \Q$ such that $a < r < b$.
   \end{enumerate}
 \end{theorem}
 
-\begin{theorem}[Cantor's theorem]
+\begin{theorem}[Cantor's diagonal argument]
   The open interval
   \[(0, 1) = \{x \in \R : 0 < x < 1\}\]
   is uncountable.

@@ -13,12 +13,15 @@
 \usepackage[shortlabels]{enumitem}
 
 \renewcommand{\chaptername}{Lecture}
-\newtheorem{definition}{Definition}[chapter]
 \newtheorem{axiom}{Axiom}[chapter]
-\newtheorem{exercise}{Exercise}[chapter]
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{example}{Example}[definition]
+\newtheorem*{remark}{Remark}
 
 \definecolor{nordblue}{RGB}{135, 160, 190}
 \definecolor{nordyellow}{RGB}{230, 204, 147}
