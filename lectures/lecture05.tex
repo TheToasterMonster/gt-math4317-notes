@@ -1,0 +1,164 @@
+\chapter{Sept.~5 -- Limits and Limit Theorems}
+
+\section{Review of Limits}
+
+\begin{example}
+  Find
+  \[
+    \lim_{n \to \infty} \frac{1 + \sqrt{n}}{\sqrt{n}}
+  .\]
+\end{example}
+
+\begin{proof}
+  We want to show that
+  \[
+    \lim_{n \to \infty} \frac{1 + \sqrt{n}}{\sqrt{n}} = 1
+  .\]
+  Fix $\epsilon > 0$ and take $N \in \N$ such that
+  $N > \frac{1}{\epsilon^2}$. Then for any $n > N$,
+  \[
+    \left\lvert \frac{1 + \sqrt{n}}{\sqrt{n}} - 1 \right\rvert \le
+    \left\lvert \frac{1}{\sqrt{n}} \right\rvert
+    \le \frac{1}{\sqrt{N}} < \epsilon
+  ,\]
+  as desired.
+\end{proof}
+
+How can we understand this using the topological definition?
+For all $\epsilon > 0$, take $V_\epsilon(1)$. Pick
+$N > \frac{1}{\epsilon^2}$. Then we claim that
+$V_\epsilon(1)$ contains all but at most $N$ elements of
+$\left\{\frac{\sqrt{n} + 1}{\sqrt{n}}\right\}$. When
+$n \ge N$, we have
+\[
+  \left\lvert \frac{\sqrt{n} + 1}{\sqrt{n}} - 1 \right\rvert
+  < \epsilon
+,\]
+i.e.~$\frac{\sqrt{n} + 1}{\sqrt{n}} \in V_\epsilon(1)$. So
+at most $N$ elements might not be in $V_\epsilon(1)$.
+
+\section{Limit Theorems}
+\subsection{Algebraic Facts About Limits}
+\begin{definition}
+  A sequence $\{x_n\}$ is said to be \textbf{bounded} if there
+  exists $M$ such that $|x_n| \le M$ for all $n$.
+  Alternatively, $\sup_n |x_n| \le M$.
+\end{definition}
+
+\begin{theorem}
+  Every convergent sequence is bounded.
+\end{theorem}
+
+\begin{proof}
+  Suppose
+  \[
+    \lim_{n \to \infty} x_n = l
+  .\]
+  Take $\epsilon = 1$, we can find $N$ such that for all
+  $n \ge N$, $|x_n - l| < 1$. By the triangle inequality,
+  $|x_n| < |l| + 1$ for $n \ge N$. Take
+  \[M = \max\{|x_1|, |x_2|, \dots, |x_{N - 1}|, |l| + 1\}.\]
+  Then $|x_n| \le M$ for all $n \in \N$.
+\end{proof}
+
+\begin{theorem}[Algebraic limit theorem]
+  If
+  \[
+    \lim_{n \to \infty} a_n = a \quad \text{and} \quad
+    \lim_{n \to \infty} b_n = b
+  ,\]
+  then for all $c \in \R$,
+  \[
+    (1)\, \lim_{n \to \infty} ca_n = ca, \quad
+    (2)\, \lim_{n \to \infty} (a_n + b_n) = a + b, \quad \text{and} \quad
+    (3)\, \lim_{n \to \infty} a_nb_n = ab
+  .\]
+  Furthermore, if $b \ne 0$, then
+  \[
+    \lim_{n \to \infty} \frac{a_n}{b_n} = \frac{a}{b} \tag{4}
+  .\]
+\end{theorem}
+
+\begin{proof}
+  (1)\, When $c = 0$, the result is trivial. When $c \ne 0$, for
+  all $\epsilon > 0$, we set
+  $\epsilon' = \frac{\epsilon}{|c|}$.
+  Since $\lim_{n \to \infty} a_n = a$, we can find
+  $N_{\epsilon'}$ such that for all $n \ge N_{\epsilon'}$,
+  $|a_n - a| < \epsilon'$.
+  When $n > N_{\epsilon'}$, we have
+  \[
+  |ca_n - ca| = |c||a_n - a| < |c|e' = |c| \frac{\epsilon}{|c|} = \epsilon
+  .\]
+  So $\lim_{n \to \infty} ca_n = ca$.
+
+  (2)\, For all $\epsilon > 0$, since $a_n \to a$ and $b_n \to b$,
+  we can find $N_1$ and $N_2$ such that when
+  \begin{align*}
+    n \ge N_1, &\quad |a_n - a| < \frac{\epsilon}{2}, \\
+    n \ge N_2, &\quad |b_n - b| < \frac{\epsilon}{2}.
+  \end{align*}
+  Take $N = \max\{N_1, N_2\}$. Then for all $n \ge N$,
+   \[
+  |a_n + b_n - (a + b)| = |a_n - a + b_n - b| \le
+  |a_n - a| + |b_n - b| < \frac{\epsilon}{2} + \frac{\epsilon}{2}
+  = \epsilon
+  .\]
+  Therefore $\lim_{n \to \infty} (a_n + b_n) = a + b$.
+\end{proof}
+
+\subsection{Order Theorem}
+\begin{theorem}[Order theorem]
+  Let $\{a_n\}$ and $\{b_n\}$ be sequences such that
+  \[
+    \lim_{n \to \infty} a_n = a \quad \text{and} \quad
+    \lim_{n \to \infty} b_n = b
+  .\]
+  (5)\, If $a_n \ge 0$ for every $n$, then $a \ge 0$.
+  (6)\, If $a_n \le b_n$, then $a \le b$.
+  (7)\, If $a_n \ge c$, then $a \ge c$.
+\end{theorem}
+
+\begin{proof}
+  (5)\, Argue by contradiction. Suppose $a < 0$. Take
+  $\epsilon = \frac{|a|}{2}$. Since
+  $\lim_{n \to \infty} a_n = a$, we can find $N$ such
+  that when $n \ge N$, $|a_n - a| < \epsilon$. Note that
+  this means
+  \[-\epsilon < a_n - a < \epsilon \]
+  Then we have
+  \[a_n < \epsilon + a = \frac{-a}{2} + a = \frac{a}{2} < 0.\]
+  Contradiction.
+\end{proof}
+
+\subsection{Monotone Convergence Theorem}
+
+\begin{definition}
+  A sequence $\{a_n\}$ is \textbf{increasing} if
+  $a_n \le a_{n + 1}$ for every $n$ and \textbf{decreasing}
+  if $a_n \ge a_{n + 1}$ for every $n$. A sequence is
+  \textbf{monotone} if it is either increasing or decreasing.
+\end{definition}
+
+\begin{theorem}[Monotone convergence theorem]
+  If a sequence is monotone and bounded, then it converges.
+\end{theorem}
+
+\begin{proof}
+  Let $\{a_n\}$ be increasing and bounded. Set
+  $A = \{a_n : n \in \N\}$.
+  Note that $A \ne \emptyset$ and $A$ is bounded. Therefore, by the
+  axiom of completeness, $s = \sup A \in \R$ exists.
+  Then we claim that $\lim_{n \to \infty} a_n = s$.
+  For
+  every $\epsilon > 0$, $s - \epsilon$ is not an upper bound
+  for $A$, so we can find $N$ such that
+  $s - \epsilon < a_{N} \le s$. 
+  Since $\{a_n\}$ is increasing, for all $n \ge N$, we know
+  $s - \epsilon < a_N \le a_n \le s$,
+  i.e.~$|a_n - s| < \epsilon$. Therefore
+  $\lim_{n \to \infty} a_n = s$.
+
+  For $\{a_n\}$ decreasing and bounded, simply let apply the
+  previous result to $\{-a_n\}$.
+\end{proof}

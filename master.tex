@@ -64,10 +64,15 @@
   \tableofcontents
   \endgroup
 
-  \foreach \i in {00, 01, 02, 03, 04, ..., 50} {%
-    \edef\FileName{lectures/lecture\i.tex}%     The % here are necessary to eliminate any
-    \IfFileExists{\FileName}{%  spurious spaces that may get inserted
-       \input{\FileName}%       at these points
-    }
-}
+  % \foreach \i in {00, 01, 02, 03, 04, ..., 50} {%
+  %   \edef\FileName{lectures/lecture\i.tex}%     The % here are necessary to eliminate any
+  %   \IfFileExists{\FileName}{%  spurious spaces that may get inserted
+  %      \input{\FileName}%       at these points
+  %   }
+  % }
+  \input{lectures/lecture01.tex}
+  \input{lectures/lecture02.tex}
+  \input{lectures/lecture03.tex}
+  \input{lectures/lecture04.tex}
+  \input{lectures/lecture05.tex}
 \end{document}
