@@ -1,0 +1,194 @@
+\chapter{Sept.~7 -- Bolzano-Weierstrass Theorem}
+
+\section{Review of Limits}
+
+\begin{theorem}[Squeeze Theorem]
+  Let $\{x_n\}, \{y_n\}, \{z_n\}$ be sequences such
+  that $x_n \le y_n \le z_n$ for all $n$, and suppose that
+  \[\lim_{n \to \infty} x_n = \lim_{n \to \infty} z_n = l.\]
+  Then $\lim_{n \to \infty} y_n = l$.
+\end{theorem}
+
+\begin{proof}
+  Consider $|y_n - l|$.
+  If
+  \begin{align*}
+    y_n - l \ge 0, &\quad \text{then} \quad y_n - l \le z_n - l, \\
+    y_n - l < 0, &\quad \text{then} \quad |y_n - l| = l - y_n \le l - x_n.
+  \end{align*}
+  So we have
+  \[
+  |y_n - l| \le |z_n - l| + |x_n - l|
+  .\]
+  For all $\epsilon > 0$, there exist $N_1, N_2$ such that
+  for all $n \ge \N_1$,
+  \[
+  |z_n - l| < \frac{\epsilon}{2},
+  \]
+  and for all $n \ge N_2$, \[
+  |x_n - l| < \frac{\epsilon}{2}
+  .\]
+  Take $N = \max\{N_1, N_2\}$. If $n \ge N$, then
+  \[
+  |y_n - l| \le |z_n - l| + |x_n - l| <
+  \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+  .\]
+  So $\lim_{n \to \infty} y_n = l$.
+\end{proof}
+
+\section{Subsequences and the Bolzano-Weierstrass Theorem}
+\begin{definition}
+  Let $\{a_n\}$ be a sequence of real numbers.
+  Let $n_1 < n_2 < n_3 < \dots$ be an increasing sequence of
+  natural numbers. Then $\{a_{n_1}, a_{n_2}, \dots, \}$
+  is a \textbf{subsequence} of $\{a_n\}$, and it is
+  denoted by $\{a_{n_k}\}$.
+\end{definition}
+
+\begin{example}
+  Let
+  \[\{a_n\} = \left\{1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \dots\right\}.\]
+  Then 
+  \[\left\{\frac{1}{2}, \frac{1}{4}, \frac{1}{6}, \frac{1}{8}, \dots\right\}\]
+  is a subsequence of $\{a_n\}$.
+  However, note that
+  \[\left\{\frac{1}{10}, \frac{1}{5}, \frac{1}{100}, \frac{1}{500}, \dots\right\}\]
+  is \textit{not} a subsequence of $\{a_n\}$ since the
+  the $n_k$ are not strictly increasing. Similarly,
+  \[\left\{1, \frac{1}{3}, \frac{1}{3}, \frac{1}{5}, \frac{1}{5} \dots\right\}\]
+  is also not a subsequence of $\{a_n\}$.
+\end{example}
+
+\begin{theorem}
+  \label{thm:subseq}
+  Subsequences of a convergent sequence converge to the
+  same limit as the original sequence.
+\end{theorem}
+
+\begin{proof}
+  Suppose $\lim_{n \to \infty} a_n = a$. So for every
+  $\epsilon > 0$, there exists $N$ such that
+  $|a_n - a| < \epsilon$ for all $n \ge N$.
+  Consider an arbitrary subsequence $\{a_{n_k}\}$.
+  Note that $n_k \ge k$. So when $k \ge N$,
+  \[|a_{n_k} - a| < \epsilon.\]
+  Therefore $\lim_{k \to \infty} a_{n_k} = a$.
+\end{proof}
+
+\begin{example}
+  Let $0 < b < 1$. Clearly
+  \[1 > b > b^2 > b^3 > b^4 > \dots \ge 0.\]
+  The sequence $\{b^n\}$ is decreasing and bounded below,
+  so by the monotone convergence theorem,
+  $\lim_{n \to \infty} b^n = l \in \R$ exists. Note that
+  $\{b^{2n}\}$ is a subsequence of $\{b^n\}$, so
+  by Theorem \ref{thm:subseq}, we have
+  $\lim_{n \to \infty} b^{2n} = l$.
+  Note that $b^{2n} = b^n b^n$. By the algebraic limit
+  theorem,
+  \[\lim_{n \to \infty} b^{2n} = \left(\lim_{n \to \infty} b^n\right)\left(\lim_{n \to \infty} b^n\right).\]
+  Therefore, $l = l^2$, so we have $l = 0$ or $l = 1$. But
+  the entire sequence is strictly less than $1$ and
+  decreasing, so $l = 0$.
+\end{example}
+
+\begin{example}
+  Consider the sequence
+  \[\{(-1)^n\} = \{-1, 1, -1, 1, \dots\}.\]
+  This sequence does not converge. But the
+  subsequence
+  \[
+    \{-1, -1, -1, \dots\}
+  \]
+  does converge.
+\end{example}
+
+\begin{remark}
+  This shows that the converse of Theorem \ref{thm:subseq} is
+  not true, i.e.~a convergent subsequence does not
+  imply that the original sequence converges.
+\end{remark}
+
+\begin{example}
+  The sequence
+  \[
+    a_n =
+    \begin{cases}
+      1 & \text{if $n$ is prime}, \\
+      0 & \text{otherwise}
+    \end{cases}
+  \]
+  does not converge.
+\end{example}
+
+\begin{exercise}
+  Show the limit of the sequence
+  \[
+    \left\{1, -\frac{1}{2}, \frac{1}{3}, -\frac{1}{4}, \frac{1}{5}, \frac{1}{5}, -\frac{1}{5}, \frac{1}{5}, -\frac{1}{5}, \dots\right\}
+  \]
+\end{exercise}
+
+\begin{proof}
+  The subsequence
+  \[\left\{\frac{1}{5}, \frac{1}{5}, \dots\right\}\]
+  converges to $\frac{1}{5}$ while the subsequence
+  \[\left\{-\frac{1}{5}, -\frac{1}{5}, \dots\right\}\]
+  converges to $-\frac{1}{5}$. Thus the original
+  sequence diverges.
+\end{proof}
+
+\begin{remark}
+  If we can find two subsequences that converge to different
+  limits, then the original sequence diverges.
+  This is the contrapositive of Theorem \ref{thm:subseq}.
+\end{remark}
+
+\begin{theorem}[Bolzano-Weierstrass theorem]
+  Every bounded sequence contains a convergent subsequence.
+  \footnote{This demonstrates some kind of
+    \textit{compactness} of the real numbers.}
+\end{theorem}
+
+\begin{proof}
+  Let $\{a_n\}$ be a bounded  be a bounded sequence.
+  So there exists $M > 0$ such that $\sup_{n} |a_n| < M$.
+  So $a_n$ is contained in $[-M, M]$. Split
+  $[-M, M]$ into $[-M, 0]$ and $[0, M]$.
+  Pick one that contains infinitely many elements of
+  $\{a_n\}$ and call it $I_1$. Then pick
+  $a_{n_1} \in \{a_n\}$ such that $a_{n_1} \in I_1$.
+  Split $I_1$ again into two closed intervals of
+  the same size. Take one of these two that contains
+  infinitely many elements of $\{a_n\}$ and call it $I_2$.
+  Then take $a_{n_2} \in \{a_n\}$ such that
+  $a_{n_2} \in I_2$. Repeat this process to to get
+  $I_{k+1} \subseteq I_k$ with
+  $|I_{k+1}| = \frac{1}{2}|I_k|$ such that $I_{k+1}$
+  contains infinitely many elements of $\{a_n\}$.
+  \footnote{Here, by $|I_k|$ we mean the length of the
+    interval $I_k$.}
+  Also pick $a_{n_{k+1}} \in \{a_n\}$ such that
+  $a_{n_{k+1}} \in I_{k+1}$ with $n_{k + 1} > n_k$.
+  
+  By construction, $\{a_{n_k}\}$ is a subsequence of
+  $\{a_n\}$ and $a_{n_k} \in I_k$. We have the
+  $I_k$ being closed intervals with
+  \[
+  I_1 \supseteq I_2 \supseteq I_3 \supseteq \dots
+  .\]
+  So there exists $x \in \R$ such that
+  $x \in \bigcap_{k = 1}^{\infty} I_k$. Note that
+  $|I_k| = M\left(\frac{1}{2}\right)^{k-1}$. Then we claim
+  that $\lim_{k \to \infty} a_{n_k} = x$.
+
+  Let $\epsilon > 0$. Take $N$ such that
+  \[2^N > \frac{2M}{\epsilon}.\]
+  Then for every $k \ge N$, we have
+  \[
+    |a_{n_k} - x| \le M \left(\frac{1}{2}\right)^{k - 1}
+    < \epsilon
+  \]
+  since $a_{n_k}, x \in I_k$.
+  Thus $\lim_{k \to \infty} a_{n_k} = x$, and
+  $\{a_{n_k}\}$ is a convergent subsequence.
+\end{proof}
