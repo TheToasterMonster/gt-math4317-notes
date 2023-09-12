@@ -1,0 +1,188 @@
+\chapter{Sept.~12 -- The Cauchy Criterion}
+
+\section{Cauchy Sequences}
+\begin{definition}
+  A sequence $\{a_n\}$ is called a \textbf{Cauchy}
+  sequence if for every $\epsilon > 0$, there exists
+  $N \in \N$ such that for every $m, n \ge N$,
+  one has $|a_m - a_n| < \epsilon$.
+  \footnote{The Cauchy condition controls the
+    \textit{oscillation} of the \textit{tail} of a sequence.}
+\end{definition}
+
+\begin{theorem}
+  \label{thm:cauchy-convergent}
+  Every convergent sequence is a Cauchy sequence.
+\end{theorem}
+
+\begin{proof}
+  Assume $\lim_{n \to \infty} a_n = a$. Then for every
+  $\epsilon > 0$, we can find $N$ such that for
+  every $n \ge N$, we have $|a_n - a| < \epsilon/2$.
+  Then for every $m, n \ge N$, we have
+  \[
+  |a_m - a_n| = |a_m - a + a - a_n| \le
+  |a_m - a| + |a - a_n| <
+  \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+  \]
+  by the triangle inequality.
+\end{proof}
+
+\begin{lemma}
+  Every Cauchy sequence is bounded.
+\end{lemma}
+
+\begin{proof}
+  Suppose $\{x_n\}$ is a Cauchy sequence.
+  Pick $\epsilon = 1$. Then there exists $N$ such that
+  for all $m, n \ge N$, we have $|x_m - x_n| < 1$.
+  Fixing $m = N$, we know that for all $n \ge N$,
+  $|x_N - x_n| < 1$. So $|x_n| \le |x_N| + 1$ for all
+  $n \ge N$. Set
+  \[
+    M = \max\{|x_1|, |x_2|, \dots, |x_{N-1}|, |x_N| + 1\}
+  .\]
+  Then $\sup |x_n| \le M$ by construction.
+\end{proof}
+
+\begin{theorem}[Cauchy criterion]
+  A sequence converges if and only if it is a Cauchy
+  sequence.
+\end{theorem}
+
+\begin{proof}\leavevmode\newline
+  $(\Longrightarrow)$: This is Theorem \ref{thm:cauchy-convergent}.
+
+  $(\Longleftarrow)$: Suppose $\{a_n\}$ is a Cauchy sequence.
+  Since $\{a_n\}$ is Cauchy, we know $\sup |a_n| \le M$
+  for some $M \in \R$. Then by the Bolzano-Weierstrass
+  theorem, we can find a convergent subsequence
+  $\{a_{n_k}\}$ such that
+  $\lim_{k \to \infty} a_{n_k} = a$. We show that
+  we also have $\lim_{n \to \infty} a_n = a$.
+
+  For every $\epsilon > 0$, we can find $N_1$ such that
+  for all $m, n \ge N_1$, we have
+  $|a_m - a_n| < \epsilon/2$. Since
+  $\lim_{k \to \infty} a_{n_k} = a$, there is some
+  $K$ such that for all $k \ge K$, we have
+  $|a_{n_k} - a| < \epsilon/2$. Take
+  \[N \ge \max\{N_1, n_K\}.\]
+  We can find $K_0$ such that $n_{K_0} \ge N$.
+  Then for every $n \ge N$,
+  \[
+    |a_n - a| = |a_n - a_{n_{K_0}} + a_{n_{K_0}} - a|
+    \le |a_n - a_{n_{K_0}}| + |a_{n_{K_0}} - a|
+    < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+  \]
+  by the triangle inequality and the Cauchy condition.
+\end{proof}
+
+\begin{remark}
+  The Cauchy condition allows us to show that a sequence
+  converges without explicitly providing its limit.
+\end{remark}
+
+\section{Revisiting Completeness}
+This is the way we have discussed completeness
+(ordered by implication):
+\begin{itemize}
+  \item Axiom of Completeness
+    \begin{itemize}
+      \item Nested intervals property
+        \begin{itemize}
+          \item Bolzano-Weierstrass theorem
+            \begin{itemize}
+              \item Cauchy criterion
+            \end{itemize}
+        \end{itemize}
+      \item Monotone convergence theorem.
+    \end{itemize}
+\end{itemize}
+
+But this is not the only way to do so: We have several
+ways of choosing axioms to define completeness. For example,
+we can also prove the nested intervals property using
+the monotone convergence theorem.
+
+\begin{exercise}
+  The monotone convergence theorem implies the nested
+  intervals property.
+\end{exercise}
+
+\begin{proof}
+  Let $I_n = [a_n, b_n]$ with $I_{n+1} \subseteq I_n$.
+  In particular, $\{a_n\}$ is increasing and
+  bounded ($b_1$ is an upper bound). So by
+  the monotone convergence theorem,
+  $\lim_{n \to \infty} a_n = a$ exists.
+
+  Left as an exercise to show that $a \in I_n$ for
+  all $n$.
+\end{proof}
+
+\begin{exercise}
+  Given the Archimedean property,
+  the nested intervals property implies the Axiom of
+  Completeness.
+\end{exercise}
+
+\begin{proof}
+  Note that $\frac{1}{2^n} \to 0$ as $n \to \infty$.
+  This is because for
+  every $\epsilon > 0$, we can find $N$ such that
+  $\frac{1}{N} < \epsilon$ by the Archimidean property.
+  Then
+  \[
+    \frac{1}{2^N} < \frac{1}{N}
+  \]
+  for all $N \in \N$. So
+  $\lim_{n \to \infty} \frac{1}{2^n} = 0$.
+
+  Now let $S$ be a nonempty set which is bounded above.
+  Let $U$ be an upper bound for $S$. Take $s \in S$.
+  Set $a_1 = s$, $b_1 = U$. Consider
+  \[
+    \frac{s + U}{2}
+  .\]
+  If $\frac{s + U}{2}$ is an upper bound for $S$, then
+  we set $a_2 = a_1 = s$, $b_2 = \frac{s + U}{2}$. If
+  $\frac{s + U}{2}$ is not an upper bound for $S$, then
+  we set $a_2 = \frac{s + U}{2}$, $b_2 = b_1 = U$.
+  Note that $[a_2, b_2] \subseteq [a_1, b_1]$.
+  Repeat the same process for $a_n$ and $b_n$ to
+  obtain the closed intervals
+  \[[a_1, b_1] \supseteq [a_2, a_2] \supseteq [a_3, b_3] \supseteq \dots.\]
+  By the nested interval properties, the intersection
+  $\bigcap_{n = 1}^\infty [a_n, b_n]$ is nonempty.
+  Note that
+  \begin{align*}
+    \left|[a_1, b_1]\right| &= |b_1 - a_1| = |U - s| \\
+    \left|[a_2, b_2]\right| &= |b_2 - a_2| = \left|\frac{U - s}{2}\right| \\
+                            &\ \ \vdots \\
+    \left|[a_n, b_n]\right| &= |b_n - a_n| = \frac{2}{2^n}|U - s| \\
+  \end{align*}
+  So there is only one $x \in \R$ such that
+  $x \in \bigcap{n = 1}^\infty [a_n, b_n]$. We claim
+  that $\sup S = x$.
+
+  Note that $x \in [a_n, b_n]$ for all $n$. So
+  $a_n$ is not an upper bound and $b_n$ is an upper bound.
+  Suppose for contradiction that $x$ is not an upper bound.
+  Then there exists $s_0 \in S$ such that $s_0 > x$.
+  Since $|[a_n, b_n]| \to 0$, there exists an $N$ such
+  that whenever $n \ge N$,
+  \[
+    |[a_n, b_n]| < \frac{1}{2}|s_0 - x|
+  .\]
+  Since $x \in [a_n, b_n]$, this implies that $s_0 > b_n$,
+  which is a contradiction with $b_n$ being an upper bound.
+
+  Use a similar idea to show that $x$ is the \textit{least}
+  upper bound.
+\end{proof}
+
+\begin{remark}
+  These are all different ways to understand the
+  same idea of completeness.
+\end{remark}
