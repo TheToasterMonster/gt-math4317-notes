@@ -1,0 +1,227 @@
+\chapter{Sept.~14 -- Series}
+
+\begin{definition}
+  Let $\{b_n\}$ be a sequence. An infinite \textbf{series}
+  is formally given by
+  \[
+    \sum_{n = 1}^\infty b_n = b_1 + b_2 + \dots
+  .\]
+\end{definition}
+
+\begin{definition}
+  We define the \textbf{partial sum} of a series by
+  \[s_m = \sum_{n = 1}^m b_n.\]
+\end{definition}
+
+\section{Convergence of Series}
+
+\begin{definition}
+  The series $\sum_{n=1}^\infty{b_n}$ \textbf{converges}
+  to $B$ if $\lim_{m \to \infty} s_m = B$. Otherwise
+  we say that the series \textbf{diverges}.
+\end{definition}
+
+\begin{example}
+  Consider the series
+  \[\sum_{n = 1}^{\infty} \frac{1}{n^2} = 1 + \frac{1}{2^2} + \frac{1}{3}^2 + \dots.\]
+  We look at the partial sums for $m > 1$:
+  \begin{align*}
+    s_m &= \sum_{n = 1}^{m} \frac{1}{n^2} = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \frac{1}{4^2} + \dots + \frac{1}{m^2}
+    \le 1 + \frac{1}{2(1)} + \frac{1}{3(2)} + \frac{1}{4(3)} + \dots + \frac{1}{m(m-1)} \\
+        &= 1 + 1 - \frac{1}{2} + \frac{1}{2} - \frac{1}{3} + \frac{1}{3} - \frac{1}{4} + \dots + \frac{1}{m-1} - \frac{1}{m}
+        \le 2 - \frac{1}{m}.
+  \end{align*}
+  Note that $\{s_m\}$ is a monotone sequence and it is
+  bounded above by $2$. Thus by the monotone convergence
+  theorem, $\{s_m\}$ converges and there is some
+  $B \in \R$ such that
+  $\lim_{m \to \infty} s_m = B$.
+\end{example}
+
+\begin{remark}
+  Using some complex analysis, we can find $B$ by way of
+  residue calculations.
+\end{remark}
+
+\begin{example}
+  Consider the harmonic series
+  \[\sum_{n = 1}^\infty \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \dots.\]
+  We look at the partial sums
+  \[
+  s_m = 1 + \frac{1}{2} + \dots + \frac{1}{m}
+  .\]
+  Note specifically that
+  \begin{align*}
+    s_4 &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4}
+    > 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{4}
+    = 1 + \frac{1}{2} + 2\left(\frac{1}{4}\right)
+    = 1 + \frac{1}{2} + \frac{1}{2}
+    = 1 + 2\left(\frac{1}{2}\right)\\
+    s_8 &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4}
+    + \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8}
+    > 1 + \frac{1}{2} + 2\left(\frac{1}{4}\right) + 4\left(\frac{1}{8}\right)
+    = 1 + 3\left(\frac{1}{2}\right)\\
+        &\ \ \vdots \\
+    s_{2^k} &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4}
+    + \dots + \frac{1}{2^{k - 1} + 1} +
+    \frac{1}{2^{k - 1} + 2} + \dots + \frac{1}{2^k}
+    > 1 + \frac{k}{2}
+  \end{align*}
+  Thus $\{s_{2^k}\}$ diverges, so $\{s_m\}$ also
+  diverges.
+\end{example}
+
+\begin{remark}
+  This type of trick (analyzing $2^k$ terms) is called
+  \textit{dyadic analysis},
+  and it shows up frequently in analysis, particularly
+  harmonic analysis.
+\end{remark}
+
+\begin{theorem}[Cauchy condensation test]
+  Suppose $\{b_n\}$ is decreasing and $b_n \ge 0$ for
+  all $n$. Then
+  \[\sum_{n = 1}^\infty b_n = b_1 + b_2 + b_3 + \dots\]
+  converges if
+  and only if
+  \[\sum_{n=0}^{\infty} 2^n b_{2^n} = b_1 + 2b_2 + 4b_4 + \dots\]
+  converges.
+\end{theorem}
+
+\begin{proof}
+  First we show the backwards direction.
+  Assume $\sum_{n = 0}^\infty 2^n b_{2^n}$ converges.
+  Define
+  \[t_k = b_1 + \dots + 2^k b_{2^k}.\]
+  By assumption, $\{t_k\}$ converges.
+  Note that $t_k \ge 0$ and $\sup_k t_k \le M$ since
+  convergent series are bounded. Set
+  \[s_m = \sum_{n=1}^m b_n.\]
+  Fix $m$ and take $k$ large such that $m \le 2^{k + 1} - 1$.
+  Then $s_m \le s_{2^{k + 1} - 1}$ since $b_n \ge 0$.
+  Observe that
+  \begin{align*}
+    s_{2^{k+1} - 1} &= b_1 + (b_2 + b_3) +
+    (b_4 + b_5 + b_6 + b_7) + \dots
+    + (b_{2^k} + \dots + b_{2^{k+1} - 1}) \\
+    &\le b_1 + 2b_2 + 4b_4 + \dots + 2^k b_{2^k}.
+  \end{align*}
+  So $s_m \le 2^{k + 1} - 1 \le t_k \le M$.
+  Thus $\{s_m\}$ is increasing and bounded, so
+  by monotone convergence,
+  $\lim_{m \to \infty} s_m = B \in \R$ exists.
+
+  Now we show the forwards direction. Argue
+  by contraposition.
+  Suppose $\sum_{n = 0}^\infty 2^n b_{2^n}$
+  diverges, then we show that $\sum_{n = 1}^\infty b_n$ also
+  diverges. Just need to check that
+  $s_{2^k} \ge \frac{1}{2} + k$ (left as an exercise).
+\end{proof}
+
+\begin{corollary}
+  The series
+  \[\sum_{n = 1}^\infty \frac{1}{n^p}\]
+  converges if and only if $p > 1$.
+\end{corollary}
+
+\begin{proof}
+  Let $b_n = \frac{1}{n^p}$ and $b_{2^n} = \frac{1}{2^{np}}$.
+  Then we have
+  \[\sum_{n=0}^\infty 2^n b_{2^n} = \sum_{n=0}^\infty 2^{(1 - p)n}.\]
+  The RHS is a geometric series, which converges if and
+  only if $p > 1$. To see this, denote $2^{1 - p} = a$.
+  Then we have
+  \[\sum_{n = 0}^\infty 2^{(1 - p)n} = \sum_{n = 0}^\infty a^n.\]
+  We can observe that the partial sums
+  \[t_k = \sum_{n=0}^k a^n = \frac{a^{k+1} - 1}{a - 1}\]
+  converges if and only if $a^{k + 1}$ converges.
+  This happens if and only if $a < 1$, which happens
+  if and only if $p > 1$.
+\end{proof}
+
+\section{Properties of Series}
+\begin{theorem}[Algebraic limit theorem for series]
+  Let
+  \[\sum_{n=1}^\infty a_n = A, \quad \sum_{n=1}^\infty b_n = B.\]
+  Then for all $c \in \R$, we have
+  \[
+    \sum_{n=1}^\infty ca_n = cA, \quad
+    \sum_{n=1}^\infty (a_n + b_n) = A + B
+  .\]
+\end{theorem}
+
+\begin{proof}
+  Let $\sum_{n=1}^\infty a_n = A$. So
+  $s_m = \sum_{n=1}^m a_n$ converges. Set
+  $\lim_{n \to \infty} s_m = A$. Define
+  \[
+    t_m = \sum_{n=1}^m ca_n = c\sum_{n=1}^m a_n = cs_m
+  .\]
+  Then by the algebraic limit theorem, we have
+  $\lim_{m \to \infty} t_m = c\lim_{m \to \infty} s_m = cA$.
+\end{proof}
+
+\begin{theorem}[Cauchy criterion for series]
+  The series $\sum_{n=1}^\infty a_n$ converges if and only if
+  for all $\epsilon > 0$, there exist $N$ such that
+  whenever $m, n \ge N$, we have
+$|a_{m+1} + \dots + a_n| < \epsilon$.
+\end{theorem}
+
+\begin{proof}
+  The series $\sum_{k = 1}^\infty a_k$ converges
+  if and only if $s_m = \sum_{k = 1}^m a_k$ converges.
+  We show that $\{s_m\}$ is a Cauchy sequence. For
+  all $\epsilon > 0$, there exists $N$ such
+  that for all $m, n \ge N$
+  \[|s_n - s_m| = |a_n + \dots + a_{m+1}| < \epsilon.\]
+  The converse is the same inequality.
+\end{proof}
+
+\begin{corollary}
+  If $\sum_{n=1}^\infty a_n$ converges, then
+  $\lim_{n \to \infty} a_n = 0$.
+\end{corollary}
+
+\begin{proof}
+  Take $m = n - 1$.
+\end{proof}
+
+\begin{theorem}
+  Assume $\{a_n\}$ and $\{b_n\}$ are sequences such that
+  $0 \le a_n \le b_n$ for all $n$. Then
+  \begin{enumerate}
+    \item $\sum_{n=1}^\infty b_n$ converges implies
+      $\sum_{n=1}^\infty a_n$ converges,
+    \item and $\sum_{n=1}^\infty a_n$ diverges implies
+      $\sum_{n=1}^\infty b_n$ diverges.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  For all $m, n$, we have
+  \[
+    |a_{m + 1} + \dots + a_n| \le |b_{m + 1} + \dots + b_n|
+  .\]
+  Then apply the Cauchy criterion.
+\end{proof}
+
+\begin{definition}
+  A series is called \textbf{geometric} if it is of the
+  form
+  \[
+    \sum_{k=0}^\infty ar^k = a + ar + ar^2 + \dots
+  .\]
+\end{definition}
+
+Note that the geometric series diverges when $r = 1$ and
+$a \ne 0$. When $r \ne 1$, the partial sums
+\[
+  s_m = \sum_{k=0}^m ar^k = a\frac{1 - r^{m + 1}}{1 - r}
+\]
+converge if $|r| < 1$. In this case, as $m \to \infty$, we
+have
+\[
+  s_m \to \frac{a}{1 - r}
+.\]
