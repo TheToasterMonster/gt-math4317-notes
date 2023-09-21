@@ -1,0 +1,189 @@
+\chapter{Sept.~21 -- Iterated Sums and Topology}
+
+\section{Double Sums}
+Given a set of doubly indexed real numbers
+$\{a_{ij} : i, j \in \N\}$, consider the
+sums
+\[
+  \sum_{j = 1}^\infty \sum_{i = 1}^\infty a_{ij}, \quad
+  \sum_{i = 1}^\infty \sum_{j = 1}^\infty a_{ij}.
+\]
+Are these sums equal? The answer is no, in general.
+
+\begin{example}
+  Define $a_{ij}$ by
+  \[
+    a_{ij} = \begin{cases}
+      \left(\frac{1}{2}\right)^{j - i} & \text{if $j > i$}, \\
+      -1 & \text{if $i = j$}, \\
+      0 & \text{if $j < i$}.
+    \end{cases}
+  \]
+  This looks like
+  \[
+    \begin{array}{c|ccccc}
+      & a_{11} & a_{12} & a_{13} & a_{14} & \cdots \\
+      \hline
+      a_{11} & -1 & \frac{1}{2} & \frac{1}{4} & \left(\frac{1}{2}\right)^3 & \vdots \\
+      a_{21} & 0 & -1 & \frac{1}{2} & \left(\frac{1}{2}\right)^2 & \vdots \\
+      a_{31} & 0 & 0 & -1 & \frac{1}{2} & \vdots \\
+      \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+    \end{array}
+  \]
+  Then the first sum (over the columns) is
+  \[
+    \sum_{j = 1}^\infty \sum_{i = 1}^\infty a_{ij}
+    = \sum_{j = 1}^\infty -\left(\frac{1}{2}\right)^{j - 1}
+    = -\frac{1}{1 - \frac{1}{2}} = -2
+  .\]
+  Meanwhile, the second sum (over the rows) is
+  \[
+    \sum_{i = 1}^\infty \sum_{j = 1}^\infty a_{ij}
+    = \sum_{i = 1}^\infty \left(-1 + \sum_{k = 1}^\infty \left(\frac{1}{2}\right)^{k}\right)
+    = \sum_{i = 1}^\infty \left(-1 + 1\right)
+    = \sum_{i = 1}^\infty 0 = 0
+  .\]
+  Notice that these two sums are not the same.
+\end{example}
+
+\begin{remark}
+  We cannot always exchange the order of a double
+  sum.
+  \footnote{\textit{Fubini's theorem} gives conditions under which we can do this for iterated \textit{integrals} (when the integrand is \textit{absolutely integrable}).}
+\end{remark}
+
+\subsection{Convergence of Double Sums}
+\begin{definition}
+  We say that $\sum_{i = 1} \sum_{j = 1} |a_{ij}|$
+  \textbf{converges}
+  if for all $i \in \N$,
+  $\sum_{j = 1}^\infty |a_{ij}|$ converges to some real
+  number $b_i$ and $\sum_{i = 1}^\infty b_i$
+  converges.
+\end{definition}
+
+\begin{theorem}
+  Consider $\{a_{ij} : i, j \in \N\}$. If
+  \[
+    \sum_{i = 1}^\infty \sum_{j = 1}^\infty |a_{ij}|
+  \]
+  converges, then both
+  \[
+    \sum_{i = 1}^\infty \sum_{j = 1}^\infty a_{ij} \quad
+    \text{and} \quad
+    \sum_{j = 1}^\infty \sum_{i = 1}^\infty a_{ij}
+  \]
+  converge to the same limit, i.e.
+  \[
+    \sum_{i = 1}^\infty \sum_{j = 1}^\infty a_{ij}
+    = \sum_{j = 1}^\infty \sum_{i = 1}^\infty a_{ij}
+    = \lim_{n \to \infty} S_{nn}
+  \]
+  where $S_{nn} = \sum_{i = 1}^n \sum_{j = 1}^n a_{ij}$.
+\end{theorem}
+
+\begin{proof}
+  Go look this up.
+\end{proof}
+
+\section{Basic Topology in \texorpdfstring{$\R$}{R}}
+\subsection{Open Sets}
+\begin{definition}
+  For all $a \in \R$, $\epsilon > 0$, we define
+  \[V_\epsilon(a) = \{x \in \R : |x - a| < \epsilon\}\]
+  to be the \textbf{$\epsilon$-neighborhood} of $a$.
+\end{definition}
+
+\begin{definition}
+  A set $U \subseteq \R$ is \textbf{open} if for all
+  $a \in U$, there exists $\epsilon > 0$ such that
+  $V_\epsilon(a) \subseteq U$.
+\end{definition}
+
+\begin{example}
+  The set $\R$ is open: Simply take $\epsilon = 1$ for
+  any choice of $a \in \R$.
+\end{example}
+
+\begin{example}
+  The open interval $(c, d)$ is open: For any
+  $x \in (c, d)$, take $\epsilon = \min\{x - c, d - x\}$.
+\end{example}
+
+\begin{theorem}\leavevmode
+  \begin{enumerate}
+    \item The union of an arbitrary collection of open sets
+      is open.
+    \item The intersection of a finite collection of
+      open sets is open.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1)\, Let $\{U_\lambda : \lambda \in \Lambda\}$ be a
+  collection of open sets and consider
+  $\bigcup_{\lambda \in \Lambda} U_\lambda$. For
+  every $a \in \bigcup_{\lambda \in \Lambda} U_\lambda$,
+  there is $\lambda'$ such that $a \in U_{\lambda'}$.
+  Since $U_{\lambda'}$ is open, there exists
+  $\epsilon > 0$ such that
+  \[V_\epsilon(a) \subseteq U_{\lambda'} \subseteq \bigcup_{\lambda \in \Lambda} U_\lambda.\]
+  So $\bigcup_{\lambda \in \Lambda} U_\lambda$ is open.
+
+  (2)\, Let $U_1, \ldots, U_n$ be a collection of
+  open sets and consider $\bigcap_{j = 1}^n U_j$.
+  For every $a \in \bigcap_{j = 1}^n U_j$, note that
+  $a \in U_j$ for all $j = 1, \ldots, n$. Since
+  $U_j$ is open, there exists $\epsilon_j > 0$ such that
+  $V_{\epsilon_j}(a) \subseteq U_j$. Then take
+  \[\epsilon = \min_{i \le j \le n}\{\epsilon_j\},\]
+  which exists since the collection is finite.
+  Since $\epsilon_j > 0$, we have $\epsilon > 0$ as well.
+  By construction,
+  \[V_\epsilon(a) \subseteq V_{\epsilon_j}(a) \subseteq U_j\]
+  for all $j$. So
+  $V_\epsilon(a) \subseteq \bigcap_{j = 1}^n U_j$, and
+  thus $\bigcap_{j = 1}^n U_j$ is open.
+\end{proof}
+
+\begin{example}
+  Consider the family of open sets
+  $U_n = (-\frac{1}{n}, \frac{1}{n})$ for $n \in \N$. Notice
+  that their intersection
+  \[\bigcap_{n = 1}^\infty U_n = \{0\}\]
+  is not open.
+\end{example}
+
+\subsection{Closed Sets}
+\begin{definition}
+  A point $x$ is a \textbf{limit point} of a set
+  $A$ if for all $\epsilon > 0$, 
+  we have
+  \[(V_\epsilon(x) \cap A) \setminus \{x\} \ne \emptyset,\]
+  i.e.~there is some other point in the
+  $\epsilon$-neighborhood of $x$ that is also in $A$.
+\end{definition}
+
+\begin{definition}
+  A set $\mathcal{F} \subseteq \R$ is \textbf{closed}
+  if it contains all of its limit points.
+\end{definition}
+
+\begin{theorem}
+  A point $x$ is a limit point of $A$ if and only
+  if $x = \lim_{n \to \infty} a_n$ for some
+  sequence $\{a_n\}$ with $a_n \ne x$ and $a_n \in A$.
+\end{theorem}
+
+\begin{proof}
+  ($\Rightarrow$)\, Suppose $x$ is a limit point of $A$.
+  Take $\epsilon = 1 / n$ and pick
+  $a_n \in (V_{1 / n}(x) \cap A)$ such that $a_n \ne x$.
+  For such a sequence $\{a_n\}$, for all $\epsilon > 0$,
+  if $N \ge 1 / \epsilon$, then for all $n \ge N$,
+  we have
+  \[|a_n - x| \le \frac{1}{N} < \epsilon.\]
+  So $\lim_{n \to \infty} a_n = x$.
+
+  ($\Leftarrow$)\, Next lecture.
+\end{proof}
