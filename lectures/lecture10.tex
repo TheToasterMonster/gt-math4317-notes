@@ -154,7 +154,7 @@ Are these sums equal? The answer is no, in general.
   is not open.
 \end{example}
 
-\subsection{Closed Sets}
+\subsection{Limit Points}
 \begin{definition}
   A point $x$ is a \textbf{limit point} of a set
   $A$ if for all $\epsilon > 0$, 
@@ -164,12 +164,8 @@ Are these sums equal? The answer is no, in general.
   $\epsilon$-neighborhood of $x$ that is also in $A$.
 \end{definition}
 
-\begin{definition}
-  A set $\mathcal{F} \subseteq \R$ is \textbf{closed}
-  if it contains all of its limit points.
-\end{definition}
-
 \begin{theorem}
+  \label{thm:limit-point}
   A point $x$ is a limit point of $A$ if and only
   if $x = \lim_{n \to \infty} a_n$ for some
   sequence $\{a_n\}$ with $a_n \ne x$ and $a_n \in A$.
@@ -185,5 +181,12 @@ Are these sums equal? The answer is no, in general.
   \[|a_n - x| \le \frac{1}{N} < \epsilon.\]
   So $\lim_{n \to \infty} a_n = x$.
 
-  ($\Leftarrow$)\, Next lecture.
+  ($\Leftarrow$)\, Assume such a sequence $\{a_n\}$ exists.
+  Then for any $\epsilon > 0$, there exists $N$
+  such that $|a_n - x| < \epsilon$ for all $n \ge N$.
+  Note that $a_N \in V_\epsilon(x)$, and also
+  $a_N \in A$ and $a_N \ne x$. So
+  $a_N \in (V_\epsilon(x) \cap A) \setminus \{x\}$,
+  i.e.~this set is not empty. Thus $x$ is a limit point
+  of $A$.
 \end{proof}

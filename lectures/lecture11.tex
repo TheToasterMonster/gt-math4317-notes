@@ -1,0 +1,184 @@
+\chapter{Sept.~26 -- Closed Sets and the Closure}
+
+\section{Closed Sets}
+
+\begin{definition}
+  Let $A \subseteq \R$. An element $x \in A$ is
+  an \textbf{isolated point} of $A$ if it is not
+  a limit point of $A$, i.e.~there exists $\epsilon > 0$
+  such that $V_\epsilon(x) \cap A = \{x\}$.
+\end{definition}
+
+\begin{definition}
+  A set $A \subseteq \R$ is \textbf{closed}
+  if it contains all of its limit points.
+\end{definition}
+
+\begin{example}
+  The empty set and $\R$ are closed. Moreover, any
+  set without limit points is closed.
+\end{example}
+
+\begin{theorem}
+  A set $A \subseteq \R$ is closed if and only if
+  every Cauchy sequence in $A$ converges to a
+  limit in $A$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$\, Suppose $A$ is closed and
+  $\{a_n\}$ is Cauchy with $a_n \in A$ for all $n$.
+  Since Cauchy sequences are convergent, let
+  $x = \lim_{n \to \infty} a_n$. Now consider two cases.
+  If there exists an $n$ such that $x = a_n$, then we're
+  done since $x = a_n \in A$. Otherwise, we have
+  $a_n \ne x$ for all $n$. By Theorem \ref{thm:limit-point},
+  $x$ is a limit point of $A$. So $x \in A$ as
+  $A$ is closed.
+
+  $(\Leftarrow)$\, Let $x$ be a limit point of $A$.
+  Then there exists a sequence $\{a_n\}$ with $a_n \in A$
+  and $a_n \ne x$ for all $n$ such that
+  $\lim_{n \to \infty} a_n = x$. This means that
+  $\{a_n\}$ is Cauchy, so by assumption,
+  $x = \lim_{n \to \infty} a_n \in A$. Thus every limit
+  point of $A$ is in $A$, so $A$ is closed.
+\end{proof}
+
+\begin{example}
+  Consider the set
+  \[
+    A = \left\{\frac{1}{n} : n \in \N\right\}
+  .\]
+  First $x \ne 0$, we look at the following cases:
+  \begin{enumerate}
+    \item If $x < 0$, let $\epsilon = |x|$. Then
+    $V_\epsilon(x) = (2x, 0)$, and
+    $V_\epsilon(x) \cap A = \emptyset$ since
+    $A \subseteq \R^+$. So $x < 0$ is not
+    is not a limit point of $A$.
+  \item If $x > 1$, let $\epsilon = x - 1$. Then
+    $V_\epsilon(x) = (1, 2x - 1)$, so
+    $V_\epsilon(x) \cap A = \emptyset$ as all $y \in A$
+    satisfies $y \in (0, 1]$.
+  \item If $x \in (0, 1]$, then there exists $n \in N$
+    such that $n > 1 / x$. Let
+    $n_0 = \min\{n \in \N : n > 1 / x\}$, which exists
+    by the well-ordering principle. Noting that
+    $n_0 \ge 2$, we have
+    \[
+    \frac{1}{n_0} < x \le \frac{1}{n_0 - 1}
+    .\]
+    Now we look at two more cases:
+    \begin{enumerate}
+      \item If $x = \frac{1}{n_0 - 1}$, let
+        \[\epsilon = x - \frac{1}{n_0} = \frac{1}{n_0 - 1} - \frac{1}{n_0}.\]
+        Then we have
+        \[
+        V_\epsilon(x) = \left(\frac{1}{n_0}, \frac{2}{n_0 - 1} - \frac{1}{n_0}\right)
+        .\]
+        Note that
+        $(V_\epsilon \cap A) \setminus \{x\} = \emptyset$ if $n_0 = 2$.
+        Otherwise, $n_0 > 2$ and we have
+        \[\frac{2}{n_0 - 1} - \frac{1}{n_0} - \frac{1}{n_0 - 2} = \dots = \frac{-2}{n_0(n_0 - 2)(n_0 - 1)} < 0.\]
+        So $V_\epsilon(x) \subseteq \left(\frac{1}{n_0}, \frac{1}{n_0} - 2\right)$, which means that
+        $V_\epsilon(x) \cap A = \{x\}$.
+      \item Otherwise, $x \in \left(\frac{1}{n_0}, \frac{1}{n_0 - 1}\right)$
+        and let
+        \[\epsilon = \min\left\{x - \frac{1}{n_0}, \frac{1}{n_0 - 1} - x\right\}.\]
+        Then (left as exercise)
+        $V_\epsilon(x) \subseteq \left(\frac{1}{n_0}, \frac{1}{n_0 - 1}\right)$,
+        which implies $V_\epsilon(x) \cap A = \emptyset$.
+    \end{enumerate}
+  \end{enumerate}
+  So $x \ne 0$ is not a limit point of $A$. However,
+  $x = 0 = \lim_{n \to \infty} \frac{1}{n}$, so $0$ is
+  a limit point of $A$. But $0 \notin A$, so $A$ is
+  not closed.
+\end{example}
+
+\begin{example}
+  Let $A = [a, b]$. For any Cauchy sequence
+  $\{x_n\} \subseteq A$, let
+  $x = \lim_{n \to \infty} x_n$. Since
+  $x_n \ge a$, we have $x = \lim_{n \to \infty} x_n \ge a$.
+  Similarly, $x_n \le b$ implies that $x \le b$. So
+  $x \in [a, b] = A$, and thus $A$ is closed.
+\end{example}
+
+\begin{example}
+  Consider $\Q$. For any $x \in \R$, for all $n \in N$
+  there exists $a_n$ such that $a_n \in \Q$ with
+  \[
+  \frac{1}{2n} < |a_n - x| < \frac{1}{n}
+  .\]
+  Thus $a_n \ne x$ and $a_n \in \Q$ for all $n$, so
+  $\lim_{n \to \infty} a_n = x$ is a limit point of
+  $\Q$. So $\Q$ is not closed.
+\end{example}
+
+\begin{remark}
+  We can also define the real numbers as equivalence
+  classes of Cauchy sequences. Note that Cauchy sequences
+  do not require an ordering (only a metric), so we can
+  easily extend this definition to higher dimensions.
+  \footnote{Using \textit{Dedekind cuts} is another such way.}
+\end{remark}
+
+\section{The Closure of a Set}
+
+\begin{definition}
+  Let $A \subseteq \R$. Define the \textbf{closure}
+  of $A$ as
+  \[
+    \overline{A} = \{x : x \in A \text{ or $x$ is a limit point of $A$}\}
+  .\]
+\end{definition}
+
+\begin{theorem}
+  The closure of a set $A$ is closed. Furthermore,
+  if $B$ is closed and $A \subseteq B$, then
+  $\overline{A} \subseteq B$.
+  \footnote{So $\overline{A}$ is the smallest closed set
+    containing $A$.}
+\end{theorem}
+
+\begin{proof}
+  Let $x$ be a limit point of $\overline{A}$.
+  We want to show that $x$ is also a limit point of $A$
+  (so we will have $x \in \overline{A}$). If $x \in A$,
+  then we're done. Otherwise, $x \notin A$, so for
+  all $\epsilon > 0$, we have
+  $(V_{\epsilon / 2}(x) \cap \overline{A}) \setminus \{x\} \ne \emptyset$,
+  so let $y \in (V_{\epsilon / 2}(x) \cap \overline{A}) \setminus \{x\}$.
+  If $y \in A$, then $(V_{\epsilon}(x) \cap A) \setminus \{x\}
+  = \emptyset$ and we're done. Otherwise, $y \notin A$,
+  so $y \in \overline{A}$ implies that $y$ is a limit
+  point of $A$. So there exists
+  $z \in (V_{\epsilon / 2} \cap A) \setminus \{y\}$.
+  Then
+  \[|x - z| \le |x - y| + |y - z| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.\]
+  So $z \in (V_\epsilon(x) \cap A) \setminus \{x\}$.
+  Since this is true for all $\epsilon > 0$,
+  $x$ is a limit point of $A$.
+  Thus $x \in \overline{A}$, so $\overline{A}$ is closed.
+
+  For the second part, let $x \in \overline{A}$. If
+  $x \in A$, then $A \subseteq B$ implies that $x \in B$.
+  If $x \notin A$, then $x$ is a limit point of $A$.
+  So there exists a sequence $\{a_n\}$ with $a_n \in A$
+  for all $n$ such that $a_n \to x$.
+  Since $a_n \in A \subseteq B$, we have $a_n \in B$ for
+  all $n$. Since $a_n \to x$, we must have
+  $x \in B$ since $B$ is closed. Thus
+  $A \subseteq B$.
+\end{proof}
+
+\begin{corollary}
+  If $A \subseteq B$, then $\overline{A} \subseteq \overline{B}$.
+\end{corollary}
+
+\begin{proof}
+  Note that
+  Cauchy sequences in $A$ are also Cauchy sequences in $B$.
+\end{proof}
