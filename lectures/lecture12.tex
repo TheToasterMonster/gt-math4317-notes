@@ -1,0 +1,275 @@
+\chapter{Sept.~28 -- Compact Sets}
+
+\section{Another Characterization of Closed Sets}
+\begin{definition}
+  Given a set $A \subseteq \R$, its \textbf{complement} is
+  $A^c = \{x \in \R : x \notin A\}$.
+\end{definition}
+
+\begin{theorem}
+  A set $A \subseteq \R$ is closed if and only if $A^c$
+  is open.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$ Suppose $A$ is closed. Take any $x \in A^c$.
+  Since $A$ is closed and $x \notin A$, we know $x$ is not a
+  limit point of $A$. So there is $\epsilon > 0$ such that
+  $(V_\epsilon(x) \cap A) \setminus \{x\} = \emptyset$.
+  Since $x \notin A$, this means that
+  $V_\epsilon(x) \cap A = \emptyset$, which means that
+  $V_\epsilon(x) \subseteq A^c$. So $x$ is an interior point
+  of $A^c$, and thus $A^c$ is open.
+
+  $(\Leftarrow)$ Suppose $A^c$ is open. Let $x$ be a
+  limit point of $A$. Assume that $x \notin A$, i.e.~$x \in A^c$.
+  Since $A^c$ is open, there is $\epsilon > 0$ such that
+  $V_\epsilon(x) \subseteq A^c$. But then
+  $V_\epsilon(x) \cap A = \emptyset$, which is a contradiction
+  with $x$ being a limit point of $A$. So $x \in A$, and
+  thus $A$ is closed.
+\end{proof}
+
+\begin{corollary}
+  A set $A \subseteq \R$ is open if and only if $A^c$
+  is closed.
+\end{corollary}
+
+\begin{remark}
+  This is used in topology, where a collection of open sets
+  that satisfies certain conditions
+  \footnote{The collection must be closed under finite intersection and arbitrary union.}
+  is called a \textit{topology}
+  of a space, and closed sets are defined as their complements.
+  Furthermore, metrics are not necessary in this setting.
+\end{remark}
+
+\begin{theorem}\leavevmode
+  \begin{enumerate}
+    \item Let $A_1, A_2, \dots, A_n \subseteq \R$ be closed.
+      Then $\bigcup_{i = 1}^n A_i$ is closed.
+    \item Let $A_\lambda \subseteq \R$, $\lambda \in \Lambda$
+      be a family of closed subsets of $\R$ indexed by
+      $\lambda \in \Lambda$, where $\Lambda$ is an index
+      set. Then $\bigcup_{\lambda \in \Lambda} A_\lambda$
+      is closed.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Left as an exercise.
+\end{proof}
+
+\section{Compactness}
+
+\begin{definition}
+  A set $A \subseteq \R$ is \textbf{compact} if any sequence
+  $\{a_n\}$ in $A$ has a convergent subsequence
+  $\{a_{n_k}\}$ such that $\lim_{k \to \infty} a_{n_k} \in A$.
+  \footnote{This definition is sometimes called \textit{sequential compactness}.}
+\end{definition}
+
+\begin{remark}
+  Suppose we want to solve the differential equation
+  \[
+  \begin{cases}
+    x' = f(t, x) \\
+    x(t_0) = x_0
+  \end{cases}
+  .\]
+  We can first transform this into the integral equation
+  \[
+    x(t) = x_0 + \int_{t_0}^t f(s, x(s))\, ds
+  \]
+  with a test function $f$.
+  Then we perform Picard iterations to continue. However, this
+  method requires $f \in C^{1}(\R)$ (i.e.~$f$ is continuously
+  differentiable), since that is what
+  guarantees that the sequence of functions converges
+  (closedness).
+  But even without this condition (if $f$ is only continuous),
+  if we can
+  show that the set of functions lies in a compact set,
+  then we can find a subsequence of functions that do converge
+  (though solutions may no longer be unique).
+\end{remark}
+
+\begin{example}
+  The interval $(0, 1]$ is not compact since it is not closed:
+  it does not contain all of its limit points.
+\end{example}
+
+\begin{example}
+  The set $\R$ is not compact since it is not bounded:
+  an arbitrary sequence may not even have a convergent
+  subsequence.
+\end{example}
+
+\begin{theorem}
+  \label{thm:compactness}
+  A set $A \subseteq \R$ is compact if and only if
+  $A$ is bounded and closed.
+  \footnote{This applies to all Euclidean spaces (and pretty much only Euclidean spaces).}
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$\, Assume $A$ is not bounded. Then for any
+  $n \in \N$, there exists an $x_n \in A$ such that
+  $|x_n| > M$. Then $\{x_n\}$ is a sequence in $A$.
+  Since $A$ is compact, there exists a subsequence
+  \[\{x_{n_k}\} = \{x_{n_1}, x_{n_2}, x_{n_3}, \dots\}\]
+  such
+  that $x = \lim_{k \to \infty} x_{n_k} \in A$. But this
+  implies that $\{x_{n_k}\}$ is bounded, which contradicts
+  the fact that $|x_{n_k}| > n_k$ and $n_k \to \infty$
+  and $k \to \infty$. Hence $A$ must be bounded.
+
+  Now assume $A$ is not closed. Then there exists a limit
+  point $x$ of $A$ such that $x \notin A$. Since $x$ is
+  a limit point of $A$, there exists a sequence
+  $\{a_n\}$ such that $a_n \in A$ and
+  $\lim_{n \to \infty} a_n = x$. Now since $A$ is compact,
+  there exists a convergent subsequence $\{a_{n_k}\}$ such that
+  $\lim_{k \to \infty} a_{n_k} \in A$. But since
+  $\{a_n\}$ converges, we have
+  \[x = \lim_{n \to \infty} a_n = \lim_{k \to \infty} a_{n_k} \in A.\]
+  This is a contradiction with $x \notin A$. Hence $A$ is closed.
+
+  $(\Leftarrow)$\, Suppose $A$ is bounded and closed. Let
+  $\{a_n\}$ be a sequence in $A$. By the Bolzano-Weierstrass
+  theorem, there exists a convergent subsequence $\{a_{n_k}\}$.
+  Let $x = \lim_{k \to \infty} a_{n_k}$. But $\{a_n\}$ is
+  a convergent sequence in $A$, which is closed. So $x \in A$,
+  and hence $A$ is compact.
+\end{proof}
+
+\begin{example}
+  The union of intervals $[1, 2] \cup [3, 4]$ is compact.
+\end{example}
+
+\begin{example}
+  The set
+  \[A = \left\{\frac{1}{n} : n \in \N\right\} \cup \{0\}\]
+  is compact (since we added the limit point $0$).
+\end{example}
+
+\begin{remark}
+  Why do we need the concept of compactness? Because Theorem
+  \ref{thm:compactness} is no longer true in infinite dimensions.
+\end{remark}
+
+\begin{theorem}
+  Suppose
+  \[k_1 \supseteq k_2 \supseteq k_3 \supseteq \dots\]
+  are non-empty compact sets. Then
+  \[
+    \bigcap_{n = 1}^\infty k_n \ne \emptyset
+  .\]
+\end{theorem}
+
+\begin{proof}
+  Since $k_n \ne \emptyset$ for all $n$, there exists
+  $a_n \in k_n$. Then for any $m \in \N$,
+  $\{a_n\}_{n = m}^\infty$ is a sequence
+  in $k_m$, which is compact. For $m = 1$,
+  there exists a convergent
+  subsequence $\{a_{n_k}\}$ such that
+  $x = \lim_{k \to \infty} a_{n_k} \in k_1$. For any
+  $m \in \N$, there is $k \in \N$ such that for all
+  $k \ge k_m$, $n_k \ge m$. So
+  \[a_{n_k} \in k_{n_k} \subseteq k_m,\]
+  which means that $\{a_{n_k}\}$ is a convergent sequence
+  in $k_m$, which is closed. Thus $x \in k_m$ for all
+  $m$, which means that $x \in \bigcap_{n = 1}^\infty k_n$.
+  So $\bigcap_{n = 1}^\infty k_n$ is nonempty.
+\end{proof}
+
+\begin{example}
+  For $U_n = (0, 1 / n)$. Then
+  $U_1 \supseteq U_2 \supseteq U_3 \supseteq \dots$, but
+  their intersection is empty.
+\end{example}
+
+However, this is not so surprising, since the measure of
+the sets $U_n$ tends to 0.
+
+\begin{example}
+  The sequence $V_n = (n, \infty)$ also satisfies
+  $V_1 \supseteq V_2 \supseteq V_3 \supseteq \dots$,
+  but their intersection is empty, despite each $V_n$ having
+  infinite measure.
+\end{example}
+
+\section{Another Definition of Compactness}
+
+\begin{theorem}
+  A set $A \subseteq \R$ is compact if and only if
+  it satisfies the following property:
+  \begin{quote}
+    (Covering property)\,
+    For any family $U_\lambda$, $\lambda \in \Lambda$ of
+    open subsets of $\R$ such that
+    $A \subseteq \bigcup_{\lambda \in \Lambda} U_\lambda$,
+    \footnote{This is called an \textit{open cover} of $A$.}
+    there exists $n \in \N$ and
+    $\lambda_1, \dots, \lambda_n \in \Lambda$ such that
+    $A \subseteq \bigcup_{k = 1}^n U_{\lambda_k}$.
+    \footnote{I.e.~there exists a finite subcover.}
+  \end{quote}
+\end{theorem}
+
+\begin{proof}
+  $(\Leftarrow)$\, Assume that the covering property holds for
+  $A$. For boundedness, let
+  \[A \subseteq \bigcup_{n = 1}^\infty (-n, n) = \R.\]
+  By the covering property, there exist
+  $n_1 < n_2 < \dots < n_k$ such that
+  \[A \subseteq \bigcup_{i = 1}^k (-n_i, n_i) = (-n_k, n_k).\]
+  So $A$ is bounded. Now for closedness, suppose otherwise
+  that $A$ is not closed. So there exists a limit point
+  $x \notin A$. Then
+  \[A \subseteq \R \setminus \{x\} = \bigcup_{n = 1}^\infty \left\{y : |y - x| > \frac{1}{n}\right\}.\]
+  By the covering property, there exist
+  $n_1 < n_2 < \dots < n_k$ such that
+  \[A \subseteq \bigcup_{i = 1}^k \left\{y : |y - x| > \frac{1}{n_i}\right\} = \left\{y : |y - x| > \frac{1}{n}\right\}.\]
+  But $x$ is a limit point of $A$, so there exists a
+  $z \in V_{1 / n_k}(x) \cap A$. This is a contradiction.
+  Hence $A$ is also closed, and thus $A$ is compact.
+
+  $(\Rightarrow)$\, Assume $A$ is compact and let
+  $U_\lambda$, $\lambda \in \Lambda$ be an open cover
+  of $A$. Suppose otherwise that there does not
+  exist a finite subcover.
+  Since $A$ is compact, $A$ is bounded. So there exists
+  an $M$ such that $A \subseteq [-M, M]$. Let $A_1 = A$
+  and define a sequence $A_n$ of sets inductively by
+  $A_n = A \cap [a_n, b_n] \ne \emptyset$ with
+  \[
+    |b_n - a_n| = \frac{2M}{2^{n - 1}}
+  ,\]
+  and $A_n$ can't be covered by a finite subcollection
+  of $U_\lambda$. Suppose such $A_n$ is defined.
+  Then
+  \[A_n = \underbrace{\left(A \cap \left[a_n, \frac{b_n + a_n}{2}\right]\right)}_{= k_1} \cup \underbrace{\left(A \cap \left[\frac{a_n + b_n}{2}, b_n\right]\right)}_{= k_2}.\]
+  So either $k_1$ or $k_2$ can't be covered by a finite
+  subcollection of $U_\lambda$. Let this one be $A_{n + 1}$.
+  Since $A_n$ is closed and bounded, $A_n$ is compact.
+  Then we have a sequence of compact sets
+  \[A_1 \supseteq A_2 \supseteq A_3 \supseteq \dots,\]
+  so $\bigcap_{n = 1}^\infty A_n \ne \emptyset$.
+  Since $|a_n - b_n| \to 0$ (prove this as exercise),
+  there exists $x \in \R$ such that
+  $\cap_{n = 1}^\infty A_n = \{x\}$. But there exists
+  $\lambda_0$ such that $x \in U_{\lambda_0}$, which is open.
+  So there exists $n$ such that
+  $V_{1 / n}(x) \subseteq U_{\lambda_0}$, which means that
+  $A_{n + 1} \subseteq U_{\lambda_0}$. This is a
+  contradiction.
+\end{proof}
+
+\begin{example}
+  Let $A = (0, 1)$, $\Lambda = (0, 1)$, and
+  $U_\lambda = (0, \lambda)$. We have
+  $A \subseteq \bigcup_{\lambda \in (0, 1)} U_\lambda$,
+  but there does not exist a finite subcover.
+\end{example}
