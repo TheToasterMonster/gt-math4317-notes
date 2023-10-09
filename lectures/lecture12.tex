@@ -15,9 +15,9 @@
   $(\Rightarrow)$\, Suppose $A$ is closed. Take any $x \in A^c$.
   Since $A$ is closed and $x \notin A$, we know $x$ is not a
   limit point of $A$. So there is $\epsilon > 0$ such that
-  $(V_\epsilon(x) \cap A) \setminus \{x\} = \emptyset$.
+  $(V_\epsilon(x) \cap A) \setminus \{x\} = \varnothing$.
   Since $x \notin A$, this means that
-  $V_\epsilon(x) \cap A = \emptyset$, which means that
+  $V_\epsilon(x) \cap A = \varnothing$, which means that
   $V_\epsilon(x) \subseteq A^c$. So $x$ is an interior point
   of $A^c$, and thus $A^c$ is open.
 
@@ -25,7 +25,7 @@
   limit point of $A$. Assume that $x \notin A$, i.e.~$x \in A^c$.
   Since $A^c$ is open, there is $\epsilon > 0$ such that
   $V_\epsilon(x) \subseteq A^c$. But then
-  $V_\epsilon(x) \cap A = \emptyset$, which is a contradiction
+  $V_\epsilon(x) \cap A = \varnothing$, which is a contradiction
   with $x$ being a limit point of $A$. So $x \in A$, and
   thus $A$ is closed.
 \end{proof}
@@ -163,12 +163,12 @@
   \[k_1 \supseteq k_2 \supseteq k_3 \supseteq \dots\]
   are non-empty compact sets. Then
   \[
-    \bigcap_{n = 1}^\infty k_n \ne \emptyset
+    \bigcap_{n = 1}^\infty k_n \ne \varnothing
   .\]
 \end{theorem}
 
 \begin{proof}
-  Since $k_n \ne \emptyset$ for all $n$, there exists
+  Since $k_n \ne \varnothing$ for all $n$, there exists
   $a_n \in k_n$. Then for any $m \in \N$,
   $\{a_n\}_{n = m}^\infty$ is a sequence
   in $k_m$, which is compact. For $m = 1$,
@@ -243,7 +243,7 @@ the sets $U_n$ tends to 0.
   Since $A$ is compact, $A$ is bounded. So there exists
   an $M$ such that $A \subseteq [-M, M]$. Let $A_1 = A$
   and define a sequence $A_n$ of sets inductively by
-  $A_n = A \cap [a_n, b_n] \ne \emptyset$ with
+  $A_n = A \cap [a_n, b_n] \ne \varnothing$ with
   \[
     |b_n - a_n| = \frac{2M}{2^{n - 1}}
   ,\]
@@ -256,7 +256,7 @@ the sets $U_n$ tends to 0.
   Since $A_n$ is closed and bounded, $A_n$ is compact.
   Then we have a sequence of compact sets
   \[A_1 \supseteq A_2 \supseteq A_3 \supseteq \dots,\]
-  so $\bigcap_{n = 1}^\infty A_n \ne \emptyset$.
+  so $\bigcap_{n = 1}^\infty A_n \ne \varnothing$.
   Since $|a_n - b_n| \to 0$ (prove this as exercise),
   there exists $x \in \R$ such that
   $\cap_{n = 1}^\infty A_n = \{x\}$. But there exists

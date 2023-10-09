@@ -54,12 +54,12 @@
   \begin{enumerate}
     \item If $x < 0$, let $\epsilon = |x|$. Then
     $V_\epsilon(x) = (2x, 0)$, and
-    $V_\epsilon(x) \cap A = \emptyset$ since
+    $V_\epsilon(x) \cap A = \varnothing$ since
     $A \subseteq \R^+$. So $x < 0$ is not
     is not a limit point of $A$.
   \item If $x > 1$, let $\epsilon = x - 1$. Then
     $V_\epsilon(x) = (1, 2x - 1)$, so
-    $V_\epsilon(x) \cap A = \emptyset$ as all $y \in A$
+    $V_\epsilon(x) \cap A = \varnothing$ as all $y \in A$
     satisfies $y \in (0, 1]$.
   \item If $x \in (0, 1]$, then there exists $n \in N$
     such that $n > 1 / x$. Let
@@ -78,7 +78,7 @@
         V_\epsilon(x) = \left(\frac{1}{n_0}, \frac{2}{n_0 - 1} - \frac{1}{n_0}\right)
         .\]
         Note that
-        $(V_\epsilon \cap A) \setminus \{x\} = \emptyset$ if $n_0 = 2$.
+        $(V_\epsilon \cap A) \setminus \{x\} = \varnothing$ if $n_0 = 2$.
         Otherwise, $n_0 > 2$ and we have
         \[\frac{2}{n_0 - 1} - \frac{1}{n_0} - \frac{1}{n_0 - 2} = \dots = \frac{-2}{n_0(n_0 - 2)(n_0 - 1)} < 0.\]
         So $V_\epsilon(x) \subseteq \left(\frac{1}{n_0}, \frac{1}{n_0} - 2\right)$, which means that
@@ -88,7 +88,7 @@
         \[\epsilon = \min\left\{x - \frac{1}{n_0}, \frac{1}{n_0 - 1} - x\right\}.\]
         Then (left as exercise)
         $V_\epsilon(x) \subseteq \left(\frac{1}{n_0}, \frac{1}{n_0 - 1}\right)$,
-        which implies $V_\epsilon(x) \cap A = \emptyset$.
+        which implies $V_\epsilon(x) \cap A = \varnothing$.
     \end{enumerate}
   \end{enumerate}
   So $x \ne 0$ is not a limit point of $A$. However,
@@ -150,10 +150,10 @@
   (so we will have $x \in \overline{A}$). If $x \in A$,
   then we're done. Otherwise, $x \notin A$, so for
   all $\epsilon > 0$, we have
-  $(V_{\epsilon / 2}(x) \cap \overline{A}) \setminus \{x\} \ne \emptyset$,
+  $(V_{\epsilon / 2}(x) \cap \overline{A}) \setminus \{x\} \ne \varnothing$,
   so let $y \in (V_{\epsilon / 2}(x) \cap \overline{A}) \setminus \{x\}$.
   If $y \in A$, then $(V_{\epsilon}(x) \cap A) \setminus \{x\}
-  = \emptyset$ and we're done. Otherwise, $y \notin A$,
+  = \varnothing$ and we're done. Otherwise, $y \notin A$,
   so $y \in \overline{A}$ implies that $y$ is a limit
   point of $A$. So there exists
   $z \in (V_{\epsilon / 2} \cap A) \setminus \{y\}$.
