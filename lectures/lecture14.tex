@@ -1,0 +1,181 @@
+\chapter{Oct.~12 -- Connected Sets}
+
+\section{Review of Exam 1}
+\begin{exercise}
+  Investigate the convergence of the following series:
+  \[\sum_{n=1}^\infty \frac{\sin(\pi n / 3)}{\sqrt{n}}.\]
+  Either state the test/reason used to show convergence
+  (and verify the hypotheses required), or show why the
+  sum diverges.
+\end{exercise}
+
+\begin{proof}[Solution]
+  Observe that
+  \[
+    \sin\left(\frac{\pi}{3}n\right) = \begin{cases}
+      0, & n = 3k\\
+      \frac{\sqrt{3}}{2}, & n = 6k + 1, 6k + 2 \\
+      -\frac{\sqrt{3}}{2}, & n = 6k + 4, 6k + 5. \\
+    \end{cases}
+  \]
+  But note that we cannot just regroup since the series
+  is not absolutely convergent! Instead, look at the partial sums
+  (here, the sum is finite so we can regroup)
+  and show that
+  \[
+    |s_m - s_n| \le \frac{C}{\sqrt{n}}
+  \]
+  for some constant $C$. Then argue by the Cauchy criterion that
+  the series converges.
+\end{proof}
+
+\section{Connected Sets}
+\begin{definition}
+  Two nonempty sets $A, B \subseteq \R$ are \textbf{separated}
+  if $\overline{A} \cap B = \overline{B} \cap A = \varnothing$.
+\end{definition}
+
+\begin{definition}
+  A set $E \subseteq \R$ is \textbf{disconnected} if $E$ can be
+  written as $E = A \cup B$ such that $A$ and $B$ (both nonempty)
+  are separated. A set which is not disconnected is
+  \textbf{connected}.
+\end{definition}
+
+\begin{example}
+  Let $A = (1, 2)$ and $B = (2, 5)$. The set
+  $E = A \cup B = (1, 2) \cup (2, 5)$ is disconnected since
+  \[\overline{A} \cap B = [1, 2] \cap (2, 5) = \varnothing = (1, 2) \cap [2, 5] = A \cap \overline{B}.\]
+\end{example}
+
+\begin{example}
+  Let $C = (1, 2)$ and $D = [2, 5)$. Then $F = C \cup D$ is
+  connected.
+\end{example}
+
+\begin{example}
+  The set of rational numbers $\Q$ is disconnected.
+  For example, we can take $A = \Q \cap (-\infty, \sqrt{2})$
+  and $B = \Q \cap (\sqrt{2}, \infty)$. Clearly
+  $A \cup B = \Q$ but $A$ and $B$ are separated.
+\end{example}
+
+\begin{theorem}
+  A set $E \subseteq \R$ is connected if and only if for every
+  $A, B \ne \varnothing$ such that $E = A \cup B$, there exists
+  $\{x_n\} \subseteq A$ such that
+  $\lim_{n \to \infty} x_n = x \in B$ or $\{x_n\} \subseteq B$
+  such that $\lim_{n \to \infty} x_n = x \in A$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$\, Argue by contrapositve and suppose that
+  the latter condition fails.
+  Then we can find $A^0, B^0 \ne \varnothing$ such that
+  for all $\{x_n\} \subseteq A^0$,  we have
+  $\lim_{n \to \infty} x_n = x \ne B^0$. So
+  $\overline{A^0} \cap B^0 = \varnothing$. By a similar argument,
+  $\overline{B^0} \cap A^0 = \varnothing$. So $E$ is disconnected.
+
+  $(\Leftarrow)$\, Use a similar argument by contrapositive.
+\end{proof}
+
+\begin{theorem}
+  A set $E \subseteq \R$ is connected if and only if
+  for any $a, b \in E$, we have $a < c < b$ implies $c \in E$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$\, Let $a, b \in E$ and pick $a < c < b$.
+  Set $A = (-\infty, c) \cap E$ and $B = (c, \infty) \cap E$.
+  Note that $A, B \ne \varnothing$ since $a \in A$ and $b \in B$.
+  Furthermore,
+  \[\overline{A} \cap B = A \cap \overline{B} = \varnothing.\]
+  If $E = A \cup B$, then $E$ is disconnected, so
+  $A \cup B \ne E$.
+  But $(A \cup B)^c = \{c\}$, so we must have
+  $c \in E$.
+
+  $(\Leftarrow)$\, Let $E = A \cup B$
+  such that $A, B \ne \varnothing$ and $A \cap B = \varnothing$.
+  Take $a_0 \in A, b_0 \in B$. Without loss of generality,
+  assume $a_0 < b_0$. Consider $I_0 = [a_0, b_0]$. Bisect
+  $I_0$ let $x_0$ be the center of $I_0$. Since
+  $a_0 < x_0 < b_0$ and $a_0, b_0 \in E$, we must have
+  $x_0 \in E$. But $E = A \cup B$, so $x_0 \in A$ or $x_0 \in B$.
+  If $x_0 \in A$, set $a_1 = x_0$ and $b_1 = b_0$. Otherwise,
+  set $a_1 = a_0$ and $b_1 = x_0$. Then take $I_1 = [a_1, b_1]$.
+  Repeat this process to construct a sequence of nested intervals
+  with $I_n = [a_n, b_n]$ such that $a_n \in A$ and $b_n \in B$.
+  By the nested interval property, we have
+  $\bigcap_{n = 1}^\infty I_n \ne \varnothing$. But
+  \[|I_n| = |b_n - a_n| = \frac{1}{2^n}(b_0 - a_0) \to 0,\]
+  so $\bigcap_{n = 1}^\infty I_n = \{x\}$ for some $x \in \R$.
+  So $\lim_{n \to \infty} a_n = \lim_{n \to \infty} b_n = x$.
+  Since $I_n \subseteq E$, we have $x \in E = A \cup B$. So
+  $x \in A$ or $x \in B$. If $x \in A$, then
+  $A \cup \overline{B} \ne \varnothing$, and if $x \in B$, then
+  $\overline{A} \cap B \ne \varnothing$. Thus $E$ is connected.
+\end{proof}
+
+\section{Density in a Set}
+\begin{definition}
+  A set $A \subseteq \R$ is called an \textbf{$F_\sigma$ set}
+  if it can be written as a countable union of closed sets.
+  A set $A \subseteq \R$ is called a \textbf{$G_\delta$ set}
+  if it can be written as a countable intersection of open sets.
+\end{definition}
+
+\begin{remark}
+  Recall that the countable union of closed sets is not necessarily
+  closed, and the countable intersection of open sets is not
+  necessarily open.
+\end{remark}
+
+\begin{definition}
+  A set $G \subseteq \R$ is \textbf{dense} in $\R$ if for every
+  $a, b \in \R$, there exists $x \in G$ such that $a < x < b$.
+\end{definition}
+
+\begin{remark}
+  Recall that $\Q$ is dense in $\R$.
+\end{remark}
+
+\begin{theorem}
+  \label{thm:countable-intersection-dense}
+  If $\{G_1, G_2, \dots\}$ is a countable collection of dense
+  open sets, then
+  $\bigcap_{n = 1}^\infty G_n \ne \varnothing$.
+\end{theorem}
+
+\begin{proof}
+  Next class.
+\end{proof}
+
+\begin{corollary}
+  The set of real numbers $\R$ cannot be written as
+  \[\R = \bigcup_{n = 1}^\infty F_n\]
+  such that $F_n$ is closed and $F_n$ contains no open nonempty
+  interval.
+\end{corollary}
+
+\begin{proof}
+  Suppose
+  \[\underbrace{\R^c}_{= \varnothing} = \left(\bigcup_{n = 1}^\infty F_n\right)^c = \bigcap_{n = 1}^\infty F_n^c\]
+  by de Morgan's laws. Then $F_n^c$ is open and dense in $\R$. To
+  see
+  that $F_n^c$ is dense in $\R$, let $a, b \in \R$. Note that
+  $(a, b) \notin F_n$, so $(a, b) \cap F_n^c \ne \varnothing$.
+  Hence there exists $x \in F_n^c$ such that $a < x < b$. Then
+  this is a contradiction with Theorem
+  \ref{thm:countable-intersection-dense}.
+\end{proof}
+
+\begin{definition}
+  A set $E$ is nowhere dense if $\overline{E}$ contains no
+  nonempty open interval.
+\end{definition}
+
+\begin{remark}
+  This is equivalent to saying that $\overline{E}^c$ is dense.
+\end{remark}
