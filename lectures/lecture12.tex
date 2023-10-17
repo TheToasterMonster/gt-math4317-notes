@@ -231,7 +231,7 @@ the sets $U_n$ tends to 0.
   \[A \subseteq \R \setminus \{x\} = \bigcup_{n = 1}^\infty \left\{y : |y - x| > \frac{1}{n}\right\}.\]
   By the covering property, there exist
   $n_1 < n_2 < \dots < n_k$ such that
-  \[A \subseteq \bigcup_{i = 1}^k \left\{y : |y - x| > \frac{1}{n_i}\right\} = \left\{y : |y - x| > \frac{1}{n}\right\}.\]
+  \[A \subseteq \bigcup_{i = 1}^k \left\{y : |y - x| > \frac{1}{n_i}\right\} = \left\{y : |y - x| > \frac{1}{n_k}\right\} \subseteq \R \setminus V_{1 / n_k}(x).\]
   But $x$ is a limit point of $A$, so there exists a
   $z \in V_{1 / n_k}(x) \cap A$. This is a contradiction.
   Hence $A$ is also closed, and thus $A$ is compact.

@@ -149,7 +149,21 @@
 \end{theorem}
 
 \begin{proof}
-  Next class.
+  Take $x_1 \in G_1$. Since $G_1$ is open, there exists
+  $\epsilon_1$ such that
+  $(x_1 - \epsilon_1, x_1 + \epsilon_1) \subseteq G_1$.
+  Take
+  \[I_1 = \left[x_1 - \frac{\epsilon_1}{2}, x_1 + \frac{\epsilon}{2}\right] \subseteq G_1.\]
+  Since $G_2$ is dense, $I_1 \cap G_2 \ne \varnothing$.
+  Take $x_2 \in I_1 \cap G_2$ such that $x_2$ is not an
+  endpoint of $I_1$. Since $G_2$ is open,
+  we can similarly find $\epsilon_2$ such that
+  $(x_2 - \epsilon_2, x_2 + \epsilon_2) \subseteq G_2$.
+  Then take
+  \[I_2 = \left[x_2 - \frac{\epsilon_2}{2}, x_2 + \frac{\epsilon_2}{2}\right] \cap I_1 \subseteq G_2.\]
+  Repeat this to get the sequence of nested intervals
+  $I_1 \supseteq I_2 \supseteq I_3 \supseteq \dots$. Then
+  $\varnothing \ne \bigcap_{n = 1}^\infty I_n \subseteq \bigcap_{n = 1}^\infty G_n$.
 \end{proof}
 
 \begin{corollary}

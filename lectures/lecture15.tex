@@ -1,0 +1,106 @@
+\chapter{Oct.~17 -- Functional Limits}
+
+\section{The Limit of a Function}
+\begin{definition}
+  Let $A \subseteq \R$ and $f : A \to \R$. Further let
+  $c$ be a limit point of $A$ (not necessarily in $A$).
+  We say that
+  \[\lim_{x \to c} f(x) = L\]
+  provided that for all $\epsilon > 0$, there exists
+  $\delta > 0$ such that for all $x \in A$, if
+  $0 < |x - c| < \delta$, then
+  $|f(x) - L| < \epsilon$.
+\end{definition}
+
+\begin{remark}
+  We do not require $f$ to be defined at $c$.
+\end{remark}
+
+\begin{example}
+  For the function $f : \R \to \R$ given by
+  \[
+    f = \begin{cases}
+      1 & \text{if $x \ne 0$} \\
+      5 & \text{if $x = 0$},
+    \end{cases}
+  \]
+  we have $\lim_{x \to 0} f(x) = 1$.
+\end{example}
+
+\begin{example}
+  Take $A = (-\infty, 0) \cup (0, \infty)$ and $f = 1$
+  in $A$. Then $\lim_{x \to 0} f(x) = 1$.
+\end{example}
+
+We can alternatively use the following topological
+definition:
+\begin{definition}
+  We say that
+  \[\lim_{x \to c}f(x) = L\]
+  if for all $\epsilon > 0$, there exists $\delta > 0$
+  such that if $x \in A$ with $x \ne c$ and
+  $x \in V_\delta(c)$, then $f(x) = V_\epsilon(L)$.
+\end{definition}
+
+\begin{exercise}
+  Let $f(x) = 3x + 1$. Then $\lim_{x \to 2} f(x) = 7$.
+\end{exercise}
+
+\begin{proof}
+  Fix $\epsilon > 0$ and let $\delta = \frac{\epsilon}{3}$.
+  Then for all $0 < |x - 2| < \delta$, we have
+  \[|f(x) - 7| = |3x + 1 - 7| = |3x - 6| = 3|x - 2|
+  < 3\delta = \epsilon.\]
+  Therefore $\lim_{x \to 2} f(x) = 7$.
+\end{proof}
+
+\begin{exercise}
+  Let $f(x) = x^2$. Then $\lim_{x \to 2} f(x) = 4$.
+\end{exercise}
+
+\begin{proof}
+  Note that
+  \[|f(x) - 4| = |x^2 - 4| = |x - 2| |x + 2|.\]
+  Since we only care about $f(x)$ when $x$ is near 2,
+  we take $|x - 2| \le 1$. In this region,
+  $|x + 2| \le 5$.
+
+  Now fix $\epsilon > 0$ and take
+  $\delta_1 = \frac{\epsilon}{5}$. Then in the region
+  $|x - 2| \le 1$, for any $0 < |x - 2| < \delta_1$, we have
+  \[|f(x) - 4| = |x + 2||x - 2| < 5 \delta_1 = 5 \cdot \frac{\epsilon}{5} = \epsilon.\]
+  Taking $\delta = \min\{1, \delta_1\}$ does the job
+  for any arbitrary $0 < |x - 2| < \delta$. So
+  $\lim_{x \to 2} f(x) = 4$.
+\end{proof}
+
+\begin{exercise}
+  Let $f(x) = x^3$. Then $\lim_{x \to 2} f(x) = 8$.
+\end{exercise}
+
+\begin{proof}
+  Note that
+  \[|x^3 - 8| = |x - 2| |x^2 + 2x + 4|.\]
+  First restrict $|x - 2| < 1$. Then
+  \[|x^2 + 2x + 4| \le 9 + 6 + 4 = 19\]
+  in this region. So take
+  $\delta_1 = \frac{\epsilon}{19}$ and
+  $\delta = \min\{1, \delta_1\}$.
+\end{proof}
+
+\section{Algebraic Properties of Functional Limits}
+\begin{theorem}
+  Let $f : A \to \R$ and $c$ be a limit point of $A$.
+  Then the following two statements are equivalent:
+  \begin{enumerate}
+    \item $\lim_{x \to c} f(x) = L$.
+    \item For any sequence $\{x_n\} \subseteq A$ such that
+      $x_n \ne c$ and
+      $\lim_{n \to \infty} x_n = c$, we have
+      $\lim_{n \to \infty} f(x_n) = L$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Next class.
+\end{proof}
