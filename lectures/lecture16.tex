@@ -1,0 +1,237 @@
+\chapter{Oct.~19 -- Continuity}
+
+\section{Algebraic Properties of Functional Limits}
+\begin{theorem}
+  Let $f : A \to \R$ and $c$ be a limit point of $A$.
+  Then the following two statements are equivalent:
+  \begin{enumerate}
+    \item $\lim_{x \to c} f(x) = L$.
+    \item For any sequence $\{x_n\} \subseteq A$ such that
+      $x_n \ne c$ and
+      $\lim_{n \to \infty} x_n = c$, we have
+      $\lim_{n \to \infty} f(x_n) = L$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  $(1) \Rightarrow (2)$: By assumption, for all $\epsilon > 0$,
+  there exists $\delta > 0$ such that for any $x \in A$,
+  $0 < |x - L| < \delta$ implies $|f(x) - L| < \epsilon$.
+  Now let $\{x_n\} \subseteq A$ be an arbitrary sequence satisfying
+  $x_n \ne c$ and $\lim_{n \to \infty} x_n = c$. Since $x_n$
+  converges, for the
+  $\delta$ given above we can find $N$ such that
+  $|x_n - L| < \delta$ for all $n \ge N$. Then by $(1)$,
+  we have $|f(x_n) - L| < \epsilon$. So for all $n \ge N$,
+  we have $|f(x_n) - L| < \epsilon$, which means that
+  $\lim_{n \to \infty} f(x_n) = L$.
+
+  $(2) \Rightarrow (1)$: Argue by contradiction. Suppose that
+  $(1)$ fails. So there exists some $\epsilon_0 > 0$ such that
+  for all $\delta > 0$ and $|x - c| < \delta$, we have
+  $|f(x) - L| > \epsilon_0$. Fix $\epsilon_0$ and take
+  $\delta_n = \frac{1}{n}$. Pick $x_n \ne c$ such that
+  $|x_n - c| < \frac{1}{n}$. By construction,
+  $|f(x_n) - L | < \epsilon_0$. Also note that clearly
+  $\lim_{n \to \infty} x_n = c$. Then by $(2)$, we have
+  $\lim_{n \to \infty} f(x_n) = L$. Contradiction.
+\end{proof}
+
+\begin{corollary}[Algebraic limit theorem for functions]
+  Given $\lim_{x \to c} f(x) = L$ and $\lim_{x \to c} g(x) = M$,
+  \begin{enumerate}
+    \item $\lim_{x \to c} kf(x) = kL$,
+    \item $\lim_{x \to c} \left(f(x) + g(x)\right) = L + M$,
+    \item $\lim_{x \to c} f(x)g(x) = LM$,
+    \item $\lim_{x \to c} \frac{f(x)}{g(x)} = \frac{L}{M}$ if
+      $M \ne 0$.
+  \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+  Convert all the limits to sequences and apply the algebraic
+  limit theorem.
+\end{proof}
+
+\begin{corollary}
+  Let $f : A \to \R$ and $c$ be a limit point of $A$. If there
+  exist sequences $\{x_n\}, \{y_n\} \subseteq A$ such that
+  \[\lim_{n \to \infty} x_n = \lim_{n \to \infty} y_n = c\]
+  but
+  \[\lim_{n \to \infty} f(x_n) \ne \lim_{n \to \infty} f(y_n),\]
+  then $\lim_{x \to c} f(x)$ does not exist.
+\end{corollary}
+
+\begin{example}
+  Let $f(x) = \sin(\frac{1}{x})$ and
+  $A = (-\infty, 0) \cup (0, \infty)$.
+  Note that $c = 0$ is a limit point of $A$. Take
+  \[x_n = \frac{1}{2n \pi}, \quad y_n = \frac{1}{2n\pi + \frac{\pi}{2}}.\]
+  Then $\lim_{n \to \infty} x_n = \lim_{n \to \infty} y_n = 0$,
+  but
+  \[
+  f(x_n) = \sin(2n \pi) = 0, \quad f(y_n) = \sin(2n \pi + \frac{\pi}{2}) = 1
+  .\]
+  So $\lim_{x \to 0} f(x)$ does not exist because $f$ oscillates
+  too much at $x = 0$.
+\end{example}
+
+\begin{example}
+  Let
+  \[
+    f(x) = \begin{cases}
+      1, &  x < 0 \\
+      2, &  x \ge 0.
+    \end{cases}
+  \]
+  The limit does not exist at $x = 0$ since there is a jump
+  discontinuity.
+\end{example}
+
+\begin{example}
+  The function $f(x) = \frac{1}{x}$ does not have a limit at
+  $x = 0$ since it diverges to infinity.
+\end{example}
+
+\section{Continuous Functions}
+\begin{definition}
+  A function $f : A \to \R$ is \textbf{continuous} at $c \in A$
+  if for all $\epsilon > 0$, there exists $\delta > 0$ such that
+  whenever $|x < c| < \delta$, we have
+  $|f(x) - f(c)| < \epsilon$.
+\end{definition}
+
+\begin{remark}
+  Here we require $f$ to be defined at $c$.
+\end{remark}
+
+\begin{definition}
+  If $f$ is continuous at every point of $A$, then
+  we say $f$ is \textbf{continuous on} $A$.
+\end{definition}
+
+\begin{theorem}
+  Let $f : A \to \R$ and $c$ be a limit point of $A$. Then
+  $f$ is continuous if one of the following hold:
+  \begin{enumerate}
+    \item For all $\epsilon > 0$, there exists $\delta > 0$ such
+      that whenever $|x - c| < \delta$ for $x \in A$, then
+      $|f(x) - f(c)| < \epsilon$.
+    \item For all $\epsilon > 0$, there exists $\delta > 0$
+      such that if $x \in V_\delta(c)$, then
+      $f(x) \in V_\epsilon(f(x))$.
+    \item For any sequence $\{x_n\} \subseteq A$ such that
+      $\lim_{n \to \infty} x_n = c$, we have
+      $\lim_{n \to \infty} f(x_n) = f(c)$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  These follow from the topological and sequential definitions
+  of limits.
+\end{proof}
+
+\begin{corollary}
+  Let $f : A \to \R$ and $c$ be a limit point of $A$. If there
+  exists $\{x_n\} \subseteq A$ with $\lim_{n \to \infty} x_n = c$
+  but $f(x_n) \not\to f(c)$, then $f$ is not continuous at $c$.
+\end{corollary}
+
+\begin{theorem}
+  Assume that $f, g : A \to \R$ are continuous at $c$. Then for
+  every $k \in \R$, each of $kf, f + g, fg$ are also continuous at
+  $c$. Also $\frac{f}{g}$ is continuous at $c$ if $g(c) \ne 0$.
+\end{theorem}
+
+\begin{proof}
+  Convert all of these to sequences.
+\end{proof}
+
+\begin{theorem}
+  Let $f : A \to \R$ and $g : B \to \R$ and assume that
+  $f(A) = \{f(x) : x \in A\} \subseteq B$. Suppose that $f(x)$ is
+  continuous at $c$ and $g$ is continuous at $f(c)$. Then
+  $(g \circ f)(x) = g(f(x))$ is continuous at $c$.
+\end{theorem}
+
+\begin{proof}
+  For all $\epsilon > 0$, since $g$ is continuous at $f(c)$, there
+  exists $\eta > 0$ such that if $|y - f(c)| < \eta$,
+  one has $|g(y) - g(f(c))| < \epsilon$. Since $f$ is continuous
+  at $c$, for the $\eta$ given above, we can find $\delta > 0$
+  such that if $|x - c| < \delta$, one has
+  $|f(x) - f(c)| < \eta$. Therefore, for every $\epsilon > 0$,
+  we can find $\delta$ such that if $|x - c| < \delta$, we have
+  $|g(f(x)) - g(f(c))| < \epsilon$ since $|f(x) - f(c)| < \eta$.
+  So $\lim_{x \to c} g(f(x)) = g(f(c))$.
+\end{proof}
+
+\section{Examples of Continuous Functions}
+\begin{example}
+  All polynomials are continuous on $\R$. To see this, first note
+  that $f(x) = x$ is continuous on $\R$. For all $c > 0$, we have
+  $f(c) = c$. Now fix a $c \in \R$. Then for all $\epsilon > 0$,
+  take $\delta = \epsilon$. Then for all $x$ with
+  $|x - c| < \delta$, we have
+  \[|f(x) - f(c)| = |x - c| < \epsilon.\]
+  So $f$ is continuous at $c$ and thus on all of $\R$. Now note
+  that any
+  polynomial $p(x)$ can be written as
+  \[p(x) = a_0 + a_1 x + a_2x^2 + \dots + a_nx^n.\]
+  Since constant functions are obviously continuous and we can
+  write $x^2 = x \cdot x$, we conclude by the algebraic limit
+  theorem that $p(x)$ is also continuous on $\R$.
+\end{example}
+
+\begin{example}
+  Let
+  \[
+    g(x) = \begin{cases}
+      x \sin(\frac{1}{x}), & x \ne 0 \\
+      0, & x = 0.
+    \end{cases}
+  \]
+  Then $g(x)$ is continuous at $x = 0$. This is because
+  \[
+  |g(x) - g(0)| = \left|x \sin\left(\frac{1}{x}\right) - 0\right|
+  = \left|x\sin\left(\frac{1}{x}\right)\right| \le |x|
+  .\]
+  So taking $\delta = \epsilon$ works for any $\epsilon > 0$.
+\end{example}
+
+\begin{example}
+  Let $A = \{x \in \R : x \ge 0\}$ and define $f : A \to \R$
+  by $f(x) = \sqrt{x}$. Then $f$ is continuous on $A$.
+  We can split the proof into two cases, $c = 0$ and $c > 0$.
+  First let $c = 0$. Then for all $\epsilon > 0$, take
+  $\delta = \epsilon^2$. Then for any $x \in A$ such that
+  $|x - 0| < \delta$, we have
+  \[
+    |f(x) - f(0)| = |\sqrt{x} - \sqrt{0}|
+    = |\sqrt{x}| < \sqrt{\delta} = \epsilon
+  .\]
+  So $f$ is continuous at $0$. Now consider $c > 0$. Note that
+  \[|f(x) - f(c)| = |\sqrt{x} - \sqrt{c}| = \left|\frac{(\sqrt{x} - \sqrt{c})(\sqrt{x} + \sqrt{c})}{\sqrt{x} + \sqrt{c}}\right| = \frac{|x - c|}{\sqrt{x} + \sqrt{c}} \le \frac{|x - c|}{\sqrt{c}}.\]
+  Then for any $\epsilon > 0$, take $\delta = \epsilon \sqrt{c}$.
+  Then for any $x \in A$ such that $|x - c| < \delta$, we have
+  \[
+  |f(x) - f(c)| \le \frac{|x - c|}{\sqrt{c}} < \frac{\delta}{\sqrt{c}} = \epsilon
+  .\]
+  So $f$ is also continuous at $c$. Thus $f$ is continuous on
+  all of $A$.
+\end{example}
+
+\begin{example}
+  Let $h(x) = \lfloor x \rfloor$, where $h(x)$ takes the
+  largest integer $n \le x$. Then we claim that $h$ is
+  not continuous on $\Z$, but it is continuous on $\R \setminus \Z$.
+  For the first part, let $m \in \Z$ and note that $h(m) = m$.
+  Take $x_n = m - \frac{1}{n}$. Then $\lim_{n \to \infty} x_n = m$
+  but $h(x_n) = m - 1$, so $\lim_{n \to \infty} h(x_n) \ne f(m)$.
+  Thus $h$ is not continuous at $m$. Now for the second part,
+  let $c \in \R \setminus \Z$. Then there exists $n \in \Z$ such
+  that $n < c < n + 1$, so that $h(c) = n$. We can let
+  $\delta = \min\{c - n, n + 1 - c\}$. Then for all
+  $|x - c| < \delta$, we have $h(x) = n = h(c)$. So $h$ is
+  continuous at $c$.
+\end{example}
