@@ -1,0 +1,231 @@
+\chapter{Oct.~24 -- Continuity and Compactness}
+
+\section{Continuous Functions on Compact Sets}
+Recall that the notation for the image of a set $B$ under
+a function $f$ is $f(B) = \{f(x) : x \in B\}$.
+
+\begin{theorem}
+  Let $f : A \to \R$ be continuous on $A$ and let
+  $K \subseteq A$ be compact. Then $f(K)$ is also
+  compact.
+\end{theorem}
+
+\begin{proof}
+  Take a sequence $\{y_n\} \subseteq f(K)$. So we
+  can find $x_n \in K$ such that $f(x_n) = y_n$.
+  Note that $\{x_n\} \subseteq K$. Since $K$ is
+  compact, we can find $\{x_{n_k}\}$ such that
+  \[\lim_{k \to \infty} x_{n_k} = x \in K.\]
+  Since $f$ is continuous at $x$ (since
+  $x \in K \subseteq A$), we have
+  $\lim_{k \to \infty} f(x_{n_k}) = f(x)$. In other words,
+  \[\lim_{k \to \infty} y_{n_k} = f(x) \in f(K).\]
+  Thus $f(K)$ is compact.
+\end{proof}
+
+\begin{remark}
+  The topological proof of this theorem goes as follows:
+  Take an open
+  cover of $f(K)$. Then the preimage of this open cover
+  under $f$ is an open cover of $K$ (since the preimage
+  of an open set under a continuous function is open).
+  Since $K$ is compact,
+  we can find a finite subcover. Taking the image again
+  of this subcover yields a finite subcover of $f(K)$.
+\end{remark}
+
+\begin{theorem}
+  If $f : K \to \R$ is continuous on a compact set
+  $K \subseteq \R$, then $f$ attains both a maximum and
+  minimum value on $K$ (i.e.~there exist $x_0, x_1 \in K$
+  such that $f(x_0) \le f(x) \le f(x_1)$ for all
+  $x \in K$).
+\end{theorem}
+
+\begin{proof}
+  Note that $K$ is compact, so $f(K)$ is also compact.
+  In particular, $f(K)$ is bounded, so
+  \[\alpha = \sup_{x \in K} f(x)\]
+  exists. By construction, for every $\epsilon > 0$,
+  we can always find $x_\epsilon \in K$ such that
+  $f(x_\epsilon) \ge \alpha - \epsilon$. Pick
+  $\epsilon = \frac{1}{n}$ and find $x_{\epsilon_n}$
+  such that $f(x_{\epsilon_n}) \ge \alpha - \frac{1}{n}$.
+  Then $\{x_{\epsilon_n}\}$ is a sequence in $K$. Since
+  $K$ is compact, we can find
+  \[\lim_{k \to \infty} x_{\epsilon_{n_k}} = x \in K.\]
+  Note that
+  \[\alpha - \frac{1}{n_k} \le f(x_{\epsilon_{n_k}}) \le \alpha,\]
+  so letting $k \to \infty$ and by the continuity of
+  $f$, we have
+  \[
+    \lim_{k \to \infty} \left(\alpha - \frac{1}{n_k}\right)
+    \le \lim_{k \to \infty} f(x_{\epsilon_{n_k}})
+    \le \lim_{k \to \infty} \alpha.
+  \]
+  This implies
+  $\alpha \le f(x) \le \alpha$. So $f(x) = \alpha$ is the
+  maximum.
+  The proof for a minimum is similar.
+\end{proof}
+
+\begin{remark}
+  In this proof, we find $x_1$ and $x_0$ in addition
+  to simply showing existence.
+\end{remark}
+
+\section{Uniform Continuity}
+
+\begin{definition}
+  A function $f : A \to \R$ is
+  \textbf{uniformly continuous} on $A$ if for every
+  $\epsilon > 0$, there exists $\delta > 0$ such that
+  for all $x, y \in A$ and $|x - y| < \delta$,
+  one has $|f(x) - f(y)| < \epsilon$.
+\end{definition}
+
+\begin{remark}
+  Here, $\delta$ does not depend on a specific choice
+  of $x$, as opposed to the usual continuity.
+\end{remark}
+
+\begin{example}
+  The function $f(x) = 3x + 1$ is uniformly
+  continuous on $\R$. For any $\epsilon > 0$, take
+  $\delta = \epsilon / 3$. Then for all $x, y \in \R$
+  with $|x - y| < \delta$, we have
+  \[|f(x) - f(y)| = 3|x - y| < 3\delta = \epsilon,\]
+  as required.
+\end{example}
+
+\begin{example}
+  Let $g(x) = x^2$ on $\R$.
+  If we let $|x - y| < \delta$, we have
+  \[|g(x) - g(y)| = |x + y||x - y| \le |x + y|\delta.\]
+  Here, we clearly need $\delta$ to depend on $x$
+  and $y$, so $g$ seems like it cannot be
+  uniformly continuous.
+\end{example}
+
+\begin{theorem}
+  A function $f : A \to \R$ fails to be uniformly
+  continuous if and only if there exists $\epsilon_0 > 0$
+  and two sequences $\{x_n\}, \{y_n\} \subseteq A$ such
+  that $|x_n - y_n| \to 0$ but
+  $|f(x_n) - f(y_n)| \ge \epsilon_0$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$\, This implies that there exists
+  $\epsilon_0 > 0$ such that for all $\delta > 0$,
+  there exist $x, y \in A$ with $|x - y| < \delta$ but
+  $|f(x) - f(y)| \ge \epsilon_0$. Take
+  $\delta = \frac{1}{n}$
+  and choose $x_n, y_n \in A$ such that
+  $|x_n - y_n| < \frac{1}{n}$ and
+  $|f(x_n) - f(y_n)| \ge \epsilon_0$.
+
+  $(\Leftarrow)$\, Take $\epsilon = \epsilon_0$. Then
+  for all $\delta > 0$, since $|x_n - y_n| \to 0$,
+  we can find $|x_n - y_n| < \delta$. But
+  $|f(x_n) - f(y_n)| \ge \epsilon_0$. So $f$ is
+  not uniformly continuous.
+\end{proof}
+
+\begin{example}
+  Recall the example of $g(x) = x^2$. Take the
+  sequences $x_n = n$ and $y_n = n + \frac{1}{n}$.
+  Then $|x_n - y_n| = \frac{1}{n} \to 0$ but
+  \[|g(x_n) - g(y_n)| = 2 + \frac{1}{n^2} \ge 2,\]
+  so $g$ is not uniformly continuous by the previous
+  theorem. This is the formal proof.
+\end{example}
+
+\begin{example}
+  The function $f(x) = \sin(\frac{1}{x})$ is not
+  uniformly continuous. Let
+  \[x_n = \frac{1}{\frac{1}{2}\pi + 2n\pi}, \quad y_n = \frac{1}{\frac{3}{2}\pi + 2n \pi}.\]
+  Then $f(x_n) = 1$ and $f(y_n) = -1$. So
+  $|x_n - y_n| \to 0$ but
+  $|f(x_n) - f(y_n)| = 2$.
+\end{example}
+
+\begin{theorem}
+  If a function $f$ is continuous over a compact set
+  $K$, then $f$ is uniformly continuous on $K$.
+\end{theorem}
+
+\begin{proof}
+  Argue by contradiction. Suppose $f$ is not uniformly
+  continuous. Then for some $\epsilon_0 > 0$, we can find
+  sequences
+  $\{x_n\}, \{y_n\} \in K$ such that
+  $|x_n - y_n| \to 0$ and
+  $|f(x_n) - f(y_n)| \ge \epsilon_0$. Since $K$ is compact,
+  we can find a subsequence $\{x_{n_k}\}$ such that
+  \[
+    \lim_{k \to \infty} x_{n_k} = x \in K
+  .\]
+  Then we have
+  \[\lim_{k \to \infty} y_{n_k} = \lim_{k \to \infty}(y_{n_k} - x_{n_k}) + \lim_{k \to \infty} x_{n_k} = x\]
+  since $|x_n - y_n| \to 0$. Then by the continuity
+  of $f$ at $x$, we have
+  \[\lim_{k \to \infty} f(x_{n_k}) = f(x) = \lim_{k \to \infty} f(y_{n_k}),\]
+  so $\lim_{k \to \infty} |f(x_{n_k}) - f(y_{n_k})| = 0$.
+  But by construction,
+  $|f(x_{n_k}) - f(y_{n_k})| \ge \epsilon_0$.
+  Contradiction.
+\end{proof}
+
+\begin{theorem}[Intermediate value theorem]
+  Let $f : [a, b] \to \R$ be continuous. If there is
+  $L \in \R$
+  such that $f(a) < L < f(b)$ or $f(b) < L < f(a)$,
+  then there exists $c \in (a, b)$ such that $f(c) = L$.
+\end{theorem}
+
+\begin{proof}[Proof]
+  It suffices to show that if $f : [a, b] \to \R$ is
+  continuous with $f(a) < 0$ and $f(b) > 0$, then
+  there exists $c \in (a, b)$ such that $f(c) = 0$.
+  This is because in the first case, we can define
+  \[g(x) = f(x) - L.\]
+  Then $g(a) < 0$ and $g(b) > 0$. Similarly take
+  $h(x) = L - f(x)$ in the second case.
+
+  Now we prove the claim. Define
+  \[K = \{x \in (a, b) : f(x) \le 0\}.\]
+  Note that $f(a) < 0$ and $a \in K$, so
+  $K \ne \varnothing$. Note that $K$ is bounded above
+  since $b$ is an upper bound (since $f(b) > 0$).
+  Then by the axiom of completeness,
+  $c = \sup K$ exists. We show that $f(c) > 0$ and
+  $f(c) < 0$ both lead to contradictions.
+
+  Suppose that $f(c) > 0$. Take
+  $\epsilon = \frac{f(c)}{2}$. Then since $f$ is
+  continuous, we can find
+  $\delta$ such that
+  \[|f(x) - f(c)| < \frac{f(c)}{2}\]
+  whenever $|x - c| < \delta$. Then we have
+  \[-\frac{f(c)}{2} < f(x) - f(c) < \frac{f(c)}{2},\]
+  and rearranging yields
+  \[0 < \frac{f(c)}{2} < f(x) < \frac{3}{2}f(c).\]
+  Then any $x$ such that $|x - c| < \delta$ is an
+  upper bound for $K$, so $c$ is not the smallest upper
+  bound for $K$. Contradiction.
+
+  The case where $f(c) < 0$ leads to a similar
+  contradiction. So we must have $f(c) = 0$.
+\end{proof}
+
+\begin{remark}
+  Alternatively, we can define $I_0 = [a, b]$ and let
+  $z = \frac{a + b}{2}$. Then if $f(z) \le 0$,
+  set $a_1 = z$ and $b_1 = b$. Otherwise, set $a_1 = a$
+  and $b_1 = z$. Then set $I_1 = [a_1, b_1]$, noting
+  that $I_1 \subseteq I_0$ and $|I_1| = \frac{1}{2}|I_0|$.
+  Repeat this process and apply the nested interval
+  property to find $c \in \bigcap_{n = 1}^\infty I_n$.
+  Then show that $f(c) = 0$.
+\end{remark}
