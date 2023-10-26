@@ -1,0 +1,191 @@
+\chapter{Oct.~26 -- Discontinuity}
+
+\section{Topological Proof of the Intermediate Value Theorem}
+
+\begin{theorem}
+  Let $f : G \to \R$ be continuous. If $E \subseteq G$
+  is connected, then $f(E)$ is connected.
+\end{theorem}
+
+\begin{proof}
+  Suppose $f(E) = A \cup B$ such that
+  $A \cap B = \varnothing$ and $A, B \ne \varnothing$.
+  Let $C = f^{-1}(A)$ and $D = f^{-1}(B)$.
+  Note that $C \cup D = E$ and $C, D \ne \varnothing$
+  (since $A, B \ne \varnothing$). Furthermore,
+  $C \cap D = \varnothing$ since $A \cap B = \varnothing$.
+  Since $E$ is connected, either
+  $\overline{C} \cap D \ne \varnothing$
+  or $C \cap \overline{D} \ne \varnothing$.
+  So either we can find
+  $\{x_n\} \subseteq C$ such that
+  $\lim_{n \to \infty} x_n = x \in D$ or
+  $\{x_n\} \subseteq D$ such that
+  $\lim_{n \to \infty} x_n = x \in C$.
+  Without loss of generality, assume we are in the first
+  case (just rename otherwise).
+  So we have $f(x_n) \in A$ and
+  $f(x) \in B$. Since $f$ is continuous,
+  $\lim_{n \to \infty} f(x_n) = f(x)$, and
+  thus
+  $f(x) \in \overline{A} \cap B \ne \varnothing$.
+  So $f(E)$ is connected.
+\end{proof}
+
+Note that in $\R$, a connected set is precisely
+an interval,
+so we are now ready to give another proof of the
+intermediate value theorem:
+\begin{theorem}[Intermediate value theorem]
+  Let $f : [a, b] \to \R$ be continuous. If there is
+  $L \in \R$
+  such that $f(a) < L < f(b)$ or $f(b) < L < f(a)$,
+  then there exists $c \in (a, b)$ such that $f(c) = L$.
+\end{theorem}
+
+\begin{proof}[Alternative proof]
+  Since $[a, b]$ is a connected set, $f([a, b])$ is
+  also a connected set. Then
+  $f(a) \in f([a, b])$ and $f(b) \in f([a, b])$.
+  Since $f([a, b])$ is an interval,
+  $[f(a), f(b)] \subseteq f([a, b])$. So for all
+  $L \in [f(a), f(b)]$, there exists $c \in [a, b]$
+  such that $f(c) = L$.
+\end{proof}
+
+\section{Sets of Discontinuity}
+
+\begin{definition}
+  For $f : \R \to \R$, we define $D_f \subseteq \R$
+  to be the set of points where $f$ fails to be
+  continuous.
+\end{definition}
+
+Our goal will be to study the structure of $D_f$.
+
+\begin{definition}
+  A function $f : A \to \R$ is \textbf{increasing}
+  if $f(x) \le f(y)$ for
+  $x < y$ with $x, y \in A$.
+  Similarly, a function is \textbf{decreasing} if
+  $f(x) \ge f(y)$
+  for all $x < y$ with $x, y \in A$.
+\end{definition}
+
+\begin{definition}
+  A \textbf{monotone} function is a one that is
+  either increasing or decreasing.
+\end{definition}
+
+\begin{definition}
+  Let $f : A \to \R$ and $c$ be a limit point of $A$.
+  Then
+  \[\lim_{x \to c^+} f(x) = L\]
+  if for all $\epsilon > 0$, there exists $\delta > 0$
+  such that for all $0 < x - c < \delta$, one has
+  $|f(x) - f(c)| < \epsilon$. Similarly,
+  we define
+  $\lim_{x \to c^-} f(x) = L$
+  if the same is true for $0 < c - x < \delta$.
+\end{definition}
+
+\begin{theorem}
+  Let $f : A \to \R$ and $c$ be a limit point of $A$.
+  Then $\lim_{x \to c} f(x) = L$ if and only if
+  \[\lim_{x \to c^+} f(x) = \lim_{x \to c^-} f(x) = L.\]
+\end{theorem}
+
+\begin{proof}
+  Homework problem.
+\end{proof}
+
+\begin{theorem}
+  Let $f : \R \to \R$ be a monotone function. Then
+  $D_f$ is either finite or countable.
+\end{theorem}
+
+\begin{proof}
+  Without loss of generality, assume that $f$ is
+  increasing.
+  Then let $c \in D_f$ and let $\{x_n\}$ be an increasing
+  sequence such that $\lim_{n \to \infty} x_n = c$.
+  Then $\{f(x_n)\}$ is a monotonically increasing
+  sequence.
+
+  Now we check that $\{f(x_n)\}$ is bounded.
+  To do this, suppose otherwise that
+  $\{f(x_n)\}$ is not bounded.
+  Then $f(x_n) \to \infty$ monotonically as $n \to \infty$.
+  Note that $x_n \le c$. Since $f(x_n) \to \infty$
+  as $n \to \infty$, we cannot define $f(x)$ for
+  $x > c$. This is a contradiction since $f$ is
+  defined on all of $\R$.
+
+  Thus $f(x_n)$ is bounded
+  and increasing, so $\lim_{n \to \infty} f(x_n)$
+  exists by the monotone convergence theorem.
+  Now define $A_c = \lim_{n \to \infty} f(x_n)$,
+  and we claim that $\lim_{x \to c^-} f(x) = A_c$.
+  To show this, take an arbitrary sequence
+  $\{y_n\}$ with $y_n < c$ such that
+  $y_n \to c$. Here we claim that
+  $\lim_{n \to \infty} f(y_n) = A_c$. Since we have
+  $A_c = \lim_{n \to \infty} f(x_n)$,
+  for every $\epsilon > 0$, we can find $N_0$
+  such that for all $k \ge N_0$, one has
+  \[A_c - \epsilon \le f(x_k) \le A_c + \epsilon.\]
+  Since $y_n \to c$, there exists $N$ such that
+  for any fixed $n \ge N$, we have
+  $x_{N_0} \le y_n \le x_{\widetilde{N}}$
+  for some $x_{\widetilde{N}}$. Then
+  \[A_c - \epsilon \le f(x_{N_0}) \le f(y_n) \le f(x_{\widetilde{N}}) \le A_c + \epsilon,\]
+  so $|f(y_n) - A_c| < \epsilon$ for all $n \ge N$.
+  Thus we conclude that
+  $\lim_{n \to \infty} f(y_n) = A_c$, and thus
+  $\lim_{x \to c^-} f(x) = A_c$.
+
+  One can similarly show that
+  $\lim_{x \to c^+} f(x)$ exists, so let
+  $B_c = \lim_{x \to c^+} f(x)$. Since $f$ is
+  increasing and $f$ is not continuous at $c$,
+  we have $A_c < B_c$. So by the density of $\Q$ in
+  $\R$, we can find $q_c \in \Q$ such that
+  $q_c \in (A_c, B_c)$. Then for any distinct
+  $c, c' \in D_f$,
+  we have $q_c \ne q_{c'}$ since $f$ is monotone.
+  By construction, this is a bijection from
+  $D_f$ to $\{q_c\}_{c \in D_f} \subseteq \Q$ given
+  by $c \mapsto q_c$. Thus $D_f$ is countable since
+  $\Q$ is countable.
+\end{proof}
+
+\begin{definition}
+  Let $f : \R \to \R$ and $\alpha > 0$. We say that
+  $f$ is \textbf{$\alpha$-continuous} at $x$ if
+  there exists $\delta > 0$ such that for all
+  $y, z \in (x - \delta, x + \delta)$, one has
+  $|f(y) - f(z)| < \alpha$.
+\end{definition}
+
+\begin{theorem}
+  Let $f : \R \to \R$. Then $D_f$ is an $F_\sigma$ set.
+\end{theorem}
+
+\begin{proof}
+  Let
+  \[D^\alpha_f = \{x \in \R : \text{$f$ is not $\alpha$-continuous at $x$}\}.\]
+  Note that $D^\alpha_f$ is closed (show that
+  $(D^\alpha_f)^c$ is open). Also observe that
+  $D^{\alpha'}_f \subseteq D^\alpha_f$ for
+  $\alpha' > \alpha$. Finally, if $f$ is
+  continuous at $x$, then $f$ is $\alpha$-continuous
+  for any fixed $\alpha$. So $D^\alpha_f \subseteq D_f$
+  for all $\alpha > 0$. Then we can write
+  \[D_f = \bigcup_{n = 1}^\infty D^{\alpha_n}_f\]
+  for $\alpha_n = \frac{1}{n}$. Note that we already
+  have the reverse inclusion.
+  To show the forward
+  inclusion, we can observe that for any $x \in D_f$,
+  one can find $\alpha_0 > 0$ such that
+  $x \in D^{\alpha_0}_f$. Then somehow finish.
+\end{proof}
