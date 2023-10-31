@@ -1,0 +1,218 @@
+\chapter{Oct.~31 -- Sequences of Functions}
+
+\section{Pointwise Convergence}
+\begin{definition}
+  For all $n \in \N$, let $f_n$ be a function defined
+  on $A \subseteq \R$. The sequence of functions $\{f_n\}$
+  \textbf{converges pointwise} on $A$ to a function $f$ if
+  for all $x \in A$, we have
+  $\lim_{n \to \infty} f_n(x) = f(x)$.
+\end{definition}
+
+\begin{example}
+  Let $f_n : \R \to \R$ be defined by
+  \[f_n(x) = \frac{x + nx}{n}.\]
+  For any fixed $x \in \R$, we have
+  $f_n(x) = x + \frac{x}{n} \to x$ as $n \to \infty$.
+  So $\{f_n\}$ converges pointwise on $\R$ to $f(x) = x$.
+\end{example}
+
+\begin{example}
+  Let $g_n : [0, 1] \to \R$ be defined by $g_n(x) = x^n$.
+  First note that for $x = 1$,
+  \[g_n(1) = 1^n = 1,\]
+  so $\lim_{n \to \infty} g_n(1) = 1$. For any
+  fixed $0 \le x < 1$,
+  \[\lim_{n \to \infty} x^n = 0.\]
+  So $\{g_n\}$ converges pointwise on $[0, 1]$ to
+  \[g(x) = \begin{cases}
+    1 & \text{if }x = 1 \\
+    0 & \text{if } 0 \le x < 1.
+  \end{cases}\]
+\end{example}
+
+\begin{example}
+  Let $h_n : [-1, 1] \to \R$ be defined by
+  \[
+    h_n(x) = x^{1 + \frac{1}{2n - 1}}
+  .\]
+  Note that $2n - 1$ is odd for every $n$, so $h_n(x)$
+  is well-defined even for $x < 0$. Observe that
+  \[h_n(x) = x \cdot x^{\frac{1}{2n - 1}}.\]
+  For $x = 0$, we have $h_n(0) = 0$, so
+  $\lim_{n \to \infty} h_n(0) = 0$. For $0 < x \le 1$,
+  we have
+  \[\lim_{n \to \infty} x^{\frac{1}{2n - 1}} = 1.\]
+  Finally, if $-1 \le x < 0$, then we have
+  \[\lim_{n \to \infty} x^{\frac{1}{2n - 1}} = \lim_{n \to \infty} (-1)^{\frac{1}{}}(-x)^{2n - 1} = -1 \lim_{n \to \infty} (-x)^{\frac{1}{2n - 1}} = -1\]
+  since $2n - 1$ is odd and $0 < -x \le 1$. Then by the
+  algebraic properties of limits, we have
+  \[
+    \lim_{n \to \infty} h_n(x) = \begin{cases}
+      0 & \text{if } x = 0 \\
+      x & \text{if } 0 < x \le 1 \\
+      -x & \text{if } {-1 \le x < 0}.
+    \end{cases}.
+  \]
+  So $\{h_n\}$ converges pointwise on $[-1, 1]$ to
+  $h(x) = |x|$.
+\end{example}
+
+\begin{remark}
+  The pointwise limit of a sequence of
+  continuous functions may fail to be continuous, and
+  the pointwise limit of a sequence of
+  differentiable functions may fail to be differentiable.
+\end{remark}
+
+\section{Uniform Convergence}
+\begin{definition}
+  Let $f_n$ be functions on $A \subseteq \R$. We say that
+  \textbf{$f_n \to f$ uniformly} on $A$ if for all
+  $\epsilon > 0$, there exists $N \in \N$ such that
+  for all $x \in A$ and $n \ge N$, one has
+  $|f_n(x) - f(x)| < \epsilon$.
+\end{definition}
+
+\begin{example}
+  Let $g_n : \R \to \R$ be defined by
+  \[g_n = \frac{1}{n(1 + x)^2}.\]
+  For any fixed $x \in \R$, we have
+  \[g_n(x) = \frac{1}{n(1 + x)^2} \to 0,\]
+  so $g_n(x) \to 0$ pointwise on $\R$. Further observe that
+  \[
+    |g_n(x) - 0| = \frac{1}{n(1 + x)^2} \le \frac{1}{n}.
+  \]
+  So for any $\epsilon > 0$, pick $N \in \N$
+  such that $N > \frac{1}{\epsilon}$. Then for all
+  $x \in \R$ and $n \ge N$, we have
+  \[|g_n(x) - 0) \le \frac{1}{n} < \epsilon.\]
+  So in fact $g_n(x) \to 0$ uniformly.
+\end{example}
+
+\begin{example}
+  Let
+  \[g_n(x) = \frac{x^2 + nx}{n} = \frac{x^2}{n} + x.\]
+  For any fixed $x \in \R$, we have $g_n(x) \to x$,
+  so $g_n(x)$ converges pointwise to $x$ on $\R$.
+  Then we can note that
+  \[|g_n(x) - x| \le \frac{x^2}{n},\]
+  so we need to take $N > \frac{x^2}{\epsilon}$ to satisfy
+  $|g_n(x) - x| < \epsilon$ for $n \ge N$. So
+  this convergence is not uniform.
+\end{example}
+
+\begin{theorem}[Cauchy criterion for uniform convergence]
+  Let $\{f_n\}$ be a sequence of functions defined
+  on $A \subseteq \R$. Then $f_n$ converges uniformly
+  on $A$ if and only if for all $\epsilon > 0$,
+  there exists $N \in \N$ such that for all $x \in A$
+  and $m, n \ge N$, we have
+  $|f_n(x) - f_m(x)| < \epsilon$.
+\end{theorem}
+
+\begin{proof}
+  Just apply the Cauchy criterion for sequences at every
+  point.
+\end{proof}
+
+\begin{theorem}
+  Let $\{f_n\}$ be a sequence of functions defined
+  on $A$ and suppose that $f_n \to f$ uniformly on $A$.
+  If each $f_n$ is continuous at $c \in A$, then
+  $f$ is also continuous at $c$.
+\end{theorem}
+
+\begin{proof}
+  For all $\epsilon > 0$, since $f_n \to f$ uniformly,
+  we can find $N \in \N$ such that whenever $n \ge N$,
+  we have
+  \[|f_n(x) - f(x)| < \frac{\epsilon}{3}\]
+  for all $x \in A$. Take $n = N$. Since $f_N$ is continuous
+  at $c$, there exists $\delta$ such that for all
+  $|x - c| < \delta$, one has
+  \[|f_N(x) - f_N(c)| < \frac{\epsilon}{3}.\]
+  Then we can note that
+  \[|f(x) - f(c)| = |f(x) - f_N(x) + f_N(x) - f_N(c) + f_N(c) - f(c)|.\]
+  By the triangle inequality, we have
+  \[|f(x) - f(c)| \le |f(x) - f_N(x)| + |f_N(x) - f_N(c)| + |f_N(c) - f(c)|.\]
+  So for all $|x - c| < \delta$, we have
+  \[|f(x) - f(c)| \le \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon,\]
+  where the first and last terms are from uniform
+  convergence and the middle term is from continuity.
+  So for every $\epsilon > 0$, we can find $\delta > 0$
+  such that for all $|x - c| < \delta$, we have
+  $|f(x) - f(c)| < \epsilon$. Thus we can conclude that
+  $f$ is continuous at $c$.
+\end{proof}
+
+\begin{remark}
+  We can also pass differentiability and integrability
+  through uniform limits.
+\end{remark}
+
+\section{Series of Functions}
+
+\begin{definition}
+  Let $f$ and $f_n$ be functions defined on $A \subseteq \R$
+  for each $n \in \N$. We say that
+  $\sum_{n = 1}^\infty f_n$ \textbf{converges pointwise}
+  to $f(x)$ if the partial sums
+  \[s_k(x) = \sum_{n = 1}^k f_n(x)\]
+  converge pointwise to $f(x)$ for every $x \in A$.
+  Similarly, we say that $\sum_{n = 1}^\infty f_n$
+  \textbf{converges uniformly} to $f(x)$ if the partial sums
+  converge uniformly to $f(x)$ for every $x \in A$.
+\end{definition}
+
+\begin{theorem}
+  Let $f_n(x)$ be a continuous function defined on a set
+  $A \subseteq \R$ and assume that
+  $\sum_{n = 1}^\infty f_n(x)$ converges uniformly to
+  $f$. Then $f$ is continuous on $A$.
+\end{theorem}
+
+\begin{proof}
+  If $f_n$ is continuous, then
+  $s_k(x) = \sum_{n = 1}^k f_n(x)$ is continuous.
+  Then we can pass continuity through the limit since
+  the convergence of $s_k(x)$ is uniform.
+\end{proof}
+
+\begin{theorem}
+  A series $\sum_{n = 1}^\infty f_n$ converges uniformly
+  on $A$ if and only if for all $\epsilon > 0$, there
+  exists $N \in \N$ such that for all $n > m \ge N$ and
+  $x \in A$, one has
+  $|f_{m + 1}(x) + \cdots + f_n(x)| < \epsilon$.
+\end{theorem}
+
+\begin{proof}
+  This is just the Cauchy criterion for series.
+\end{proof}
+
+\begin{corollary}
+  For every $n \in \N$, let $f_n$ be a function
+  defined on $A \subseteq \R$. Assume
+  \[|f_n(x)| \le M_n\]
+  for all $x \in A$. If $\sum_{n = 1}^\infty M_n$
+  converges, then $\sum_{n = 1}^\infty f_n$ converges
+  uniformly on $A$.
+\end{corollary}
+
+\begin{proof}
+  For every $\epsilon > 0$, since $\sum_{i = 1}^\infty M_n$
+  converges,
+  there exists $N$ such that
+  for all $m, n \ge N$, we have
+  \[M_{m + 1} + \dots + M_n < \epsilon.\]
+  Note here that $0 \le |f_n(x)| \le M_n$, so we can
+  drop the absolute values. Then for the same choice
+  of $N$,
+  \[
+    |f_{m + 1}(x) + \dots + f_n(x)|
+    \le |f_{m + 1}(x)| + \dots + |f_n(x)|
+    \le M_{m + 1} + \dots + M_n < \epsilon.
+  \]
+  Apply the Cauchy criterion again to finish.
+\end{proof}
