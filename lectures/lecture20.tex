@@ -1,0 +1,158 @@
+\chapter{Nov.~2 -- Power Series}
+
+\section{Power Series}
+
+\begin{definition}
+  A \textbf{power series} is a series of the form
+  \[\sum_{n = 0}^\infty a_n x^n.\]
+\end{definition}
+
+\begin{theorem}
+  If \[\sum_{n = 0}^\infty a_n x^n\] converges at
+  $x_0 \in \R$,
+  then it converges absolutely at any $x$ such that
+  $|x| < |x_0|$.
+\end{theorem}
+
+\begin{proof}
+  Since $\sum_{n = 0}^\infty a_n x_0^n$ converges,
+  there exists $M > 0$ such that $|a_nx_0^n| < M$
+  for all $n$. Then observe
+  \[
+    |a_nx^n| = |a_nx_0^n| \left|\frac{x^n}{x_0^n}\right|
+    = |a_nx_0^n| \left|\frac{x}{x_0}\right|^n.
+  \]
+  Now let $|x| < |x_0$, so that
+  \[
+    \sum_{n = 0}^\infty |a_n x^n| = \sum_{n = 0}^\infty |a_n x_0^n|\left|\frac{x}{x_0}\right|^n
+    \le M \sum_{n = 0}^\infty \left|\frac{x}{x_0}\right|^n.
+  \]
+  Note that $\left|\frac{x}{x_0}\right| < 1$, so the
+  right hand side converges by geometric series.
+  Thus $\sum_{n = 0}^\infty |a_n x^n| < \infty$.
+\end{proof}
+
+\begin{remark}
+  We need to make this argument since $\sum_{n = 0}^\infty a_n x_0^n$
+  need not converge absolutely. So we cannot simply do a
+  direct comparison.
+\end{remark}
+
+\begin{theorem}
+  If \[\sum_{n = 0}^\infty a_n x^n\] converges absolutely
+  at $x_0 \in \R$, then it converges uniformly on
+  $[-c, c]$ where $c = |x_0|$.
+\end{theorem}
+
+\begin{proof}
+  By assumption, $\sum_{n = 0}^\infty |a_n x_0^n| < \infty$.
+  Then for any $x \in [-c, c]$, note that
+  $|a_nx^n| \le |a_nx_0^n|$. Then
+  \[
+    |a_{m + 1} x^{m + 1} + \dots + a_nx^n|
+    \le |a_{m + 1} x^{m + 1}| + \dots + |a_nx^n|
+    \le |a_{m + 1} x_0^{m + 1}| + \dots + |a_nx_0^n|
+  \]
+  for $m < n$. For any $\epsilon$, we can find $N$
+  such that for any $n > m \ge N$, we have
+  \[|a_{m + 1}x_0^{m + 1}| + \dots + |a_nx_0^n| < \epsilon.\]
+  Then by the Cauchy criterion for uniform convergence,
+  $\sum_{n = 0}^\infty a_n x^n$ converges uniformly on
+  $[-c, c]$.
+\end{proof}
+
+\begin{remark}
+  This result holds on a closed interval,
+  whereas the previous holds on an open interval.
+\end{remark}
+
+\begin{example}
+  Consider the sum
+  \[\sum_{n = 1}^\infty \frac{(-1)^n}{n} x^n,\]
+  which converges at $x = 1$ by the alternating series test.
+  Then by the previous theorem, this series converges
+  absolutely on $(-1, 1)$. However, observe that at $x = -1$,
+  we have
+  \[\sum_{n = 1}^\infty \frac{(-1)^n}{n} (-1)^n = \sum_{n = 1}^\infty \frac{1}{n},\]
+  which diverges. This is an example of why the
+  interval is open.
+\end{example}
+
+\section{Abel's Theorem}
+\begin{lemma}[Abel's lemma]
+  Let $\{b_n\}$ be a sequence satisfying
+  $b_1 \ge b_2 \ge b_3 \dots \ge 0$ and $\{a_n\}$ satisfy
+  \[|s_k| = \left|\sum_{n = 1}^k a_n\right| \le A\]
+  for some $A > 0$. Then
+  $|a_1b_1 + a_2b_2 + \dots a_nb_n| \le Ab_1$.
+\end{lemma}
+
+\begin{proof}
+  See Homework 5. The key is summation by parts.
+\end{proof}
+
+\begin{theorem}[Abel's theorem]
+  If
+  \[\sum_{n = 0}^\infty a_nx^n\]
+  converges at $x = R > 0$, then $\sum_{n = 0}^\infty a_nx^n$
+  converges uniformly on $[0, R]$. The same result holds for
+  $R < 0$.
+\end{theorem}
+
+\begin{proof}
+  Fix $0 \le x \le R$. Observe that
+  \[
+    \sum_{n = 0}^\infty a_n x^n =
+    \sum_{n = 0}^\infty a_n \frac{x^n}{R^n} R^n.
+  \]
+  Note that $\sum_{n = 0}^\infty a_n R^n$
+  converges by assumption. By the Cauchy criterion, for
+  every $\epsilon > 0$, there exists $N$ such that
+  for all $n > m \ge N$, we have
+  \[|a_{m + 1}R^{m + 1} + \dots + a_nR^n| < \frac{\epsilon}{2}. \tag{$+$}\]
+  Now consider
+  \[
+    |a_{m + 1}x^{m + 1} + \dots + a_nx^n|
+    = \left|a_{m + 1} R^{m + 1} \left(\frac{x}{R}\right)^{m + 1}
+    + \dots + a_n R^n \left(\frac{x}{R}\right)^n\right|.
+    \tag{$*$}
+  \]
+  Then pick
+  \[b_1 = \left(\frac{x}{R}\right), \quad \dots, \quad b_{n - m} = \left(\frac{x}{R}\right)^n,\]
+  so that $b_1 \ge b_2 \ge \dots \ge b_{n - m} \ge 0$
+  since $1 \ge \frac{x}{R} \ge 0$. Also pick
+  \[\alpha_1 = a_{m + 1} R^{m + 1}, \quad \dots, \quad \alpha_{n - m} = a_nR^n.\]
+  Then we have 
+  \[(*) = |\alpha_1 b_1 + \alpha_2 b_2 + \dots + \alpha_{n - m}b_{n - m}|.\]
+  Note that $\left|\sum_{j = 1}^k \alpha_j\right| \le \frac{\epsilon}{2}$
+  for $k \le n - m$ by $(+)$. Then by Abel's lemma,
+  \[(*) = |\alpha_1 b_1 + \alpha_2 b_2 + \dots + \alpha_{n - m}b_{n - m}| \le \frac{\epsilon}{2} \left(\frac{x}{R}\right)^{m + 1} < \epsilon.\]
+  Therefore by the Cauchy criterion,
+  $\sum_{n = 0} a_n x^n$ converges uniformly on $[0, R]$.
+\end{proof}
+
+\begin{remark}
+  Observe that for $R < 0$ and $x \in [R, 0]$, we still have
+  $0 \le \frac{x}{R} \le 1$, so the proof is the same.
+\end{remark}
+
+\begin{theorem}
+  If
+  \[\sum_{n = 0}^\infty a_n x^n\]
+  converges pointwise
+  on a set $A \subseteq \R$, then it converges
+  uniformly on any compact set $K \subseteq A$.
+\end{theorem}
+
+\begin{proof}
+  Since $K$ is compact, it is closed and bounded.
+  In particular, $x_0 = \inf K$ exists and $x_0 \in K$.
+  Similarly, $x_1 = \sup K$ exists and $x_1 \in K$.
+  Note that $K \subseteq [x_0, x_1]$. By assumption,
+  $\sum_{n = 0}^\infty a_n x^n$ converges at $x_0$ and $x_1$.
+  Then by Abel's theorem,
+  $\sum_{n = 0}^\infty a_n x^n$
+  converges uniformly on $[x_0, x_1] \supseteq K$.
+  \footnote{To be more precise, we need some case work
+  here depending on the signs of $x_0$ and $x_1$.}
+\end{proof}
