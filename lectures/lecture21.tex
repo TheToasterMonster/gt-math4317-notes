@@ -1,0 +1,191 @@
+\chapter{Nov.~7 -- Weierstrass Approximation Theorem}
+
+\section{Weierstrass Approximation Theorem}
+
+\subsection{Bernstein Polynomials}
+\begin{definition}
+  A \textbf{Bernstein polynomial} is a polynomial
+  of the form
+  \[
+    B_{n, k}(x) = \binom{n}{k} x^k (1 - x)^{n - k}
+  \]
+  for $k = 0, \dots, n$.
+  \footnote{Here $\binom{n}{k} = \frac{n!}{(n - k)!k!}$ is
+  the binomial coefficient.}
+\end{definition}
+
+Clearly we have $B_{n, k}(x) \ge 0$ for all $x \in [0, 1]$.
+We also have
+\[
+  B_{1, 0} = 1 - x, \quad B_{1, 1} = x, \quad
+  B_{2, 0} = (1 - x)^2, \quad B_{2, 1} = 2x(1 - x), \quad
+  B_{2, 2} = x^2, \quad \dots
+.\]
+
+\begin{lemma}
+  We have the following statements about
+  Bernstein polynomials:
+  \begin{enumerate}
+    \item $\sum_{k = 0}^n B_{n, k}(x) = 1$,
+    \item $\sum_{k = 0}^n k B_{n, k}(x) = nx$,
+    \item and $\sum_{k = 0}^n k(k - 1) B_{n, k}(x) = n(n - 1)x^2$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  For $(1)$, we note that
+  \[
+    1 = (x + 1 - x)^n = \sum_{k = 0}^n \binom{n}{k}
+    x^k (1 - x)^{n - k} = \sum_{k = 0}^n B_{n, k}
+  \]
+  by the binomial theorem. For $(2)$, we can compute
+  \begin{align*}
+    \sum_{k = 0}^n k B_{n, k}(x)
+    &= \sum_{k = 0}^n \frac{n!}{(n - k)!k!} x^k (1 - x)^{n - k} k
+    = nx \sum_{k = 1}^n \frac{(n - 1)!}{(n - k)!(k - 1)!}
+    x^{k - 1}(1 - x)^{n - k} \\
+    &= nx \sum_{j = 0}^{n - 1} \frac{(n - 1)!}{(n - 1 - j)!j!} x^j (1 - x)^{n - 1 - j}
+    = nx\sum_{j = 0}^{n - 1} B_{n - 1, j}(x)
+    = nx
+  \end{align*}
+  by reindexing the sum and then using $(1)$.
+  Also we dropped $k = 0$ in step two.
+  Finally, for $(3)$, we have
+  \begin{align*}
+    \sum_{k = 0}^n k(k - 1)B_{n, k}(x)
+    &= \sum_{k = 0}^n k(k - 1) \frac{n!}{(n - k)!k!} x^k (1 - x)^{n - k}
+    = n(n - 1)x^2 \sum_{k = 2}^n \frac{(n - 2)!}{(n - k)!(k - 2)!} x^{k - 2} (1 - x)^{n - k} \\
+    &= n(n - 1)x^2 \sum_{j = 0}^{n - 2} \frac{(n - 2)!}{(n - 2 - j)!j!}x^j (1 - x)^{n - 2 - j}
+    = n(n - 1)x^2 \sum_{j = 0}^{n - 2} B_{n - 2, j}(x)
+    = n(n - 1)x^2,
+  \end{align*}
+  where we reindexed and used $(1)$ again.
+\end{proof}
+
+\begin{remark}
+  By dividing by $n$, we can get $(\widetilde{2})$:
+  \[
+    \sum_{k = 0}^n \frac{k}{n} B_{n, k}(x) = x
+  .\]
+  If we view $\frac{k}{n}$ as an event and
+  then $B_{n, k}(x)$ as a probability, then this tells us
+  $x$ is the expectation. We can perform a similar
+  process to get an analogous $(\widetilde{3})$:
+  \[
+    \sum_{k = 0}^n \left(\frac{k}{n} - x\right)^2 B_{n, k}(x) = \frac{x(1 - x)}{n}
+  .\]
+  Using the same interpretation, we can view this
+  as a computation of the variance.
+\end{remark}
+
+\subsection{The Actual Theorem}
+
+\begin{theorem}[Weierstrass approximation theorem]
+  Let $f : [a, b] \to \R$ be continuous. Given
+  $\epsilon > 0$, there exists a polynomial $p(x)$ such
+  that
+  \[
+    |f(x) - p(x)| < \epsilon
+  \]
+  for all $x \in [a, b]$.
+\end{theorem}
+
+\begin{proof}
+  First we can normalize the interval so that
+  $f : [0, 1] \to \R$. Then define
+  \[
+    B_n(f)(x) = \sum_{k = 0}^n f\left(\frac{k}{n}\right) B_{n, k}(x)
+  \]
+  It suffices to show that for all $\epsilon > 0$,
+  there exists $N$ such that for all $n \ge N$ and
+  $x \in [0, 1]$, we have $|B_n(x) - f(x)| < \epsilon$.
+  Note that this somewhat resembles a Riemann sum.
+  \footnote{While the usual Riemann sum gives the integral of $f$ as $n \to \infty$, this construction recovers $f$ itself instead.}
+
+  Now we proceed. Since $f$ is continuous on the compact
+  set $[0, 1]$, it is uniformly continuous. In other
+  words, for all $\epsilon > 0$, there exists $\delta > 0$
+  such that
+  \[
+  |f(x) - f(y)| < \frac{\epsilon}{2}
+  \]
+  for all $|x - y| < \delta$. Then we can bound the
+  error by
+  \begin{align*}
+    B_n(x) - f(x)
+    &= \sum_{k = 0}^n f\left(\frac{k}{n}\right) B_{n, k}(x) - \sum_{k = 0}^n f(x) B_{n, k}(x)
+    = \sum_{k = 0}^n \left[f\left(\frac{k}{n}\right) - f(x)\right] B_{n, k}(x) \\
+    &= \sum_{\left|\frac{k}{n} - x\right| < \delta}
+    \left[f\left(\frac{k}{n}\right) - f(x)\right] B_{n, k}(x)
+    + \sum_{\left|\frac{k}{n} - x\right| \ge \delta}
+    \left[f\left(\frac{k}{n}\right) - f(x)\right] B_{n, k}(x).
+  \end{align*}
+  Here we have used the result that
+  $\sum_{k = 0}^n B_{n, k}(x) = 1$. Then we continue with
+  \[
+    |B_n(x) - f(x)| \le
+    \underbrace{\sum_{\left|\frac{k}{n} - x\right| < \delta}
+    \left|f\left(\frac{k}{n}\right) - f(x)\right| B_{n, k}(x)}_{(\star)}
+    + \underbrace{\sum_{\left|\frac{k}{n} - x\right| \ge \delta}
+    \left|f\left(\frac{k}{n}\right) - f(x)\right| B_{n, k}(x)}_{(\star \star)}
+  .\]
+  For $(\star)$, by uniform continuity we can bound
+  \[
+    (\star) < \sum_{\left|\frac{k}{n} - x\right| < \delta}
+    \frac{\epsilon}{2} B_{n, k}(x)
+    = \frac{\epsilon}{2} \sum_{\left|\frac{k}{n} - x\right| < \delta} B_{n, k}(x)
+    \le \frac{\epsilon}{2} \sum_{k = 0}^n B_{n, k}(x)
+    = \frac{\epsilon}{2}
+  .\]
+  Then for $(\star \star)$,
+  \[
+    (\star \star) \le 2 \max_{x \in [0, 1]} |f|
+    \sum_{\left|\frac{k}{n} - x\right| \ge \delta} B_{n, k}(x)
+  \]
+  since $[0, 1]$ is compact. Now by $(\widetilde{3})$,
+  \begin{align*}
+    \sum_{\left|\frac{k}{n} - x\right| \ge \delta} B_{n, k}(x) &= \sum_{\left|\frac{k}{n} - x\right| \ge \delta}
+    \frac{\left(\frac{k}{n} - x\right)^2}{\left(\frac{k}{n} - x\right)^2} B_{n, k}(x)
+    \le \frac{1}{\delta^2} \sum_{\left|\frac{k}{n} - x\right| \ge \delta} \left(\frac{k}{n} - x\right)^2 B_{n, k}(x) \\
+                                                               &\le \frac{1}{\delta^2} \sum_{k = 0}^n \left(\frac{k}{n} - x\right)^2 B_{n, k}(x)
+    = \frac{1}{\delta^2} \frac{x(1 - x)}{n}.
+  \end{align*}
+  Plugging this back in yields
+  \[
+    (\star \star) \le 2 \max_{x \in [0, 1]} |f| \frac{1}{\delta^2n}
+  \]
+  since $x(1 - x) \le 1$. Now
+  take
+  \[N > \frac{4\max_{x \in [0, 1]}|f|}{\epsilon \delta^2}.\]
+  So when $n \ge N$, we have $(\star \star) < \epsilon / 2$.
+  Then 
+  \[|B_n(x) - f(x)| \le (\star) + (\star \star) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon,\]
+  which finishes the proof.
+\end{proof}
+
+\section{Arzela-Ascoli Theorem}
+
+\begin{definition}
+  We say that $\{f_n(x)\}$ is \textbf{equicontinuous}
+  on $E \subseteq \R$ if for every $\epsilon > 0$,
+  there exists $\delta$ such that if
+  $|x - y| < \delta$ for $x, y \in E$, then
+  $|f_n(x) - f_n(y)| < \epsilon$ for all $n$.
+\end{definition}
+
+\begin{remark}
+  The choice of $\delta$ is independent of $n$ here.
+\end{remark}
+
+\begin{theorem}[Arzela-Ascoli theorem]
+  Let $f_n$ be defined on $[0, 1]$ for each $n \in \N$.
+  Suppose that there is $M > 0$ such that
+  $|f_n(x)| \le M$ for every $x \in [0, 1]$,
+  and that $\{f_n(x)\}$ is equicontinuous on $[0, 1]$.
+  Then there exists a subsequence of $\{f_n\}$ which
+  converges uniformly on $[0, 1]$.
+\end{theorem}
+
+\begin{proof}
+  Next class.
+\end{proof}
