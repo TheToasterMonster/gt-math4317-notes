@@ -1,0 +1,167 @@
+\chapter{Nov.~9 -- hi}
+
+\section{Arzela-Ascoli Theorem}
+
+\begin{definition}
+  We say that $\{f_n(x)\}$ is \textbf{equicontinuous}
+  on $E \subseteq \R$ if for every $\epsilon > 0$,
+  there exists $\delta$ such that if
+  $|x - y| < \delta$ for $x, y \in E$, then
+  $|f_n(x) - f_n(y)| < \epsilon$ for all $n$.
+\end{definition}
+
+\begin{remark}
+  The choice of $\delta$ is independent of $n$ here.
+\end{remark}
+
+\begin{lemma}
+  \label{lem:pointwise-subsequence}
+  Let $A = \{x_1, x_2, \dots\}$ be a countable set and
+  let $f_n$ be defined on $A$ for each $n \in \N$.
+  Suppose that there is $M > 0$ such that
+  $|f_n(x)| \le M$ for all $n \in \N$ and $x \in A$.
+  Then there exists a subsequence of $\{f_n\}$ which
+  converges pointwise on $A$.
+\end{lemma}
+
+\begin{proof}
+  Observe that the sequence $\{f_n(x_1)\}$ is bounded,
+  so by Bolzano-Weierstrass we can find a subsequence
+  $f_{n_k}(x_1) \to a_1$. Now let
+  $f_{1, k}(x) = f_{n_k}(x)$ for the previously
+  described $f_{n_k}$. Now look at the sequence
+  $\{f_{1, k}(x_2)\}$. This is still bounded, so similarly
+  by Bolzano-Weierstrass we can find a subsequence
+  $\{f_{2, k}(x_2)\} \subseteq \{f_{1, k}(x_2)\}$
+  with $f_{2, k}(x_2) \to a_2$. Continue this process
+  to find $f_{3, k}(x_3) \to a_3$ and so on.
+  Now consider the subsequence
+  $\{f_{k, k}(x)\} \subseteq \{f_n(x)\}$. For all
+  $n$, we have
+  $\{f_{k, k}(x_n)\}_{k \ge n} \subseteq \{f_{n, k}(x_n)\}$.
+  By construction, $f_{n, k}(x_n) \to a_n$ as $k \to \infty$,
+  so $f_{k, k}(x_n) \to a_n$ as well. This gives
+  pointwise convergence.
+\end{proof}
+
+\begin{theorem}[Arzela-Ascoli theorem]
+  Let $f_n$ be defined on $[0, 1]$ for each $n \in \N$.
+  Suppose that there is $M > 0$ such that
+  $|f_n(x)| \le M$ for every $x \in [0, 1]$,
+  and that $\{f_n(x)\}$ is equicontinuous on $[0, 1]$.
+  Then there exists a subsequence of $\{f_n\}$ which
+  converges uniformly on $[0, 1]$.
+\end{theorem}
+
+\begin{proof}
+  Let $q = \{q_1, q_2, \dots\}$ be rational points
+  in $[0, 1]$. Note that $q$ is countable, so by
+  Lemma \ref{lem:pointwise-subsequence} we can find
+  $\{f_{n_k}(x)\} \subseteq \{f_n(x)\}$ which converges
+  pointwise on $q$. By equicontinuity, for
+  every $\epsilon > 0$, there exists $\delta > 0$ such
+  that for every $k \in \N$ and $x, y \in [0, 1]$
+  with $|x - y| < \delta$, we have
+  \[|f_{n_k}(x) - f_{n_k}(y)| < \frac{\epsilon}{3}.\]
+  Since the $\Q$ is dense in $\R$, we clearly have
+  \[[0, 1] \subseteq \bigcup_{j = 1}^\infty V_\delta(q_j).\]
+  Then since $[0, 1]$ is compact, we can find a finite
+  subcover
+  \[
+    [0, 1] \subseteq \bigcup_{j = 1}^m V_\delta(r_j)
+  \]
+  where $\{r_1, \dots, r_m\} \subseteq q$. Since
+  $f_{n_k}(r_j)$ converges pointwise for each
+  $J = 1, \dots, m$, by the Cauchy criterion there exists
+  $N_j$ such that for all $h, m \ge N_j$, we have
+  \[
+    |f_{n_h}(r_j) - f_{n_m}(r_j)| < \frac{\epsilon}{3}
+  .\]
+  Now take $N = \max_{j = 1, \dots, m} N_j$. Then for
+  $h, m \ge N$, we have
+  \[
+    |f_{n_h}(x) - f_{n_m}(x)| \le
+    |f_{n_h}(x) - f_{n_h}(r_{j_0}) + f_{n_h}(r_{j_0})
+    - f_{n_m}(r_{j_0}) + f_{n_m}(r_{j_0}) - f_{n_m}(x)|,
+  \]
+  where $j_0$ is picked such that $x \in V_\delta(r_{j_0})$
+  for some $j_0 \in \{1, \dots, m\}$, since the
+  $V_\delta(r_j)$ form an open cover of $[0, 1]$. Then
+  by the triangle inequality,
+  \[
+    |f_{n_h}(x) - f_{n_m}(x)| \le
+    |f_{n_h}(x) - f_{n_h}(r_{j_0})| + |f_{n_h}(r_{j_0})
+    - f_{n_m}(r_{j_0})| + |f_{n_m}(r_{j_0}) - f_{n_m}(x)|
+    < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3}
+    = \epsilon
+  ,\]
+  where the first and last bounds come from equicontinuity,
+  and the middle bound comes from the Cauchy criterion.
+  Then by Cauchy again, we conclude
+  that $\{f_{n_k}\}$ converges uniformly on $[0, 1]$.
+\end{proof}
+
+\begin{remark}
+  This Arzela-Ascoli theorem is some kind of generalization
+  of the Bolzano-Weierstrass theorem. Except now we also
+  require equicontinuity in order to make the
+  same conclusion.
+\end{remark}
+
+\section{Contraction Mapping Theorem}
+Here we review a homework problem from a week or two ago.
+\begin{theorem}[Contraction mapping theorem]
+  Let $f : \R \to \R$ be a function that satisfies
+  \[|f(x) - f(y)| \le c|x - y|\]
+  for some constant $c \in (0, 1)$ and all $x, y \in \R$.
+  Then there exists a unique fixed point $y_*$ such
+  that $f(y_*) = y_*$.
+  \footnote{This theorem is also sometimes called the
+  \textit{Banach fixed-point theorem}.}
+\end{theorem}
+
+\begin{proof}
+  First it is easy to show that $f$ is continuous.
+  Pick some $y_1 \in \R$ and define the sequence
+  $\{y_n\}$ by $y_{n + 1} = f(y_n)$. Then note that
+  \[
+    |y_{n + 2} - y_{n + 1}| \le c |y_{n + 1} - y_n|
+  \]
+  since $y_{n + 2} - y_{n + 1} = f(y_{n + 1}) - f(y_n)$.
+  Repeat this to see that
+  \[
+    |y_{n + 3} - y_{n + 2}| \le c |y_{n + 2} - y_{n + 1}|
+    \le c^2 |y_{n + 1} - y_n|
+    \le c^3 |y_n - y_{n - 1}|
+    \le \dots
+    \le c^{n + 1} |y_2 - y_1|
+  .\]
+  So in general we have
+  $|y_{n + 1} - y_n| \le c^{n - 1}|y_2 - y_1|$.
+  Now let $m, n \in \N$ with $m < n$. Then
+  \begin{align*}
+    |y_n - y_m|
+    &= |y_n - y_{n - 1} + y_{n - 1} - y_{n - 2} + \dots + y_{m + 1} - y_m|
+    \le |y_n - y_{n - 1}| + \dots + |y_{m + 1} - y_m| \\
+    &\le (c^{n - 2} + \dots + c^{m - 1}) |y_2 - y_1|
+    \le (c^{m - 1} + c^m + \dots) |y_2 - y_1|
+    = c^{m - 1} \frac{1}{1 - c} |y_2 - y_1|.
+  \end{align*}
+  So for every $\epsilon > 0$, simply take $N$ large
+  enough such that
+  $c^{N - 1} \frac{1}{1 - c} |y_2 - y_1| < \epsilon$.
+  Then for all $m, n \ge N$, we have
+  $|y_n - y_m| < \epsilon$. So $\{y_n\}$ is Cauchy and
+  $y_* = \lim y_n$ exists. Then because $\lim y_n = y_*$,
+  we have $\lim f(y_n) = f(y_*)$ since $f$ is continuous.
+  Then we can take the limit through $y_{n + 1} = f(y_n)$
+  to get
+  \[y_* = \lim_{n \to \infty} y_{n + 1} = \lim_{n \to \infty} f(y_n) = f(y_*).\]
+  Now for uniqueness, suppose that
+  $y_*, \widetilde{y}$ each satisfy $f(y_*) = y_*$ and
+  $f(\widetilde{y}) = \widetilde{y}$. Then
+  \[|y_* - \widetilde{y}| = |f(y_*) - f(\widetilde{y})| \le c |y_* - \widetilde{y}|,\]
+  which happens only when $|y_* - \widetilde{y}| = 0$ since
+  $c \in (0, 1)$. So $y_* = \widetilde{y}$ and
+  $y_*$ is the unique fixed point of $f$.
+\end{proof}

@@ -1,8 +1,6 @@
 \chapter{Nov.~7 -- Weierstrass Approximation Theorem}
 
-\section{Weierstrass Approximation Theorem}
-
-\subsection{Bernstein Polynomials}
+\section{Bernstein Polynomials}
 \begin{definition}
   A \textbf{Bernstein polynomial} is a polynomial
   of the form
@@ -78,7 +76,7 @@ We also have
   as a computation of the variance.
 \end{remark}
 
-\subsection{The Actual Theorem}
+\section{Weierstrass Approximation Theorem}
 
 \begin{theorem}[Weierstrass approximation theorem]
   Let $f : [a, b] \to \R$ be continuous. Given
@@ -161,31 +159,4 @@ We also have
   Then 
   \[|B_n(x) - f(x)| \le (\star) + (\star \star) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon,\]
   which finishes the proof.
-\end{proof}
-
-\section{Arzela-Ascoli Theorem}
-
-\begin{definition}
-  We say that $\{f_n(x)\}$ is \textbf{equicontinuous}
-  on $E \subseteq \R$ if for every $\epsilon > 0$,
-  there exists $\delta$ such that if
-  $|x - y| < \delta$ for $x, y \in E$, then
-  $|f_n(x) - f_n(y)| < \epsilon$ for all $n$.
-\end{definition}
-
-\begin{remark}
-  The choice of $\delta$ is independent of $n$ here.
-\end{remark}
-
-\begin{theorem}[Arzela-Ascoli theorem]
-  Let $f_n$ be defined on $[0, 1]$ for each $n \in \N$.
-  Suppose that there is $M > 0$ such that
-  $|f_n(x)| \le M$ for every $x \in [0, 1]$,
-  and that $\{f_n(x)\}$ is equicontinuous on $[0, 1]$.
-  Then there exists a subsequence of $\{f_n\}$ which
-  converges uniformly on $[0, 1]$.
-\end{theorem}
-
-\begin{proof}
-  Next class.
 \end{proof}
