@@ -1,0 +1,138 @@
+\chapter{Nov.~14 -- Review for Exam 2}
+
+\section{Problems from Homework 9}
+\begin{exercise}[Abbott 6.2.1]
+  Let
+  \[
+  f_n(x) = \frac{nx}{1 + nx^2}
+  .\]
+  \begin{enumerate}[(a)]
+    \item Find the pointwise limit of $f_n$.
+    \item Is the convergence uniform on $(0, \infty)$?
+    \item Is the convergence uniform on $(0, 1)$?
+    \item Is the convergence uniform on $(1, \infty)$?
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}[Solution]
+  (a)\, We have
+  \[
+    f_n(x) = \frac{x}{\frac{1}{n} + x^2} \to \frac{x}{x^2}
+    = \frac{1}{x} = f(x).
+  \]
+  Also observe that
+  \[
+    |f_n(x) - f(x)|
+    = \left|\frac{x}{\frac{1}{n} + x^2} - \frac{x}{x^2}\right|
+    = \left|\frac{x(-\frac{1}{n})}{x^2 (\frac{1}{x} + x^2)}\right|
+    = \frac{1}{n} \frac{1}{x(\frac{1}{n} + x^2)}.
+  \]
+  (c)\, No, the convergence is problematic near $x = 0$. We
+  can see that
+  \[
+    \frac{1}{n}\frac{1}{x(1 + nx^2)} < \epsilon
+    \iff \frac{x}{1 + nx^2} < \epsilon
+    \iff 1 + nx^2 > \frac{1}{x\epsilon}
+    \iff nx^2 > \frac{1}{x\epsilon} - 1
+    \iff n > \frac{1}{x^2}\left(\frac{1}{x\epsilon} - 1\right).
+  \]
+  Since this is true for all $x \in (0, 1)$, we have
+  $n$ arbitrarily large, which is not allowed.
+
+  (d)\, Notice that
+  \[
+    \frac{1}{n} \frac{1}{x(\frac{1}{n} + x^2)}
+    \le \frac{1}{n}
+  \]
+  when $x \ge 1$. So taking $n > 1 / \epsilon$
+  works.
+
+  (b)\, No, since $(0, 1) \subseteq (0, \infty)$ and
+  the convergence is not uniform on $(0, 1)$ by
+  (c).
+\end{proof}
+
+\begin{exercise}[Abbott 6.2.2]
+  Let
+  \[
+    f_n(x) = \begin{cases}
+      1 & \text{if } x = 1, \frac{1}{2}, \dots, \frac{1}{n} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \]
+  and let $f$ be the pointwise limit of $f_n$.
+  \begin{enumerate}[(a)]
+    \item Is $f_n$ is continuous at $0$?
+    \item Does $f_n \to f$ uniformly?
+    \item Is $f$ continuous at $0$?
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}[Solution]
+  (a)\, Note that $f_n(0) = 0$. For any
+  $\epsilon > 0$, pick $\delta < \frac{1}{n}$.
+  Then
+  \[
+    |f_n(x) - f(0)| = |0 - 0| = 0 < \epsilon.
+  \]
+  So $f_n$ is continuous at $x = 0$.
+
+  (c)\, Observe that
+  \[
+    f = \begin{cases}
+      x & \text{if } x = \frac{1}{q} \text{ for some } q \in \N \\
+      0 & \text{otherwise}.
+    \end{cases}
+  \]
+  Take $\epsilon_0 = 1 / 2$. For all $\delta > 0$,
+  there exists $q_0 \in \N$ such that
+  $1 / q_0 \in (0, \delta)$. Then
+  \[
+    \left|f(1 / q_0) - f(0)\right| = 1 > \frac{1}{2}.
+  \]
+  So $f$ is not continuous at $0$.
+
+  (b)\, Since $f$ is not continuous despite
+  $f_n$ being continuous, the convergence cannot be
+  uniform.
+\end{proof}
+
+\section{Weierstrass \texorpdfstring{$M$}{M}-test}
+
+\begin{corollary}[Weierstrass $M$-test]
+  Let $f_n$ be a function defined on $A \subseteq \R$
+  for each $n \in \N$ and suppose that
+  $|f_n(x)| \le M_n$ for all $x \in A$.
+  If $\sum_{n = 0}^\infty M_n < \infty$, then
+  $\sum_{n = 0}^\infty f_n$ converges uniformly.
+\end{corollary}
+
+\begin{proof}
+  Apply the Cauchy criterion twice, once on $\sum M_n$
+  and again on $\sum f_n$.
+\end{proof}
+
+\section{More Problems}
+
+\begin{exercise}
+  True of false?
+  \begin{enumerate}[(a)]
+    \item We have $f^{-1}(B)$ is finite whenever $B$ is finite.
+    \item We have $f^{-1}(K)$ is compact if
+      $K$ is compact.
+    \item We have $f^{-1}(A)$ is bounded if $A$ is bounded.
+    \item If $F$ is closed, then $f^{-1}(F)$ is closed.
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}[Solution]
+  (a)\, Very false. Just let $f \equiv 0$.
+
+  (b)\, Still very false. Use the same $f \equiv 0$.
+
+  (c)\, Still false, use $f \equiv 0$ again.
+
+  (d)\, False. Define $f \equiv 0$ on $(0, 1)$ and
+  $f \equiv 1$ on $\R \setminus (0, 1)$.
+  Take $F = \{0\}$ with $f^{-1}(F) = (0, 1)$.
+\end{proof}
