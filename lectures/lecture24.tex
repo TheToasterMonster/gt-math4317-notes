@@ -1,0 +1,215 @@
+\chapter{Nov.~28 -- Dini's Theorem, Metric Spaces}
+
+\section{Dini's Theorem}
+
+\begin{theorem}[Dini's theorem]
+  Let $K$ be a compact set. Let $f : K \to \R$
+  be a continuous function and $f_{n} : K \to \R$ for
+  $n \in \N$
+  be a sequence of continuous functions. If $f_n \to f$
+  pointwise and $f_n(x) \ge f_{n + 1}(x)$, then $f_n \to f$
+  uniformly.
+\end{theorem}
+
+\begin{proof}
+  For each $n \in \N$, define $g_n(x) = f_n(x) - f(x)$. Now
+  $\{g_n\}$ is a sequence of continuous functions and
+  $g_n(x) \to 0$ for every $x \in K$. Also
+  \[g_n(x) \ge g_{n + 1}(x) \ge 0\]
+  since the $f_n$ is decreasing.
+  Set $M_n = \sup \{g_n(x) : x \in K\}$. Then it suffices to
+  show that $M_n \to 0$. For every $\epsilon > 0$, we define
+  \[
+    O_n = \{x \in K : g_n(x) \in (-\infty, \epsilon)\}.
+  \]
+  Observe that $O_n$ is open since we have
+  $O_n = g_n^{-1}((-\infty, \epsilon))$, which is the
+  preimage of an open set under a continuous function.
+  Also $O_n \subseteq O_{n + 1}$ since $\{g_n\}$ is
+  decreasing.
+  For any fixed $x \in K$, since $g_n(x) \to x$, there
+  exists $N_x$ such that $g_{N_x}(x) < \epsilon$. In
+  particular, this means that $x \in O_{N_x}$. Then
+  \[
+    K = \bigcup_{n = 1}^\infty O_n.
+  \]
+  Observe that $\{O_n\}$ is an open cover for $K$ and $K$
+  is compact, so
+  we may find a finite subcover
+  $\{O_{n_k}\}_{k = 1}^M$ satisfying
+  \[
+    K \subseteq \bigcup_{k = 1}^M O_{n_k} \subseteq O_{n_M}.
+  \]
+  Note that the last equality is from
+  $O_n \subseteq O_{n + 1}$. So for all $n \ge n_M$,
+  we have $K \subseteq O_n$. In particular, for all
+  $x \in K$, we have $g_n(x) < \epsilon$. Furthermore
+  $0 \le g_n(x)$ by construction, so $g_n \to 0$
+  uniformly and $M_n \to 0$.
+\end{proof}
+
+\begin{example}
+  Let's see what happens when the compactness condition
+  is removed. Let $K = (0, 1)$ and $f_n(x) = x^n$.
+  Clearly $f_{n + 1} \le f_n$ and $f_n$ is continuous
+  for every $n$. Now note that
+  \[\sup\{x^n : 0 < x < 1\} = 1,\]
+  so this convergence is not uniform.
+\end{example}
+
+\begin{example}
+  Let $K = \R$ and
+  \[
+    f_n(x) = \begin{cases}
+      0 & \text{if } x \le n \\
+      \frac{1}{n}(x - n) & \text{if } n < x < 2n \\
+      1 & \text{if } x \ge 2n.
+    \end{cases}
+  \]
+  Note that $f_n \ge f_{n + 1}$ and $f_n \to 0$ pointwise.
+  But $\sup\{f_n\} = 1$, so we do not have $f_n \to f$
+  uniformly.
+\end{example}
+
+\begin{example}
+  Now let's try removing the continuity condition.
+  Let $K = [0, 1]$ and
+  \[
+    f_n(x) = \begin{cases}
+      -n (x - \frac{1}{n}) & \text{if } 0 \le x \le \frac{1}{n} \\
+      0 & \text{if } \frac{1}{n} < x \le 1
+    \end{cases}
+  \]
+  We have
+  \[
+    f_n(x) \to f(x)
+    = \begin{cases}
+      1 & \text{if } x = 0 \\
+      0 & \text{if } 0 < x \le 1
+    \end{cases}
+  \]
+  pointwise. Note that $f(x)$ is not continuous.
+  As a result, we have
+  \[\sup\{f_n(x) - f(x) : x \in K\} = 1,\]
+  so we do not have $f_n \to f$ uniformly.
+\end{example}
+
+\begin{example}
+  Finally we try removing the monotonicity condition.
+  Let $K = [0, 1]$ and
+  \[
+    f_n(x) = \begin{cases}
+      0 & \text{if } x \le \frac{1}{n} \\
+      2n(x - \frac{1}{n}) & \text{if } \frac{1}{n} < x \le \frac{3}{2n} \\
+      -2n(x - \frac{2}{n}) & \text{if } \frac{3}{2n} < x < \frac{2}{n} \\
+      0 & \text{if } x \ge \frac{2}{n}.
+    \end{cases}
+  \]
+  Observe that $f_n \to 0$ pointwise. However,
+  $\sup\{f_n(x) : x \in K\} = 1$, so the convergence is
+  not uniform. This is because $f_{n + 1} \le f_n$ fails.
+\end{example}
+
+\section{Metric Spaces}
+
+\begin{definition}
+  Given a set $X$, a function $d : X \times X \to \R$ is a
+  \textbf{metric} on $X$ if for all $x, y \in X$,
+  \begin{enumerate}[(i)]
+    \item (Positive-definiteness)\ $d(x, y) \ge 0$, with $d(x, y) = 0$ if and only
+      if $x = y$,
+    \item (Symmetry)\ $d(x, y) = d(y, x)$,
+    \item (Triangle inequality)\ for all $z \in X$,
+      $d(x, y) \le d(x, z) + d(z, y)$.
+  \end{enumerate}
+  A \textbf{metric space} is a set $X$ with a metric $d$.
+  We typically write this as a pair $(X, d)$.
+\end{definition}
+
+\begin{example}
+  On $\R$, the absolute value $d(x, y) = |x - y|$ is a metric.
+\end{example}
+
+\begin{example}
+  On $\R^2$, for points $x = (x_1, x_2)$ and $y = (y_1, y_2)$,
+  the Euclidean distance
+  \[d_1 (x, y) = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2}\]
+  is a metric. The following
+  \[
+    d_2(x, y) = \max\{|x_1 - y_1|, |x_2 - y_2|\}
+  \]
+  is also a metric.
+\end{example}
+
+\begin{definition}
+  Given $\epsilon > 0$ and $x \in X$ the
+  \textbf{$\epsilon$-neighborhood} in $(X, d)$ is
+  \[V_\epsilon(x) = \{y \in X : d(x, y) < \epsilon\}.\]
+\end{definition}
+
+\begin{example}
+  For $(\R^2, d_1)$, the neighborhood
+  $V_1(0)$ is the unit disk. However, for
+  $(\R^2, d_2)$, the neighborhood $V_1(0)$ is a square of
+  side length $2$.
+\end{example}
+
+\begin{definition}
+  Let $(X, d)$ be a metric space. A sequence
+  $\{x_n\} \subseteq X$ \textbf{converges} to
+  $x \in X$ if for all
+  $\epsilon > 0$, there exists $N$ such that for all
+  $n \ge N$, we have $d(x, x_n) < \epsilon$.
+\end{definition}
+
+\begin{definition}
+  A sequence $\{x_n\}$ in $(X, d)$ is \textbf{Cauchy} if
+  for all $\epsilon > 0$, there exists $N$ such that
+  for all $m, n \ge N$, we have $d(x_m, x_n) < \epsilon$.
+\end{definition}
+
+\begin{prop}
+  Convergent sequences in a metric space are Cauchy.
+\end{prop}
+
+\begin{proof}
+  Pretty much carry over the same proof from
+  $| \cdot |$ in $\R$.
+\end{proof}
+
+\begin{definition}
+  A metric space $(X, d)$ is \textbf{complete} if every
+  Cauchy sequence in $X$ converges to an element in $X$.
+\end{definition}
+
+\begin{remark}
+  The real numbers $\R$ form a complete metric space
+  (recall the axiom of completeness),
+  but the same is not true for $\Q$.
+\end{remark}
+
+\begin{definition}
+  Let $(X, d_1)$ and $(Y, d_2)$ be metric spaces.
+  A function $f : X \to Y$ is \textbf{continuous} at
+  $x \in X$ if for all $\epsilon > 0$, there exists
+  $\delta > 0$ such that
+  \[d_2(f(x), f(y)) < \epsilon\]
+  for all $y$ with $d_1(x, y) < \delta$.
+\end{definition}
+
+\begin{definition}
+  A set $O \subseteq X$ is \textbf{open} if for every
+  $x \in O$, we can find $\epsilon > 0$ such that
+  $V_\epsilon(x) \subseteq O$.
+\end{definition}
+
+\begin{remark}
+  We can similarly define closed sets, limit points, etc.
+  on metric spaces.
+\end{remark}
+
+\begin{definition}
+  A subset $K$ of a metric space $(X, d)$ is \textbf{compact}
+  if every sequence in $K$ has a convergent subsequence
+  that converges to a point in $K$.
+\end{definition}
