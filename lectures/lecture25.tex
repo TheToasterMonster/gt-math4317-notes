@@ -1,0 +1,170 @@
+\chapter{Nov.~30 -- Review for Final, Part 1}
+
+\section{Discussion of Exam 2}
+\begin{exercise}
+  Suppose $f : [0, \pi / 2] \to \R$ is continuous and
+  $f(t) \in [0, 1]$ for every $t \in [0, \pi / 2]$. Prove
+  that there exists $t \in [0, \pi / 2]$ with
+  $f(t) = \sin (t)$. (You may use without proof that
+  $\sin$ is continuous.)
+\end{exercise}
+
+\begin{proof}[Solution]
+  Define $g(t) = f(t) - \sin t$. Note that
+  \[g(0) = f(0) - \sin 0 = f(0).\]
+  So if $f(0) = 0$, then we are done. Also note that
+  \[
+    g(\pi / 2) = f(\pi / 2) - \sin (\pi / 2) = f(\pi / 2) - 1,
+  \]
+  so if $f(\pi / 2) = 1$, then we are also done. So
+  assume $f(0) > 0$ and $f(\pi / 2) < 1$. Then $g(0) > 0$
+  and $g(1) < 0$, after which the result follows from the
+  intermediate value theorem.
+\end{proof}
+
+\section{More on Metric Spaces}
+\begin{definition}
+  Let $E$ be a subset of $(X, d)$. The \textbf{closure}
+  of $E$, denoted $\overline{E}$, is the union of $E$
+  and its limit points. The \textbf{interior} $E^\circ$ is defined to be
+  \[
+    E^\circ = \{x \in E : \text{there exists $V_\epsilon(x) \subseteq E$ for some $\epsilon > 0$}\}.
+  \]
+\end{definition}
+
+\begin{definition}
+  A set $A \subseteq X$ is \textbf{dense} in $(X, d)$ if
+  $\overline{A} = X$.
+\end{definition}
+
+\begin{definition}
+  A subset $E$ is \textbf{nowhere-dense} in $(X, d)$ if
+  ${\overline{E}}^\circ = \varnothing$
+  (interior of the closure is empty).
+\end{definition}
+
+\begin{theorem}[Baire category theorem]
+  A complete metric space is not the union of a countable
+  collection of nowhere dense sets.
+\end{theorem}
+
+\section{Review for Final}
+
+\subsection{Cesaro Means}
+\begin{definition}
+  Given a sequence $\{x_n\}_{n = 1}^\infty$, the
+  \textbf{Cesaro means} of $\{x_n\}_{n = 1}^\infty$ are
+  $\{y_n\}_{n = 1}^\infty$ given by
+  \[
+    y_n = \frac{x_1 + \dots + x_n}{n}.
+  \]
+\end{definition}
+
+\begin{prop}
+  We have the following properties about a sequence
+  $\{x_n\}$ and
+  its Cesaro means $\{y_n\}$:
+  \begin{enumerate}[(a)]
+    \item Suppose $\lim_{n \to \infty} x_n = x$. Then
+      $\lim_{n \to \infty} y_n = x$.
+    \item $\lim_{n \to \infty} y_n$ exists does not
+      imply that $\lim_{n \to \infty} x_n$ exists.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  $(a)$\, For all $\epsilon > 0$, we can find $N_1$ such that
+  for all $n \ge N_1$, we have
+  $|x_n - x| < \epsilon$. Then
+  \[
+    y_n - x = \frac{x_1 + \dots + x_n - nx}{n}
+    = \frac{(x_1 - x) + \dots + (x_n - x)}{n}
+    = \frac{\sum_{k = 1}^{N_1 - 1} (x_k - x)
+    + \sum_{j = N_1}^{n} (x_j - x)}{n}.
+  \]
+  Now note that
+  \[
+    \left|\sum_{k = 1}^{N_1 - 1} (x_k - x)\right|
+    \le N_1 \max_{k = 1, \dots, N_1 - 1} |x_k - x|.
+  \]
+  For the other sum, we have
+  \[
+    \left|\sum_{j = N_1}^n (x_j - x)\right|
+    \le (n - N_1 + 1)\epsilon.
+  \]
+  Then
+  \[
+  |y_n - x| \le \frac{N_1 \max_{k = 1, \dots, N_1 - 1} |x_k - x|}{n} + \frac{(n - N_1 + 1)\epsilon}{n}.
+  \]
+  So take $N_2$ large enough so that
+  \[
+    \frac{N_1 \max_{k = 1, \dots, N_1 - 1} |x_k - x|}{N_2} < \epsilon.
+  \]
+  Then for $n \ge \max\{N_1, N_2\}$, we have
+  \[
+    |y_n - x| < \epsilon + \epsilon = 2\epsilon.
+  \]
+  Thus we have $\lim_{n \to \infty} y_n = x$, as desired.
+
+  $(b)$\, Simply take $x_n = (-1)^n$. Then
+  \[
+    y_n = \frac{-1 + 1 - 1 + \dots + (-1)^n}{n}.
+  \]
+  So $|y| \le 1 / n$ and
+  $\lim_{n \to \infty} y_n = 0$, but $\{x_n\}$ diverges.
+\end{proof}
+
+\subsection{Limit Superior}
+\begin{exercise}
+  Let $\{a_n\}$ be a bounded sequence.
+  \begin{enumerate}[(a)]
+    \item Let
+    \[
+      y_n = \sup\{a_k : k \ge n\}.
+    \]
+    Then $\lim_{n \to \infty} y_n$ exists, and we define
+    $\limsup_{n \to \infty} a_n = \lim_{n \to \infty} y_n$.
+  \item Let
+    \[z_n = \inf\{a_k : k \ge n\}.\]
+    Then $\lim_{n \to \infty} z_n$ exists, and we define
+    $\liminf_{n \to \infty} a_n = \lim_{n \to \infty} z_n$.
+  \item We have $\lim_{n \to \infty} a_n = L$ exists if and
+    only if
+    \[\limsup_{n \to \infty} a_n = \liminf_{n \to \infty} a_n = L.\]
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+  $(a)$\, Note that
+  \[\{a_k : k \ge n + 1\} \subseteq \{a_k : k \ge n\},\]
+  so $y_{n + 1} \le y_n$. Then $\{y_n\}$ is a
+  bounded, nonincreasing sequence, so
+  $\lim_{n \to \infty} y_n$
+  exists by the monotone convergence theorem.
+
+  $(b)$\, We have $z_n \le z_{n + 1}$ by a similar argument.
+  So $\{z_n\}$ is bounded and monotone, so
+  $\lim_{n \to \infty} z_n$ exists by the monotone convergence
+  theorem.
+
+  $(c)$\, $(\Rightarrow)$\,
+  Suppose $\lim_{n \to \infty} a_n = L$.
+  Then for all $\epsilon > 0$, there exists $N$ such that
+  for all $n \ge N$, we have
+  \[
+    L - \epsilon \le a_n \le L + \epsilon.
+  \]
+  Then when $n \ge N$, we have
+  \[
+    L - \epsilon \le y_n \le L + \epsilon \quad \text{and}
+    \quad L - \epsilon \le z_n \le L + \epsilon.
+  \]
+  Then it follows that
+  $\lim_{n \to \infty} y_n = \lim_{n \to \infty} z_n = L$.
+
+  $(c)$\, $(\Leftarrow)$\, Note that
+  $z_n \le a_n \le y_n$ by construction. Then if
+  $\lim_{n \to \infty} y_n = \lim_{n \to \infty} z_n = L$,
+  by the squeeze theorem we also have
+  $\lim_{n \to \infty} a_n = L$.
+\end{proof}
