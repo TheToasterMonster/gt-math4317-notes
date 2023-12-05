@@ -1,0 +1,95 @@
+\chapter{Dec.~5 -- Review for Final, Part 2}
+
+\section{Problems from Homework 10}
+
+\begin{exercise}
+  Prove that the following function is continuous on
+  $[-1, 1]$.
+  \[h(x) = \sum_{n = 1}^\infty \frac{x^n}{n^2} = x + \frac{x^2}{4} + \frac{x^3}{9} + \frac{x^4}{16}\]
+\end{exercise}
+
+\begin{proof}
+  Look at the partial sums
+  \[S_M = \sum_{n = 1}^M \frac{x^n}{n^2}.\]
+  Clearly $S_M$ is continuous. Note that
+  \[\left|\frac{x^n}{n^2}\right| \le \frac{1}{n^2}\]
+  for all $x \in [-1, 1]$. So by the Weierstrass $M$-test,
+  we have
+  $S_M \to h(x)$ uniformly on $[-1, 1]$.
+  Thus $h(x)$ is continuous since each $S_M$ is continuous.
+\end{proof}
+
+\section{Other Review}
+\begin{exercise}
+  Let $\{x_n\}, \{y_n\}$ be Cauchy sequences. Show that
+  $\{x_n + y_n\}, \{x_n y_n\}$ are also Cauchy.
+\end{exercise}
+
+\begin{proof}
+  Since $\{x_n\}$ and $\{y_n\}$ are Cauchy, we can
+  find $N_1$ such that for all $m, n \ge N_1$,
+  $|x_m - x_n| < \epsilon$ and $N_2$ such that
+  for all $m, n \ge N_2$, $|y_m - y_n| < \epsilon$. Take
+  $N = \max\{N_1, N_2\}$. Then for all $m, n \ge N$, we have
+  \[|x_m + y_m - (x_n + y_n)| \le |x_m - x_n| + |y_m - y_n| < \epsilon + \epsilon = 2\epsilon.\]
+  So $\{x_n + y_n\}$ is Cauchy.
+
+  For $\{x_n y_n\}$, we must first
+  observe that Cauchy sequences are bounded, so there
+  exist $M_1$ and $M_2$ such that $|x_n| \le M_1$ and
+  $|y_n| \le M_2$ for all $n$. So for any $\epsilon > 0$,
+  we can pick $N_1$ and $N_2$ such that
+  \[
+    |x_m - x_n| < \frac{\epsilon}{2M_2}
+    \text{ for all $m, n \ge N_1$}
+    \quad\text{and}\quad
+    |y_m - y_n| < \frac{\epsilon}{2M_1}
+    \text{ for all $m, n \ge N_2$}.
+  \]
+  Then for $m, n \ge N = \max\{N_1, N_2\}$, we have
+  \[
+    |x_n y_n - x_m y_m|
+    = |x_n y_n - x_m y_n + x_m y_n - x_m y_m|
+    \le |y_n| |x_n - x_m| + |x_m| |y_n - y_m|
+    < M_2 \cdot \frac{\epsilon}{M_2} + M_1 \cdot \frac{\epsilon}{M_1}
+    = 2\epsilon.
+  \]
+  Thus $\{x_n y_n\}$ is also Cauchy.
+\end{proof}
+
+\begin{exercise}
+  Let $K, L$ be two subsets of $\R$. Define
+  \[
+    d(K, L) = \inf\{|x - y| : x \in K, y \in L\}
+  \]
+  and suppose that $L \cap K = \varnothing$.
+  \begin{enumerate}[(a)]
+    \item If $K, L$ are compact, then show that
+      $d(K, L) > 0$.
+    \item If $K, L$ are only closed, then show that it is
+      possible to have $d(K, L) = 0$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+  (b)\, Let
+  \[K = \left\{n + \frac{1}{n} : n \in \N\right\}, \quad L = \N.\]
+  Note that for $x_n = n + \frac{1}{n} \in K$ and $y_n = n \in L$, we have $|x_n - y_n| = \frac{1}{n}$. Then
+  we have
+  $d(K, L) \le \frac{1}{n}$
+  for every $n$, so we conclude $d(K, L) = 0$.
+
+  (a)\, We can find $x_n \in K$ and $y_n \in K$ such that
+  \[\lim_{n \to \infty} |x_n - y_n| = d(K, L).\]
+  Since both $K$ and $L$ are compact, we can find
+  convergent subsequences $\{x_{n_k}\} \subseteq \{x_n\}$
+  and $\{y_{n_k}\} \subseteq \{y_n\}$ with
+  \[
+    \lim_{k \to \infty} x_{n_k} = x_0 \in K, \quad
+    \lim_{k \to \infty} y_{n_k} = y_0 \in L.
+  \]
+  We know that
+  \[d(K, L) = \lim_{k \to \infty} |x_{n_k} - y_{n_k}| = |x_0 - y_0|.\]
+  Then since $K \cap L = \varnothing$, we must have
+  $|x_0 - y_0| > 0$.
+\end{proof}
